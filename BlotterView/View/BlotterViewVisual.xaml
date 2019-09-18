@@ -83,7 +83,7 @@
 
     <Grid Name="root">
 
-        <!--<Grid.Resources> 
+        <Grid.Resources> 
             <DataTemplate x:Key="renameColumnHeaderTemplate">
                 <Grid>
                     <dxe:TextEdit
@@ -112,7 +112,7 @@
             <DataTemplate x:Key="wrapHeader">
                 <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
             </DataTemplate>
-        </Grid.Resources>-->
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
