@@ -1,0 +1,231 @@
+﻿<UserControl x:Class="IPO.Client.View.IPOVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:IPO.Client"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Loaded="UserControl_Loaded" >
+
+ 
+    <Grid VerticalAlignment="Stretch" Width="auto" Background="white" Height="Auto" HorizontalAlignment="Stretch" >
+
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="127" Margin="1,28,0,0" Stroke="Black" VerticalAlignment="Top" Width="572"/>
+
+
+        <dxg:GridControl  ItemsSource="{Binding Table1,Mode=TwoWay}" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"    
+                          x:Name="IpoData"   FontWeight="Bold" SelectionMode="Row"    AllowLiveDataShaping="True"  
+                          Margin="0,155,0,0" HorizontalAlignment="Stretch"  
+                          FontSize="12" FontFamily="Calibri" 
+                        
+                         dxg:DataControlSerializationOptions.AddNewColumns="true" 
+                         dxg:DataControlSerializationOptions.RemoveOldColumns="False" 
+                          >
+            <dxg:GridControl.View  >
+                <dxg:TableView  AllowConditionalFormattingMenu="True" ShowGroupPanel="False" AutoWidth="False" 
+                                x:Name="viewAccountTax" FadeSelectionOnLostFocus="False"  
+                                EnableImmediatePosting="True" 
+                                NavigationStyle="Row"  
+                                CustomRowAppearance="viewAccountTax_CustomRowAppearance" CustomCellAppearance="viewAccountTax_CustomCellAppearance"
+                                >
+                    <dxg:TableView.ColumnHeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"  TextWrapping="Wrap" TextAlignment="Center"/>
+
+                        </DataTemplate>
+                    </dxg:TableView.ColumnHeaderTemplate>
+
+                    <dxg:TableView.FormatConditions>
+                        <dxg:ColorScaleFormatCondition Expression="[Int]" PredefinedFormatName="RedWhiteBlueColorScale" />
+                    </dxg:TableView.FormatConditions>
+                    <dxg:TableView.RowStyle>
+                        <Style TargetType="{x:Type dxg:RowControl}">
+                            <Setter Property="Background" Value="{x:Null}"/>
+                        </Style>
+                    </dxg:TableView.RowStyle>
+
+
+                </dxg:TableView>
+            </dxg:GridControl.View>
+            <dxg:GridColumn Header="Model" Binding="{Binding Model}"  Width="75" SortMode="DisplayText" FieldName="Model" IsSmart="True">
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+
+
+            <dxg:GridColumn Header="Account" Binding="{Binding Account}"  Width="75" SortMode="DisplayText" FieldName="Account" IsSmart="True">
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+
+            <dxg:GridColumn Name="Inc" Header="Inc?" Width="30" FieldName="Inc"
+                                     Binding="{Binding Inc}"  >
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <CheckBox  
+                                          HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" OverridesDefaultStyle="True" />
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+
+            <dxg:GridColumn Header="Total Market Value in USD" Binding="{Binding Total Market Value in USD}"  Width="90" IsSmart="True" FieldName = "Total Market Value in USD">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings  DisplayFormat="n2" />
+                </dxg:GridColumn.EditSettings>
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+            <dxg:GridColumn Header="Percent of Aum" Binding="{Binding Percent of Aum}"  Width="90" IsSmart="True" FieldName = "Percent of Aum">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings  DisplayFormat="p2" />
+                </dxg:GridColumn.EditSettings>
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+            <dxg:GridColumn Header="Reg. Target Wgt." Binding="{Binding RegTargetWgt}"  Width="90" IsSmart="True" FieldName = "RegTargetWgt">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings  DisplayFormat="p2" />
+                </dxg:GridColumn.EditSettings>
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+            <dxg:GridColumn Header="Porfolio Target MKT Value" Binding="{Binding Porfolio Target MKT Value}"  Width="90" IsSmart="True" FieldName = "Porfolio Target MKT Value">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings  DisplayFormat="n2" />
+                </dxg:GridColumn.EditSettings>
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+            <dxg:GridColumn Header="Target Purchase Weight MKT Value" Binding="{Binding Target Purchase Weight MKT Value}"  Width="90" IsSmart="True" FieldName = "Target Purchase Weight MKT Value">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings  DisplayFormat="n2" />
+                </dxg:GridColumn.EditSettings>
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+            <dxg:GridColumn Header="Share Esitmate of Mid Offer Price" Binding="{Binding Share Esitmate of Mid Offer Price}"  Width="90" IsSmart="True" FieldName = "Share Esitmate of Mid Offer Price">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings  DisplayFormat="n4" />
+                </dxg:GridColumn.EditSettings>
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+            <dxg:GridColumn Header="Share Esitmate of High Offer Price" Binding="{Binding Share Esitmate of High Offer Price}"  Width="90" IsSmart="True" FieldName = "Share Esitmate of High Offer Price" >
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings  DisplayFormat="n4" />
+                </dxg:GridColumn.EditSettings>
+                <dxg:GridColumn.HeaderStyle>
+                    <Style TargetType="Control">
+                        <Setter Property="Background" Value="LightSkyBlue"/>
+                    </Style>
+                </dxg:GridColumn.HeaderStyle>
+            </dxg:GridColumn>
+        </dxg:GridControl>
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+            Grid.Row="0"             
+			Margin="5,5,0,0"  x:Name="comboBoxEdit1" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			EditValueChanged="comboBoxEdit1_EditValueChanged"  
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"         
+			IsTextEditable="True" LostFocus="comboBoxEdit1_LostFocus" IsPopupOpen="True" >
+
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="WM01"/>
+        </dxe:ComboBoxEdit>
+
+        <ComboBox x:Name="cmbTargetWeight"  Margin="116,79,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                    Width="149" DropDownClosed="cmbTargetWeight_DropDownClosed"   >
+            <ComboBoxItem Content="Global"/>
+            <ComboBoxItem Content="Country"/>
+
+        </ComboBox>
+        <Label Content="Date of Offering:" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Margin="2,33,0,0"  Width="93" FontWeight="Bold"/>
+        <Label Content="Security Ticker:" HorizontalAlignment="Left" Height="20" Margin="2,57,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <dxe:TextEdit x:Name="TXTWeight" HorizontalAlignment="Left" Margin="414,31,0,0" VerticalAlignment="Top" Width="57" MaskType="Numeric" Mask="n2" Text="{Binding Weight,Mode=OneWay,UpdateSourceTrigger=Default}" LostFocus="TXTWeight_LostFocus"/>
+        <Label Content="Weight:" HorizontalAlignment="Left" Height="22" Margin="308,32,0,0" VerticalAlignment="Top" Width="66" FontWeight="Bold"/>
+        <Label Content="MidPrice(local):" HorizontalAlignment="Left" Height="23" Margin="308,55,0,0" VerticalAlignment="Top" Width="92" FontWeight="Bold"/>
+        <dxe:TextEdit x:Name="txtpricelocalmid" HorizontalAlignment="Left" Margin="414,56,0,0" VerticalAlignment="Top" Width="57" MaskType="Numeric" Mask="n2" Text="{Binding Latest,Mode=OneWay,UpdateSourceTrigger=Default}" LostFocus="txtpricelocalmid_LostFocus"/>
+        <Label Content="HighPrice(local):" HorizontalAlignment="Left" Height="23" Margin="308,81,0,0" VerticalAlignment="Top" Width="101" FontWeight="Bold"/>
+        <Button x:Name="btnCreateOrders" Content="Create Orders" HorizontalAlignment="Left" Height="28" Margin="647,97,0,0" VerticalAlignment="Top" Width="106" Click="btnCreateOrders_Click"/>
+        <Label Content="Target Weight:" HorizontalAlignment="Left" Height="20" Margin="3,84,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <Label Content="Country:" HorizontalAlignment="Left" Height="20" Margin="3,107,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <dxe:TextEdit x:Name="txtpricelocalhigh" HorizontalAlignment="Left" Margin="414,81,0,0" VerticalAlignment="Top" Width="57" MaskType="Numeric" Mask="n2" Text="{Binding Latest,Mode=OneWay,UpdateSourceTrigger=Default}" LostFocus="txtpricelocalhigh_LostFocus"/>
+        <ComboBox x:Name="cmbCountry"  Margin="116,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" 
+        	Width="149"  IsTextSearchEnabled="True" IsEditable="True" Text="{Binding CountryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Label x:Name="lblSummary" Content="" HorizontalAlignment="Left" Height="20" Margin="160,129,0,0" VerticalAlignment="Top" Width="357" Foreground="black" FontWeight="Bold" FontSize="14" Background="LightYellow"/>
+
+        <dxe:TextEdit x:Name="txtpriceusdmid" HorizontalAlignment="Left" Margin="498,55,0,0" VerticalAlignment="Top" Width="56" MaskType="Numeric" Mask="n4" Text="{Binding MidPrice,Mode=OneWay,UpdateSourceTrigger=Default}"/>
+        <dxe:TextEdit x:Name="txtpriceusdhigh" HorizontalAlignment="Left" Margin="498,81,0,0" VerticalAlignment="Top" Width="56" MaskType="Numeric" Mask="n2" Text="{Binding HighPrice,Mode=OneWay,UpdateSourceTrigger=Default}"/>
+        <dxe:DateEdit x:Name="txtdate" HorizontalAlignment="Left" Margin="116,32,0,0" VerticalAlignment="Top" Width="150"/>
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.SecurityName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+			Margin="116,55,0,0"  x:Name="SecurityComboBoxEdit" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="150"  
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"
+			IsTextEditable="True" LostFocus="SecurityComboBoxEdit_LostFocus_1" IsPopupOpen="True" EditValueChanged="SecurityComboBoxEdit_EditValueChanged_1" 
+                            >
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="IBM.US"/>
+        </dxe:ComboBoxEdit>
+        <Button Content="Refresh Grid" HorizontalAlignment="Left" Margin="300,105,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
+        <RadioButton x:Name="rdoMidPrice" Content="Use Mid Price" HorizontalAlignment="Left" Margin="593,53,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <RadioButton x:Name="rdoHighPrice" Content="Use High Price" HorizontalAlignment="Left" Margin="724,53,0,0" VerticalAlignment="Top"/>
+        <Label Content="US Equiv." HorizontalAlignment="Left" Height="20" Margin="498,31,0,0" VerticalAlignment="Top" Width="65" FontWeight="Bold"/>
+
+
+
+    </Grid>
+
+</UserControl>

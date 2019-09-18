@@ -1,0 +1,245 @@
+﻿<UserControl x:Class="CashFlow.Client.View.CashFlowVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:CashFlow.Client"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Loaded="UserControl_Loaded" 
+             
+           
+            
+             >
+    <UserControl.Resources>
+        <Style TargetType="dxg:GridColumnHeader">
+            <Setter Property="Background" Value="LightSkyBlue"/>
+
+        </Style>
+        <sys:Double x:Key="maxHeaderHeight">
+            40
+        </sys:Double>
+
+        <!--<DataTemplate x:Key="wrapHeader">
+            <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+        </DataTemplate>-->
+
+
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Stretch" Width="auto" Background="white" Height="Auto" HorizontalAlignment="Stretch" >
+        <Grid.Resources>
+            
+            <DataTemplate x:Key="renameColumnHeaderTemplate">
+                <Grid>
+                    <dxe:TextEdit
+                        EditValue="{Binding Path=DataContext.Header, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}}" 
+                        Foreground="Black" 
+                        Visibility="{Binding Path=DataContext.(local:ColumnBehavior.IsRenameEditorActivated), 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}, 
+                        Converter={local:VisibilityConverter},
+                        Mode=TwoWay}"                    
+                        Name="textEdit"
+                        LostFocus="OnRenameEditorLostFocus"/>
+                    
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="{Binding}" 
+                        Visibility="{Binding Path=Visibility, ElementName=textEdit, Converter={local:ReverseVisibilityConverter}}"
+                        MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="NoWrap" TextAlignment="Center">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="0" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="wrapHeader">
+                <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+            </DataTemplate>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <Label Content="{Binding Path=Parameters.Report, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="378,10,0,0" FontFamily="Calibri Black" FontSize="18" Foreground="#FF0072C6" Name="lblheader" Width="auto" Height="27"  />
+
+
+      
+
+        <dxg:GridControl x:Name="_dataGrid"  dx:DXSerializer.StoreLayoutMode="All"  Grid.Row="1" AutoGenerateColumns="AddNew"
+                         AutoPopulateColumns="True" EnableSmartColumnsGeneration="True" 
+                          Margin="0,0,0,0" 
+                           dxg:GridSerializationOptions.AddNewColumns="true" 
+                         dxg:GridSerializationOptions.RemoveOldColumns="False" 
+                         
+            ItemsSource="{Binding  MyDataTable.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}">
+
+
+
+            <dxg:GridControl.View  >
+
+                <dxg:TableView 
+                    x:Name="viewRoboDrift"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    AllowChangeBandParent="True" 
+                     AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu"
+                    IsGroupFooterMenuEnabled="True"
+                    GroupSummaryDisplayMode="AlignByColumns"
+                    ShowFixedTotalSummary="True"
+                    
+              CustomRowAppearance="viewAccountTax_CustomRowAppearance"  
+                                CustomCellAppearance="viewAccountTax_CustomCellAppearance"
+                    >
+
+
+                    <dxg:TableView.GroupValueTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Value, StringFormat=' {0}'}" />
+                                <TextBlock Text="{Binding RowData.Row.GroupDescription, StringFormat='Dexcription: {0}'}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxg:TableView.GroupValueTemplate>
+
+                </dxg:TableView>
+
+            </dxg:GridControl.View>
+
+           
+
+            <dxg:GridControl.Columns>
+
+                <dxg:GridColumn Header="cash_flow" Binding="{Binding cash_flow, StringFormat=n2}" FieldName="cash_flow" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+
+
+                <dxg:GridColumn Header="Principal" Binding="{Binding Principal, StringFormat=n2}" FieldName="Principal" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Interest" Binding="{Binding Interest, StringFormat=n2}" FieldName="Interest" >
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings DisplayFormat="N2" />
+                        </dxg:GridColumn.EditSettings>
+
+                    </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Cash Sum" Binding="{Binding cash }" FieldName="cash"  GroupIndex="0">
+              
+
+                </dxg:GridColumn>
+
+
+                <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+           
+            </dxg:GridControl.Columns>
+
+        
+         
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem DisplayFormat="Sum: {0:n2}" FieldName="cash_flow" 
+                                     ShowInColumn="" SummaryType="Sum" Alignment="Left" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.GroupSummary>
+                <dxg:GridSummaryItem FieldName="cash_flow" SummaryType="Sum" ShowInColumn="cash_flow" />
+             
+            </dxg:GridControl.GroupSummary>
+
+
+        </dxg:GridControl>
+        <dx:SimpleButton Content="Print" HorizontalAlignment="Left"  Margin="542,38,0,0" Width="62" Height="20" Click="SimpleButton_Click" VerticalAlignment="Top"/>
+        <dxe:DateEdit EditValue="{Binding Parameters.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" Margin="366,41,0,0" VerticalAlignment="Top" Width="150" x:Name="txtenddate" FontFamily="Calibri" FontSize="14" Height="20"  EditValueChanged="start_EditValueChanged"/>
+        <dxe:DateEdit EditValue="{Binding Parameters.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" Margin="366,13,0,0" VerticalAlignment="Top" Width="150" x:Name="txtstartdate" FontFamily="Calibri" FontSize="14" Height="20" EditValueChanged="end_EditValueChanged"/>
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+                              
+			Margin="105,13,0,0"  x:Name="comboBoxEdit1" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			EditValueChanged="comboBoxEdit1_EditValueChanged"  
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"
+                              
+			IsTextEditable="True" LostFocus="comboBoxEdit1_LostFocus" IsPopupOpen="True" 
+                            
+                          
+                              >
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="WM01"/>
+        </dxe:ComboBoxEdit>
+        <Label Content="Account:" HorizontalAlignment="Left" Margin="19,14,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" />
+        <Label Content="Security:" HorizontalAlignment="Left" Margin="19,42,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" />
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.SecurityName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+                              
+			Margin="105,42,0,0"  x:Name="SecurityComboBoxEdit" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"
+			IsTextEditable="True" LostFocus="SecurityComboBoxEdit_LostFocus_1" IsPopupOpen="True" EditValueChanged="SecurityComboBoxEdit_EditValueChanged_1" 
+                            >
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="IBM.US"/>
+        </dxe:ComboBoxEdit>
+        <Label Content="To Date:
+               " HorizontalAlignment="Left" Margin="296,38,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" />
+        <Label Content="From Date:" HorizontalAlignment="Left" Margin="296,10,0,0" VerticalAlignment="Top" Width="81" Height="23" FontWeight="Bold" />
+        <dx:SimpleButton Content="Update" HorizontalAlignment="Left"  Margin="542,10,0,0" Width="62" Height="20" Click="UpdateButton_Click" VerticalAlignment="Top"/>
+
+
+
+
+    </Grid>
+</UserControl>

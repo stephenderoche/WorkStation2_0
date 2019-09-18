@@ -1,0 +1,10 @@
+﻿<Window x:Class="TraderVsPM.IssuerLookup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="IssuerLookup" Height="326" Width="293">
+    <Grid Height="301" Width="285" HorizontalAlignment="Center" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" >
+        <Button Content="OK" Height="26" HorizontalAlignment="Left" Margin="107,264,0,0" Name="btnOk" VerticalAlignment="Top" Width="78" Click="btnOk_Click" />
+        <Button Content="Cancel" Height="26" HorizontalAlignment="Left" Margin="200,264,0,0" Name="btnCancel" VerticalAlignment="Top" Width="78" Click="btnCancel_Click" />
+        <ListBox Height="240" HorizontalAlignment="Left" Margin="6,12,0,0" Name="lstSecurity" VerticalAlignment="Top" Width="272" MouseDoubleClick="lstSecurity_MouseDoubleClick" SelectionChanged="lstSecurity_SelectionChanged" />
+    </Grid>
+</Window>

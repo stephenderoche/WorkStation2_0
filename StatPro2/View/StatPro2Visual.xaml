@@ -1,0 +1,245 @@
+﻿<UserControl x:Class="StatPro2.Client.View.StatPro2Visual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+           xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+               xmlns:helpers="clr-namespace:StatPro2.Client.Helpers"
+             xmlns:resources="clr-namespace:StatPro2.Client.Resources"
+             xmlns:themes="clr-namespace:Linedata.Framework.WidgetFrame.ThemesAndStyles;assembly=Linedata.Framework.WidgetFrame.ThemesAndStyles"
+             Background="LightGray"
+             xmlns:local="clr-namespace:StatPro2.Client"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Loaded="UserControl_Loaded" 
+          >
+
+    <UserControl.Resources>
+
+        <Storyboard x:Key="ExpandAnimation">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="SettingGrid"
+                                           Storyboard.TargetProperty="(FrameworkElement.Height)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="28" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="HideAnimation">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="SettingGrid"
+                                           Storyboard.TargetProperty="(FrameworkElement.Height)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="28" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+
+        <Grid Grid.Row="0"  MaxHeight="50"  >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+
+            <Button Grid.Column="0" 
+                    Margin="0, 0, 2, 2"
+                    Command="{Binding BackCommand}">
+
+                <Path Stretch="Uniform" 
+                        Width="12" 
+                        Height="12"
+                        Data="M392.24621,165.75 L392,175.25 383.875,170.5 z"
+                        Fill="#005090" 
+                      />
+
+            </Button>
+
+            <Button Grid.Column="1"
+                    Margin="2, 0, 2, 2"
+                    Command="{Binding ForwardCommand}">
+
+                <Path Stretch="Uniform" 
+                              Width="12" 
+                              Height="12"
+                              Data="M391.99999,165.75 L392,175.25 399.75581,170.5 z"
+                              Fill="#005090" />
+
+            </Button>
+
+            <Border BorderThickness="1"
+                    Margin="2, 0, 0, 2"
+                    Grid.Column="2"
+                    BorderBrush="{DynamicResource ResourceKey={x:Static themes:ResourceKeys.BorderBrushKey}}">
+
+                <Grid Background="#005090" MouseLeftButtonUp="OnMouseLeftButtonUp">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="TitleNameTextBlock" 
+                           Grid.Column="2" 
+                           KeyDown="TitleNameTextBlock_KeyDown"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Margin="5,0"
+                           Text="{Binding Parameters.Title}" 
+                           Foreground="White" />
+
+                    <Label Grid.Column="3" 
+                           Content="{x:Static resources:WebBrowserRes.Loading}" 
+                           Visibility="{Binding LoadingVisibility}"/>
+
+                </Grid>
+            </Border>
+
+
+        </Grid>
+
+        <Grid x:Name="SettingGrid" 
+              Height="0"
+              Grid.Row="1" >
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" 
+                       VerticalContentAlignment="Center"
+                       Margin="20, 2, 2, 2"
+                       Content="Account:"
+                       />
+
+                <dxe:ComboBoxEdit Grid.Column="1" EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left"             
+			Margin="2, 2, 2, 2"  x:Name="comboBoxEdit1" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			EditValueChanged="comboBoxEdit1_EditValueChanged"  
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"         
+			IsTextEditable="True" LostFocus="comboBoxEdit1_LostFocus" IsPopupOpen="True" >
+
+                    <dxmvvm:Interaction.Triggers>
+                        <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+                    </dxmvvm:Interaction.Triggers>
+                    <dxe:ComboBoxEditItem Content="WM01"/>
+                </dxe:ComboBoxEdit>
+
+                <TextBlock Grid.Column="2" Text="Section" Margin="2, 2, 2, 2" />
+                <ComboBox  Grid.Column="3" Text="{Binding Parameters.Section, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                           Name="StatProSection"  Margin="2, 2, 2, 2" VerticalAlignment="Center" Focusable="True" SelectedIndex="0" >
+                    <ComboBoxItem>Analytics</ComboBoxItem>
+                    <ComboBoxItem>Risk</ComboBoxItem>
+                    <ComboBoxItem>Fixed Income</ComboBoxItem>
+                </ComboBox>
+
+                <Label Grid.Column="4" 
+                       VerticalContentAlignment="Center"
+                       Margin="2, 2, 2, 2"
+                       Content="{x:Static resources:WebBrowserRes.Title}"/>
+
+                <TextBox Grid.Column="5"  
+                         Margin="2, 2, 2, 2"
+                         VerticalContentAlignment="Center"
+                         Text="{Binding Parameters.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Label Grid.Column="6" 
+                      Margin="2, 2, 2, 2"
+                       Content="{x:Static resources:WebBrowserRes.Url}" 
+                       HorizontalAlignment="Left"
+                       VerticalContentAlignment="Center"/>
+
+                <TextBox Grid.Column="7" 
+                         Margin="2, 2, 2, 2"
+                         VerticalContentAlignment="Center"
+                         Text="{Binding UrlForTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Button Grid.Column="8" 
+                        Margin="2, 2, 2, 2"
+                        IsDefault="True" 
+                        Command="{Binding ProcessWebPageCommand}" Content="{x:Static resources:WebBrowserRes.Go}"/>
+            </Grid>
+
+
+        </Grid>
+
+
+        <WebBrowser x:Name="webBrowser"
+                    Grid.Row="2" 
+                    Height="Auto" 
+                    Margin="0,2,0,0" 
+                    Cursor="Arrow"
+                    LoadCompleted="OnEndNavigating"
+                    Navigating="OnBeginNavigating"
+                    Navigated="OnNavigated"
+                    Tag="{Binding Parameters.URL}"
+                    Visibility="{Binding BrowserVisibility}"
+                    
+                    helpers:WebBrowserMvvmHelper.SourceMvvm="{Binding Parameters.URL}"
+                    helpers:WebBrowserMvvmHelper.Back="{Binding Back}"
+                    helpers:WebBrowserMvvmHelper.Forward="{Binding Forward}">
+        </WebBrowser>
+    </Grid>
+    <!--<Grid>
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+            Grid.Row="0"             
+			Margin="10,5,0,0"  x:Name="comboBoxEdit1" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			EditValueChanged="comboBoxEdit1_EditValueChanged"  
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"         
+			IsTextEditable="True" LostFocus="comboBoxEdit1_LostFocus" IsPopupOpen="True" >
+
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="WM01"/>
+        </dxe:ComboBoxEdit>
+
+    </Grid>-->
+
+</UserControl>

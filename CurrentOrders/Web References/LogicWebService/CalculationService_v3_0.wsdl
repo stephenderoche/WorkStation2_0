@@ -1,0 +1,1944 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="urn:v3_0.logic.itginc.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="urn:v3_0.logic.itginc.com" targetNamespace="urn:v3_0.logic.itginc.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:v3_0.logic.itginc.com">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="TimeZone">
+        <xsd:sequence>
+          <xsd:element name="ID" nillable="true" type="xsd:string" />
+          <xsd:element name="inDaylightTime" type="xsd:boolean" />
+          <xsd:element name="offset" type="xsd:int" />
+          <xsd:element name="rawOffset" type="xsd:int" />
+          <xsd:element name="useDaylightTime" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="LabelValue">
+        <xsd:sequence>
+          <xsd:element name="label" nillable="true" type="xsd:string" />
+          <xsd:element name="value" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfLabelValue">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:LabelValue[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOf_xsd_double">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:double[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="StockData">
+        <xsd:sequence>
+          <xsd:element name="exchangeRate" type="xsd:double" />
+          <xsd:element name="medianCurrencyVolume5" type="xsd:long" />
+          <xsd:element name="volatility" type="xsd:double" />
+          <xsd:element name="medianCurrencyVolume21" type="xsd:long" />
+          <xsd:element name="closePrice" type="xsd:double" />
+          <xsd:element name="sharesOutstanding" type="xsd:long" />
+          <xsd:element name="percSpread5" type="xsd:double" />
+          <xsd:element name="aceDayAlpha" type="xsd:double" />
+          <xsd:element name="aceBinAlphas" nillable="true" type="impl:ArrayOf_xsd_double" />
+          <xsd:element name="feExchange" nillable="true" type="xsd:string" />
+          <xsd:element name="currencyId" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DistributionDay">
+        <xsd:sequence>
+          <xsd:element name="totalExecutions" type="xsd:double" />
+          <xsd:element name="bins" nillable="true" type="impl:ArrayOf_xsd_double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfDistributionDay">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:DistributionDay[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ExplicitCost">
+        <xsd:sequence>
+          <xsd:element name="amount" type="xsd:double" />
+          <xsd:element name="costInBPS" type="xsd:boolean" />
+          <xsd:element name="currencyId" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ExplicitCostParameters">
+        <xsd:sequence>
+          <xsd:element name="commission" nillable="true" type="impl:ExplicitCost" />
+          <xsd:element name="fee" nillable="true" type="impl:ExplicitCost" />
+          <xsd:element name="tax" nillable="true" type="impl:ExplicitCost" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CrossParameters">
+        <xsd:sequence>
+          <xsd:element name="externalCrossCosts" nillable="true" type="impl:ExplicitCostParameters" />
+          <xsd:element name="externalCrossRate" type="xsd:double" />
+          <xsd:element name="internalCrossCosts" nillable="true" type="impl:ExplicitCostParameters" />
+          <xsd:element name="internalCrossRate" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PostTradeParameters">
+        <xsd:sequence>
+          <xsd:element name="excludeTradeImbalance" type="xsd:boolean" />
+          <xsd:element name="benchmarkPrice" type="xsd:double" />
+          <xsd:element name="benchmarkCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="useRealizedVolumes" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DoubleWrapper">
+        <xsd:sequence>
+          <xsd:element name="doubleValue" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TradeParameters">
+        <xsd:sequence>
+          <xsd:element name="lotRounding" type="xsd:int" />
+          <xsd:element name="horizon" type="xsd:int" />
+          <xsd:element name="endingBin" type="xsd:int" />
+          <xsd:element name="rate" type="xsd:double" />
+          <xsd:element name="aceStrategyType" nillable="true" type="xsd:string" />
+          <xsd:element name="startingBin" type="xsd:int" />
+          <xsd:element name="distributions" nillable="true" type="impl:ArrayOfDistributionDay" />
+          <xsd:element name="explicitCosts" nillable="true" type="impl:ExplicitCostParameters" />
+          <xsd:element name="crossParameters" nillable="true" type="impl:CrossParameters" />
+          <xsd:element name="postTradeParameters" nillable="true" type="impl:PostTradeParameters" />
+          <xsd:element name="costFunctionLambda" nillable="true" type="impl:DoubleWrapper" />
+          <xsd:element name="treatLateStartingBinAsMarketOpen" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Security">
+        <xsd:sequence>
+          <xsd:element name="dayDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="stockId" nillable="true" type="xsd:string" />
+          <xsd:element name="stockData" nillable="true" type="impl:StockData" />
+          <xsd:element name="tradeParameters" nillable="true" type="impl:TradeParameters" />
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="clientId" nillable="true" type="xsd:string" />
+          <xsd:element name="amount" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfSecurity">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:Security[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Tradelist">
+        <xsd:sequence>
+          <xsd:element name="securitiesArray" nillable="true" type="impl:ArrayOfSecurity" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="basisValue" nillable="true" type="xsd:double" />
+          <xsd:element name="userBasisCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="basisType" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Benchmark">
+        <xsd:sequence>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="amountType" nillable="true" type="xsd:string" />
+          <xsd:element name="holdingsArray" nillable="true" type="impl:ArrayOfSecurity" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Portfolio">
+        <xsd:sequence>
+          <xsd:element name="securitiesArray" nillable="true" type="impl:ArrayOfSecurity" />
+          <xsd:element name="basisValue" type="xsd:double" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="userBasisCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="amountType" nillable="true" type="xsd:string" />
+          <xsd:element name="basisType" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="HedgeAggregateAssetDetails">
+        <xsd:sequence>
+          <xsd:element name="benchmarkId" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="price" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="HedgeAggregateAsset">
+        <xsd:sequence>
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="id" nillable="true" type="xsd:string" />
+          <xsd:element name="details" nillable="true" type="impl:HedgeAggregateAssetDetails" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfHedgeAggregateAsset">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:HedgeAggregateAsset[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Condition">
+        <xsd:sequence>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="comparator" nillable="true" type="xsd:string" />
+          <xsd:element name="value" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCondition">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:Condition[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Rule">
+        <xsd:sequence>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="priority" type="xsd:int" />
+          <xsd:element name="tradeParameters" nillable="true" type="impl:TradeParameters" />
+          <xsd:element name="conditions" nillable="true" type="impl:ArrayOfCondition" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfRule">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:Rule[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="CostParameters">
+        <xsd:sequence>
+          <xsd:element name="defaultTradeParameters" nillable="true" type="impl:TradeParameters" />
+          <xsd:element name="applyTradeCorrelations" type="xsd:boolean" />
+          <xsd:element name="useConstantSpread" type="xsd:boolean" />
+          <xsd:element name="useCompositePlusOTCVolume" type="xsd:boolean" />
+          <xsd:element name="binVolParticipationLB" nillable="true" type="impl:DoubleWrapper" />
+          <xsd:element name="binVolParticipationUB" nillable="true" type="impl:DoubleWrapper" />
+          <xsd:element name="aceCostBenchmark" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="rules" nillable="true" type="impl:ArrayOfRule" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RiskParameters">
+        <xsd:sequence>
+          <xsd:element name="riskModelId" nillable="true" type="xsd:string" />
+          <xsd:element name="benchmark" nillable="true" type="impl:Benchmark" />
+          <xsd:element name="benchmarkId" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CustomAnalyticsParameters">
+        <xsd:sequence>
+          <xsd:element name="customBenchmark" nillable="true" type="xsd:string" />
+          <xsd:element name="customBenchmarkCountry" nillable="true" type="xsd:string" />
+          <xsd:element name="numOfDays" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CalcParameters">
+        <xsd:sequence>
+          <xsd:element name="dayDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="portfolio" nillable="true" type="impl:Portfolio" />
+          <xsd:element name="options" nillable="true" type="impl:ArrayOfLabelValue" />
+          <xsd:element name="tradelist" nillable="true" type="impl:Tradelist" />
+          <xsd:element name="costParameters" nillable="true" type="impl:CostParameters" />
+          <xsd:element name="riskParameters" nillable="true" type="impl:RiskParameters" />
+          <xsd:element name="sourceApp" nillable="true" type="xsd:string" />
+          <xsd:element name="customAnalyticsParameters" nillable="true" type="impl:CustomAnalyticsParameters" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CostPercentile">
+        <xsd:sequence>
+          <xsd:element name="percentile" type="xsd:int" />
+          <xsd:element name="value" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCostPercentile">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:CostPercentile[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="CrossSavingsResult">
+        <xsd:sequence>
+          <xsd:element name="crossSavings" type="xsd:double" />
+          <xsd:element name="crossSavingsPerShare" type="xsd:double" />
+          <xsd:element name="crossSavingsPerShare_bps" type="xsd:double" />
+          <xsd:element name="crossShares" type="xsd:double" />
+          <xsd:element name="crossValue" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CrossSavingsResults">
+        <xsd:sequence>
+          <xsd:element name="totalCrossSavings" nillable="true" type="impl:CrossSavingsResult" />
+          <xsd:element name="internalCrossSavings" nillable="true" type="impl:CrossSavingsResult" />
+          <xsd:element name="externalCrossSavings" nillable="true" type="impl:CrossSavingsResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ExplicitCostResult">
+        <xsd:sequence>
+          <xsd:element name="costPerShare" type="xsd:double" />
+          <xsd:element name="costPerShare_bps" type="xsd:double" />
+          <xsd:element name="costTotal" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ExplicitCostResults">
+        <xsd:sequence>
+          <xsd:element name="commission" nillable="true" type="impl:ExplicitCostResult" />
+          <xsd:element name="fee" nillable="true" type="impl:ExplicitCostResult" />
+          <xsd:element name="tax" nillable="true" type="impl:ExplicitCostResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AceCostDecomposition">
+        <xsd:sequence>
+          <xsd:element name="spreadCostPerShare_bps" type="xsd:double" />
+          <xsd:element name="spreadCostPerShare" type="xsd:double" />
+          <xsd:element name="spreadCostTotal" type="xsd:double" />
+          <xsd:element name="marketImpactCostPerShare_bps" type="xsd:double" />
+          <xsd:element name="marketImpactCostPerShare" type="xsd:double" />
+          <xsd:element name="marketImpactCostTotal" type="xsd:double" />
+          <xsd:element name="alphaDecayCostPerShare_bps" type="xsd:double" />
+          <xsd:element name="alphaDecayCostPerShare" type="xsd:double" />
+          <xsd:element name="alphaDecayCostTotal" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AggregateSideResults">
+        <xsd:sequence>
+          <xsd:element name="activeRisk" type="xsd:double" />
+          <xsd:element name="activeVAR1" type="xsd:double" />
+          <xsd:element name="activeVAR5" type="xsd:double" />
+          <xsd:element name="avgCostPerShare" type="xsd:double" />
+          <xsd:element name="avgCostPerShareBps" type="xsd:double" />
+          <xsd:element name="avgCostStdDev" type="xsd:double" />
+          <xsd:element name="avgCostStdDevBps" type="xsd:double" />
+          <xsd:element name="beta" type="xsd:double" />
+          <xsd:element name="closePriceAvg" type="xsd:double" />
+          <xsd:element name="marketCapAvg" type="xsd:double" />
+          <xsd:element name="r2" type="xsd:double" />
+          <xsd:element name="sharesTotal" type="xsd:double" />
+          <xsd:element name="totalCost" type="xsd:double" />
+          <xsd:element name="totalNames" type="xsd:long" />
+          <xsd:element name="totalRisk" type="xsd:double" />
+          <xsd:element name="totalVAR1" type="xsd:double" />
+          <xsd:element name="totalVAR5" type="xsd:double" />
+          <xsd:element name="valueTotal" type="xsd:double" />
+          <xsd:element name="percentile" nillable="true" type="impl:ArrayOfCostPercentile" />
+          <xsd:element name="percentileBps" nillable="true" type="impl:ArrayOfCostPercentile" />
+          <xsd:element name="crossSavings" nillable="true" type="impl:CrossSavingsResults" />
+          <xsd:element name="explicitCosts" nillable="true" type="impl:ExplicitCostResults" />
+          <xsd:element name="costDecomposition" nillable="true" type="impl:AceCostDecomposition" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AceDensity">
+        <xsd:sequence>
+          <xsd:element name="probability" type="xsd:double" />
+          <xsd:element name="cost" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfAceDensity">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:AceDensity[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AggregateResults">
+        <xsd:sequence>
+          <xsd:element name="currencyId" nillable="true" type="xsd:string" />
+          <xsd:element name="maxTradingDays" type="xsd:int" />
+          <xsd:element name="totalCorrelation" type="xsd:double" />
+          <xsd:element name="totalResults" nillable="true" type="impl:AggregateSideResults" />
+          <xsd:element name="buyResults" nillable="true" type="impl:AggregateSideResults" />
+          <xsd:element name="sellResults" nillable="true" type="impl:AggregateSideResults" />
+          <xsd:element name="aceDensityArray" nillable="true" type="impl:ArrayOfAceDensity" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOf_xsd_int">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:int[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SecurityException">
+        <xsd:sequence>
+          <xsd:element name="stockId" nillable="true" type="xsd:string" />
+          <xsd:element name="countryId" nillable="true" type="xsd:string" />
+          <xsd:element name="resultIndex" type="xsd:int" />
+          <xsd:element name="aggregatedIndex" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CalcException">
+        <xsd:sequence>
+          <xsd:element name="severity" type="xsd:int" />
+          <xsd:element name="message" nillable="true" type="xsd:string" />
+          <xsd:element name="securityException" nillable="true" type="impl:SecurityException" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCalcException">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:CalcException[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="VolumeParticipation">
+        <xsd:sequence>
+          <xsd:element name="totalParticipation" type="xsd:double" />
+          <xsd:element name="binParticipation" nillable="true" type="impl:ArrayOfDistributionDay" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AceSecurityResults">
+        <xsd:sequence>
+          <xsd:element name="costContribPerShare" type="xsd:double" />
+          <xsd:element name="costPerShare" type="xsd:double" />
+          <xsd:element name="costTotal" type="xsd:double" />
+          <xsd:element name="numOfDistributionDays" type="xsd:int" />
+          <xsd:element name="costStdDev_bps" type="xsd:double" />
+          <xsd:element name="costPerShare_bps" type="xsd:double" />
+          <xsd:element name="costStdDev" type="xsd:double" />
+          <xsd:element name="distributions" nillable="true" type="impl:ArrayOfDistributionDay" />
+          <xsd:element name="volumeParticipation" nillable="true" type="impl:VolumeParticipation" />
+          <xsd:element name="costContribPerShare_bps" type="xsd:double" />
+          <xsd:element name="percentile" nillable="true" type="impl:ArrayOfCostPercentile" />
+          <xsd:element name="percentileBps" nillable="true" type="impl:ArrayOfCostPercentile" />
+          <xsd:element name="costDecomposition" nillable="true" type="impl:AceCostDecomposition" />
+          <xsd:element name="endTime" nillable="true" type="xsd:string" />
+          <xsd:element name="executionTimeInMins" type="xsd:int" />
+          <xsd:element name="fractionalHorizon" nillable="true" type="impl:DoubleWrapper" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="StockDataResults">
+        <xsd:sequence>
+          <xsd:element name="nativeCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="exchange" nillable="true" type="xsd:string" />
+          <xsd:element name="itgStockId" nillable="true" type="xsd:string" />
+          <xsd:element name="volatility_bps" type="xsd:double" />
+          <xsd:element name="spreadCurrencyAmount" type="xsd:double" />
+          <xsd:element name="sectorName" nillable="true" type="xsd:string" />
+          <xsd:element name="tradeValuePerc" type="xsd:double" />
+          <xsd:element name="closingPrice" type="xsd:double" />
+          <xsd:element name="spread_bps" type="xsd:double" />
+          <xsd:element name="volatilityCurrencyAmount" type="xsd:double" />
+          <xsd:element name="volumePercent" type="xsd:double" />
+          <xsd:element name="tradeValue" type="xsd:double" />
+          <xsd:element name="regionName" nillable="true" type="xsd:string" />
+          <xsd:element name="industryName" nillable="true" type="xsd:string" />
+          <xsd:element name="industryGroupName" nillable="true" type="xsd:string" />
+          <xsd:element name="volume" type="xsd:double" />
+          <xsd:element name="exchangeRate" type="xsd:double" />
+          <xsd:element name="marketCap" type="xsd:double" />
+          <xsd:element name="volatility" type="xsd:double" />
+          <xsd:element name="spread" type="xsd:double" />
+          <xsd:element name="avgShareVolume" type="xsd:double" />
+          <xsd:element name="percentADV" type="xsd:double" />
+          <xsd:element name="currencyADV" type="xsd:double" />
+          <xsd:element name="issueTypeName" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RiskSecurityResults">
+        <xsd:sequence>
+          <xsd:element name="weightActive" type="xsd:double" />
+          <xsd:element name="weightBenchmark" type="xsd:double" />
+          <xsd:element name="mcar" type="xsd:double" />
+          <xsd:element name="mcavar5" type="xsd:double" />
+          <xsd:element name="weightTradelist" type="xsd:double" />
+          <xsd:element name="mcavar1" type="xsd:double" />
+          <xsd:element name="specificRisk" type="xsd:double" />
+          <xsd:element name="mctr" type="xsd:double" />
+          <xsd:element name="mctvar5" type="xsd:double" />
+          <xsd:element name="mctvar1" type="xsd:double" />
+          <xsd:element name="sharesMinimizeTotalRisk" type="xsd:double" />
+          <xsd:element name="sharesMinimizeActiveRisk" type="xsd:double" />
+          <xsd:element name="riskMinimizeTotalRisk" type="xsd:double" />
+          <xsd:element name="riskMinimizeActiveRisk" type="xsd:double" />
+          <xsd:element name="maxSharesTotalRisk" type="xsd:double" />
+          <xsd:element name="maxSharesActiveRisk" type="xsd:double" />
+          <xsd:element name="riskMaxSharesTotalRisk" type="xsd:double" />
+          <xsd:element name="riskMaxSharesActiveRisk" type="xsd:double" />
+          <xsd:element name="riskTradeAllTotalRisk" type="xsd:double" />
+          <xsd:element name="riskTradeAllActiveRisk" type="xsd:double" />
+          <xsd:element name="beta" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FactorLoading">
+        <xsd:sequence>
+          <xsd:element name="factorName" nillable="true" type="xsd:string" />
+          <xsd:element name="loading" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfFactorLoading">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:FactorLoading[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOf_xsd_string">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Momentums">
+        <xsd:sequence>
+          <xsd:element name="stockMomentum" type="xsd:double" />
+          <xsd:element name="unadjustedMomentum" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PostTradeAceSecurityResults">
+        <xsd:sequence>
+          <xsd:element name="benchmarkPrice" type="xsd:double" />
+          <xsd:element name="benchmarkDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="intercept" type="xsd:double" />
+          <xsd:element name="PreTradeSpreadComponent" type="xsd:double" />
+          <xsd:element name="preTradeSpreadComponentBPs" type="xsd:double" />
+          <xsd:element name="PreTradePriceImpact" type="xsd:double" />
+          <xsd:element name="preTradePriceImpactBPs" type="xsd:double" />
+          <xsd:element name="spreadComponent" type="xsd:double" />
+          <xsd:element name="spreadComponentBPs" type="xsd:double" />
+          <xsd:element name="volumeComponent" type="xsd:double" />
+          <xsd:element name="volumeComponentBPs" type="xsd:double" />
+          <xsd:element name="momentumComponent" type="xsd:double" />
+          <xsd:element name="momentumComponentBPs" type="xsd:double" />
+          <xsd:element name="postTradeCost" type="xsd:double" />
+          <xsd:element name="postTradeCostBPs" type="xsd:double" />
+          <xsd:element name="momentums" nillable="true" type="impl:Momentums" />
+          <xsd:element name="realizedVolumesExtrapolated" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SecurityResults">
+        <xsd:sequence>
+          <xsd:element name="clientId" nillable="true" type="xsd:string" />
+          <xsd:element name="dayDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="amount" type="xsd:double" />
+          <xsd:element name="targetCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="side" nillable="true" type="xsd:string" />
+          <xsd:element name="aceResults" nillable="true" type="impl:AceSecurityResults" />
+          <xsd:element name="stockDataResults" nillable="true" type="impl:StockDataResults" />
+          <xsd:element name="resultIndex" type="xsd:int" />
+          <xsd:element name="riskResults" nillable="true" type="impl:RiskSecurityResults" />
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="companyName" nillable="true" type="xsd:string" />
+          <xsd:element name="shortId" nillable="true" type="xsd:string" />
+          <xsd:element name="longId" nillable="true" type="xsd:string" />
+          <xsd:element name="ruleName" nillable="true" type="xsd:string" />
+          <xsd:element name="factorLoadings" nillable="true" type="impl:ArrayOfFactorLoading" />
+          <xsd:element name="explicitCosts" nillable="true" type="impl:ExplicitCostResults" />
+          <xsd:element name="crossSavings" nillable="true" type="impl:CrossSavingsResults" />
+          <xsd:element name="indexMembership" nillable="true" type="impl:ArrayOf_xsd_string" />
+          <xsd:element name="postTradeAceSecurityResults" nillable="true" type="impl:PostTradeAceSecurityResults" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfSecurityResults">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:SecurityResults[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="RiskSummary">
+        <xsd:sequence>
+          <xsd:element name="shortRisk" type="xsd:double" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="benchmarkRisk" type="xsd:double" />
+          <xsd:element name="netRisk" type="xsd:double" />
+          <xsd:element name="netPercent" type="xsd:double" />
+          <xsd:element name="longRisk" type="xsd:double" />
+          <xsd:element name="longPercent" type="xsd:double" />
+          <xsd:element name="activePercent" type="xsd:double" />
+          <xsd:element name="benchmarkPercent" type="xsd:double" />
+          <xsd:element name="activeRisk" type="xsd:double" />
+          <xsd:element name="shortPercent" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfRiskSummary">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:RiskSummary[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="RiskDecomp">
+        <xsd:sequence>
+          <xsd:element name="commonSummary" nillable="true" type="impl:RiskSummary" />
+          <xsd:element name="commonComponents" nillable="true" type="impl:ArrayOfRiskSummary" />
+          <xsd:element name="specificSummary" nillable="true" type="impl:RiskSummary" />
+          <xsd:element name="totalSummary" nillable="true" type="impl:RiskSummary" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SubFactorSummary">
+        <xsd:sequence>
+          <xsd:element name="activeExposure" type="xsd:double" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="longMCR" type="xsd:double" />
+          <xsd:element name="shortMCR" type="xsd:double" />
+          <xsd:element name="benchmarkExposure" type="xsd:double" />
+          <xsd:element name="benchmarkMCR" type="xsd:double" />
+          <xsd:element name="netMCR" type="xsd:double" />
+          <xsd:element name="shortExposure" type="xsd:double" />
+          <xsd:element name="activeMCR" type="xsd:double" />
+          <xsd:element name="netExposure" type="xsd:double" />
+          <xsd:element name="longExposure" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfSubFactorSummary">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:SubFactorSummary[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="FactorSummary">
+        <xsd:sequence>
+          <xsd:element name="activeExposure" type="xsd:double" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="longMCR" type="xsd:double" />
+          <xsd:element name="shortMCR" type="xsd:double" />
+          <xsd:element name="benchmarkExposure" type="xsd:double" />
+          <xsd:element name="benchmarkMCR" type="xsd:double" />
+          <xsd:element name="netMCR" type="xsd:double" />
+          <xsd:element name="shortExposure" type="xsd:double" />
+          <xsd:element name="activeMCR" type="xsd:double" />
+          <xsd:element name="netExposure" type="xsd:double" />
+          <xsd:element name="longExposure" type="xsd:double" />
+          <xsd:element name="subFactors" nillable="true" type="impl:ArrayOfSubFactorSummary" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfFactorSummary">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:FactorSummary[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SubSectorWeight">
+        <xsd:sequence>
+          <xsd:element name="sectorName" nillable="true" type="xsd:string" />
+          <xsd:element name="weightLong" type="xsd:double" />
+          <xsd:element name="weightShort" type="xsd:double" />
+          <xsd:element name="weightPortfolio" type="xsd:double" />
+          <xsd:element name="weightBenchmark" type="xsd:double" />
+          <xsd:element name="weightActive" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfSubSectorWeight">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:SubSectorWeight[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SectorWeight">
+        <xsd:sequence>
+          <xsd:element name="sectorName" nillable="true" type="xsd:string" />
+          <xsd:element name="weightLong" type="xsd:double" />
+          <xsd:element name="weightShort" type="xsd:double" />
+          <xsd:element name="weightPortfolio" type="xsd:double" />
+          <xsd:element name="weightBenchmark" type="xsd:double" />
+          <xsd:element name="weightActive" type="xsd:double" />
+          <xsd:element name="components" nillable="true" type="impl:ArrayOfSubSectorWeight" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfSectorWeight">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:SectorWeight[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="IndexMembershipResult">
+        <xsd:sequence>
+          <xsd:element name="indexName" nillable="true" type="xsd:string" />
+          <xsd:element name="totalWeight" type="xsd:double" />
+          <xsd:element name="totalValue" type="xsd:double" />
+          <xsd:element name="totalShare" type="xsd:double" />
+          <xsd:element name="totalNumber" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfIndexMembershipResult">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:IndexMembershipResult[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="IndexMembershipResults">
+        <xsd:sequence>
+          <xsd:element name="indexMembershipBuy" nillable="true" type="impl:ArrayOfIndexMembershipResult" />
+          <xsd:element name="indexMembershipSell" nillable="true" type="impl:ArrayOfIndexMembershipResult" />
+          <xsd:element name="indexMembershipTotal" nillable="true" type="impl:ArrayOfIndexMembershipResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CustomAnalyticsResults">
+        <xsd:sequence>
+          <xsd:element name="realizedVolatilityBuy" type="xsd:double" />
+          <xsd:element name="realizedVolatilitySell" type="xsd:double" />
+          <xsd:element name="realizedVolatilityTotal" type="xsd:double" />
+          <xsd:element name="dollarWgtAvgDailyVolBuy" type="xsd:double" />
+          <xsd:element name="dollarWgtAvgDailyVolSell" type="xsd:double" />
+          <xsd:element name="dollarWgtAvgDailyVolTotal" type="xsd:double" />
+          <xsd:element name="absoluteVolatilityBuy" type="xsd:double" />
+          <xsd:element name="absoluteVolatilitySell" type="xsd:double" />
+          <xsd:element name="buyVsSellVolatility" type="xsd:double" />
+          <xsd:element name="absoluteVolatilityTotal" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SubCalcResults">
+        <xsd:sequence>
+          <xsd:element name="aggregateResults" nillable="true" type="impl:AggregateResults" />
+          <xsd:element name="securityResultsIdArray" nillable="true" type="impl:ArrayOf_xsd_int" />
+          <xsd:element name="exceptions" nillable="true" type="impl:ArrayOfCalcException" />
+          <xsd:element name="securityResultsArray" nillable="true" type="impl:ArrayOfSecurityResults" />
+          <xsd:element name="riskDecomp" nillable="true" type="impl:RiskDecomp" />
+          <xsd:element name="factorRisk" nillable="true" type="impl:ArrayOfFactorSummary" />
+          <xsd:element name="sectorWeights" nillable="true" type="impl:ArrayOfSectorWeight" />
+          <xsd:element name="dollarNeutralRiskDecomp" nillable="true" type="impl:RiskDecomp" />
+          <xsd:element name="indexMembershipResults" nillable="true" type="impl:IndexMembershipResults" />
+          <xsd:element name="customAnalyticsResults" nillable="true" type="impl:CustomAnalyticsResults" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CalcResults">
+        <xsd:sequence>
+          <xsd:element name="portfolioResults" nillable="true" type="impl:SubCalcResults" />
+          <xsd:element name="tradelistResults" nillable="true" type="impl:SubCalcResults" />
+          <xsd:element name="portfolioTargetResults" nillable="true" type="impl:SubCalcResults" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="HedgeInstrumentsList">
+        <xsd:sequence>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="instruments" nillable="true" type="impl:ArrayOfHedgeAggregateAsset" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="HedgeCalcParameters_goal">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="minRisk" />
+          <xsd:enumeration value="minSectorImbalance" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="HedgeCalcParameters">
+        <xsd:sequence>
+          <xsd:element name="dayDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="instrumentsList" nillable="true" type="impl:HedgeInstrumentsList" />
+          <xsd:element name="maxNumOfInstruments" type="xsd:int" />
+          <xsd:element name="maxTotalTradeAmount" type="xsd:double" />
+          <xsd:element name="maxTradeAmountPerInstrument" type="xsd:double" />
+          <xsd:element name="options" nillable="true" type="impl:ArrayOfLabelValue" />
+          <xsd:element name="riskModelId" nillable="true" type="xsd:string" />
+          <xsd:element name="tradelist" nillable="true" type="impl:Tradelist" />
+          <xsd:element name="goal" nillable="true" type="impl:HedgeCalcParameters_goal" />
+          <xsd:element name="sellBuyImbalanceLowerBound" nillable="true" type="impl:DoubleWrapper" />
+          <xsd:element name="sellBuyImbalanceUpperBound" nillable="true" type="impl:DoubleWrapper" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="HedgeResults">
+        <xsd:sequence>
+          <xsd:element name="unhedgedResult" nillable="true" type="impl:SubCalcResults" />
+          <xsd:element name="hedgedResult" nillable="true" type="impl:SubCalcResults" />
+          <xsd:element name="recommendedHedges" nillable="true" type="impl:SubCalcResults" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CountryData">
+        <xsd:sequence>
+          <xsd:element name="iso3" nillable="true" type="xsd:string" />
+          <xsd:element name="iso2" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCountryData">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:CountryData[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptResidualConstraints">
+        <xsd:sequence>
+          <xsd:element name="riskMinimize" type="xsd:boolean" />
+          <xsd:element name="sectorMinimize" type="xsd:boolean" />
+          <xsd:element name="liquidityMaximize" type="xsd:boolean" />
+          <xsd:element name="riskBoundAbsolute" type="xsd:boolean" />
+          <xsd:element name="liquidityBound" type="xsd:boolean" />
+          <xsd:element name="sectorBound" type="xsd:boolean" />
+          <xsd:element name="riskBoundAt" type="xsd:double" />
+          <xsd:element name="riskBoundAt_on" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptPortfolioConstraints">
+        <xsd:sequence>
+          <xsd:element name="riskMinimize" type="xsd:boolean" />
+          <xsd:element name="riskBoundAbsolute" type="xsd:boolean" />
+          <xsd:element name="riskBoundAt" type="xsd:double" />
+          <xsd:element name="riskBoundAt_on" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptPortfolioParameters">
+        <xsd:sequence>
+          <xsd:element name="benchmark" nillable="true" type="xsd:string" />
+          <xsd:element name="portfolioConstraints" nillable="true" type="impl:TradeOptPortfolioConstraints" />
+          <xsd:element name="riskModelId" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptConstraints">
+        <xsd:sequence>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="upperBound" type="xsd:double" />
+          <xsd:element name="upperBound_on" type="xsd:boolean" />
+          <xsd:element name="lowerBound" type="xsd:double" />
+          <xsd:element name="lowerBound_on" type="xsd:boolean" />
+          <xsd:element name="minimum" type="xsd:double" />
+          <xsd:element name="minimum_on" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptTrade">
+        <xsd:sequence>
+          <xsd:element name="trade" nillable="true" type="impl:Security" />
+          <xsd:element name="sizeConstraint" nillable="true" type="impl:TradeOptConstraints" />
+          <xsd:element name="minimumThresholdConstraint" nillable="true" type="impl:TradeOptConstraints" />
+          <xsd:element name="roundLotSize" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTradeOptTrade">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:TradeOptTrade[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTradeOptConstraints">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:TradeOptConstraints[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptTradelist">
+        <xsd:sequence>
+          <xsd:element name="trades" nillable="true" type="impl:ArrayOfTradeOptTrade" />
+          <xsd:element name="constraints" nillable="true" type="impl:ArrayOfTradeOptConstraints" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BooleanWrapper">
+        <xsd:sequence>
+          <xsd:element name="booleanValue" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptParameters">
+        <xsd:sequence>
+          <xsd:element name="tradelist" nillable="true" type="impl:Tradelist" />
+          <xsd:element name="buySellImbalanceLB" type="xsd:double" />
+          <xsd:element name="buySellImbalanceLB_on" type="xsd:boolean" />
+          <xsd:element name="totalConstraints" nillable="true" type="impl:TradeOptResidualConstraints" />
+          <xsd:element name="progressInterval" type="xsd:double" />
+          <xsd:element name="aceMinimize" type="xsd:boolean" />
+          <xsd:element name="buyConstraints" nillable="true" type="impl:TradeOptResidualConstraints" />
+          <xsd:element name="maxADV" type="xsd:double" />
+          <xsd:element name="maxADV_on" type="xsd:boolean" />
+          <xsd:element name="aceHorizon" type="xsd:int" />
+          <xsd:element name="aceMax" type="xsd:double" />
+          <xsd:element name="aceMax_on" type="xsd:boolean" />
+          <xsd:element name="sellConstraints" nillable="true" type="impl:TradeOptResidualConstraints" />
+          <xsd:element name="numWedges" type="xsd:int" />
+          <xsd:element name="buySellImbalanceUB" type="xsd:double" />
+          <xsd:element name="buySellImbalanceUB_on" type="xsd:boolean" />
+          <xsd:element name="initialProgress" type="xsd:double" />
+          <xsd:element name="benchmarkId" nillable="true" type="xsd:string" />
+          <xsd:element name="portfolio" nillable="true" type="impl:Portfolio" />
+          <xsd:element name="portfolioParameters" nillable="true" type="impl:TradeOptPortfolioParameters" />
+          <xsd:element name="options" nillable="true" type="impl:ArrayOfLabelValue" />
+          <xsd:element name="sourceApp" nillable="true" type="xsd:string" />
+          <xsd:element name="riskModelId" nillable="true" type="xsd:string" />
+          <xsd:element name="startingBin" type="xsd:int" />
+          <xsd:element name="endingBin" type="xsd:int" />
+          <xsd:element name="tradelistContrained" nillable="true" type="impl:TradeOptTradelist" />
+          <xsd:element name="dayDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="useRoundLot" nillable="true" type="impl:BooleanWrapper" />
+          <xsd:element name="roundLotSize" type="xsd:int" />
+          <xsd:element name="variableProgress" nillable="true" type="impl:BooleanWrapper" />
+          <xsd:element name="allOrNothingTrades" nillable="true" type="impl:BooleanWrapper" />
+          <xsd:element name="fillRatio_on" type="xsd:boolean" />
+          <xsd:element name="fillRatio" type="xsd:double" />
+          <xsd:element name="sellBuyImbalanceLB_on" type="xsd:boolean" />
+          <xsd:element name="sellBuyImbalanceLB" type="xsd:double" />
+          <xsd:element name="sellBuyImbalanceUB_on" type="xsd:boolean" />
+          <xsd:element name="sellBuyImbalanceUB" type="xsd:double" />
+          <xsd:element name="softBoundPenalty" type="xsd:double" />
+          <xsd:element name="useSoftLB" type="xsd:boolean" />
+          <xsd:element name="useSoftUB" type="xsd:boolean" />
+          <xsd:element name="buySellImbalanceLBRem" type="xsd:double" />
+          <xsd:element name="buySellImbalanceLBRem_on" type="xsd:boolean" />
+          <xsd:element name="buySellImbalanceUBRem" type="xsd:double" />
+          <xsd:element name="buySellImbalanceUBRem_on" type="xsd:boolean" />
+          <xsd:element name="fillRatioRem_on" type="xsd:boolean" />
+          <xsd:element name="fillRatioRem" type="xsd:double" />
+          <xsd:element name="sellBuyImbalanceLBRem_on" type="xsd:boolean" />
+          <xsd:element name="sellBuyImbalanceLBRem" type="xsd:double" />
+          <xsd:element name="sellBuyImbalanceUBRem_on" type="xsd:boolean" />
+          <xsd:element name="sellBuyImbalanceUBRem" type="xsd:double" />
+          <xsd:element name="softBoundPenaltyRem" type="xsd:double" />
+          <xsd:element name="useSoftLBRem" type="xsd:boolean" />
+          <xsd:element name="useSoftUBRem" type="xsd:boolean" />
+          <xsd:element name="progressMax" type="xsd:double" />
+          <xsd:element name="sectorWeightBoundAt" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptWedgeResults">
+        <xsd:sequence>
+          <xsd:element name="progress" type="xsd:double" />
+          <xsd:element name="executionResults" nillable="true" type="impl:SubCalcResults" />
+          <xsd:element name="residualResults" nillable="true" type="impl:SubCalcResults" />
+          <xsd:element name="targetPortfolioResults" nillable="true" type="impl:SubCalcResults" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTradeOptWedgeResults">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:TradeOptWedgeResults[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="TradeOptResults">
+        <xsd:sequence>
+          <xsd:element name="initTradelistResults" nillable="true" type="impl:SubCalcResults" />
+          <xsd:element name="wedgeResultsArray" nillable="true" type="impl:ArrayOfTradeOptWedgeResults" />
+          <xsd:element name="portfolioResults" nillable="true" type="impl:SubCalcResults" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CapacityAnalysisParams">
+        <xsd:sequence>
+          <xsd:element name="calcParameters" nillable="true" type="impl:CalcParameters" />
+          <xsd:element name="capacityBenchmark" nillable="true" type="impl:Benchmark" />
+          <xsd:element name="capacityBenchmarkId" nillable="true" type="xsd:string" />
+          <xsd:element name="universeNamesHeld" type="xsd:double" />
+          <xsd:element name="portfolioValues" nillable="true" type="impl:ArrayOf_xsd_double" />
+          <xsd:element name="weightingScheme" nillable="true" type="xsd:string" />
+          <xsd:element name="rebalancesPerYear" type="xsd:int" />
+          <xsd:element name="turnover" type="xsd:double" />
+          <xsd:element name="rebalanceType" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SubCapacityAnalysisResults">
+        <xsd:sequence>
+          <xsd:element name="Results" nillable="true" type="impl:SubCalcResults" />
+          <xsd:element name="maxHorizon" type="xsd:int" />
+          <xsd:element name="avgHorizon" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfSubCapacityAnalysisResults">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:SubCapacityAnalysisResults[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="CapacityAnalysisResults">
+        <xsd:sequence>
+          <xsd:element name="capacityAnalysisResults" nillable="true" type="impl:ArrayOfSubCapacityAnalysisResults" />
+          <xsd:element name="exceptions" nillable="true" type="impl:ArrayOfCalcException" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="CostCurveParams_tradeSizeType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="adv" />
+          <xsd:enumeration value="shares" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="CostCurveParams">
+        <xsd:sequence>
+          <xsd:element name="dayDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="tradeSizePoints" nillable="true" type="impl:ArrayOf_xsd_double" />
+          <xsd:element name="options" nillable="true" type="impl:ArrayOfLabelValue" />
+          <xsd:element name="tradelist" nillable="true" type="impl:Tradelist" />
+          <xsd:element name="tradeSizeType" nillable="true" type="impl:CostCurveParams_tradeSizeType" />
+          <xsd:element name="costParameters" nillable="true" type="impl:CostParameters" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CostCurveAggregateResults">
+        <xsd:sequence>
+          <xsd:element name="avgCostStdDev" type="xsd:double" />
+          <xsd:element name="avgCostPerShare" type="xsd:double" />
+          <xsd:element name="avgVolumePerc" type="xsd:double" />
+          <xsd:element name="percentileBps" nillable="true" type="impl:ArrayOfCostPercentile" />
+          <xsd:element name="avgCostStdDevBps" type="xsd:double" />
+          <xsd:element name="sharesTotal" type="xsd:double" />
+          <xsd:element name="avgCostPerShareBps" type="xsd:double" />
+          <xsd:element name="valueTotal" type="xsd:double" />
+          <xsd:element name="percentile" nillable="true" type="impl:ArrayOfCostPercentile" />
+          <xsd:element name="tradeSizeValue" type="xsd:double" />
+          <xsd:element name="tradeSizeType" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCostCurveAggregateResults">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:CostCurveAggregateResults[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="CostCurvePointResults">
+        <xsd:sequence>
+          <xsd:element name="volumePercent" type="xsd:double" />
+          <xsd:element name="costPerShare" type="xsd:double" />
+          <xsd:element name="costStdDev_bps" type="xsd:double" />
+          <xsd:element name="percentileBps" nillable="true" type="impl:ArrayOfCostPercentile" />
+          <xsd:element name="costPerShare_bps" type="xsd:double" />
+          <xsd:element name="shares" type="xsd:double" />
+          <xsd:element name="costStdDev" type="xsd:double" />
+          <xsd:element name="side" nillable="true" type="xsd:string" />
+          <xsd:element name="distributions" nillable="true" type="impl:ArrayOfDistributionDay" />
+          <xsd:element name="percentile" nillable="true" type="impl:ArrayOfCostPercentile" />
+          <xsd:element name="numOfDistributionDays" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCostCurvePointResults">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:CostCurvePointResults[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="CostCurveTradeResults">
+        <xsd:sequence>
+          <xsd:element name="clientId" nillable="true" type="xsd:string" />
+          <xsd:element name="dayDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="shortId" nillable="true" type="xsd:string" />
+          <xsd:element name="pointResultsList" nillable="true" type="impl:ArrayOfCostCurvePointResults" />
+          <xsd:element name="longId" nillable="true" type="xsd:string" />
+          <xsd:element name="targetCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="nativeCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="resultIndex" type="xsd:int" />
+          <xsd:element name="volume" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCostCurveTradeResults">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:CostCurveTradeResults[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="CostCurveResults">
+        <xsd:sequence>
+          <xsd:element name="aggregateResultsList" nillable="true" type="impl:ArrayOfCostCurveAggregateResults" />
+          <xsd:element name="tradeResultsList" nillable="true" type="impl:ArrayOfCostCurveTradeResults" />
+          <xsd:element name="currencyId" nillable="true" type="xsd:string" />
+          <xsd:element name="exceptions" nillable="true" type="impl:ArrayOfCalcException" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NameIdGroup">
+        <xsd:sequence>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="components" nillable="true" type="impl:ArrayOfNameIdGroup" />
+          <xsd:element name="id" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfNameIdGroup">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:NameIdGroup[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTimeZone">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:TimeZone[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfAceSecurityResults">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:AceSecurityResults[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="StrategyResult">
+        <xsd:sequence>
+          <xsd:element name="strategy" nillable="true" type="xsd:string" />
+          <xsd:element name="aceResultsArray" nillable="true" type="impl:ArrayOfAceSecurityResults" />
+          <xsd:element name="recommendedSecurityResultIndex" nillable="true" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfStrategyResult">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:StrategyResult[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="StrategySecurityResult">
+        <xsd:sequence>
+          <xsd:element name="clientId" nillable="true" type="xsd:string" />
+          <xsd:element name="dayDate" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="amount" type="xsd:double" />
+          <xsd:element name="targetCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="side" nillable="true" type="xsd:string" />
+          <xsd:element name="strategyResultsArray" nillable="true" type="impl:ArrayOfStrategyResult" />
+          <xsd:element name="stockDataResults" nillable="true" type="impl:StockDataResults" />
+          <xsd:element name="resultIndex" type="xsd:int" />
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="companyName" nillable="true" type="xsd:string" />
+          <xsd:element name="shortId" nillable="true" type="xsd:string" />
+          <xsd:element name="longId" nillable="true" type="xsd:string" />
+          <xsd:element name="recommendedStrategyResultIndex" nillable="true" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfStrategySecurityResult">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:StrategySecurityResult[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="StrategyComparisonResults">
+        <xsd:sequence>
+          <xsd:element name="currencyId" nillable="true" type="xsd:string" />
+          <xsd:element name="strategySecurityResultsArray" nillable="true" type="impl:ArrayOfStrategySecurityResult" />
+          <xsd:element name="exceptions" nillable="true" type="impl:ArrayOfCalcException" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="VolumeProfileParameters">
+        <xsd:sequence>
+          <xsd:element name="securitiesArray" nillable="true" type="impl:ArrayOfSecurity" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="VolumeProfileSecurityResult">
+        <xsd:sequence>
+          <xsd:element name="stockId" nillable="true" type="xsd:string" />
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="companyName" nillable="true" type="xsd:string" />
+          <xsd:element name="shortId" nillable="true" type="xsd:string" />
+          <xsd:element name="longId" nillable="true" type="xsd:string" />
+          <xsd:element name="volumeProfileWeights" nillable="true" type="impl:ArrayOf_xsd_double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfVolumeProfileSecurityResult">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="impl:VolumeProfileSecurityResult[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="deleteBenchmarkResponse" />
+  <wsdl:message name="calculateAsyncResponse">
+    <wsdl:part name="calculateAsyncReturn" type="xsd:long" />
+  </wsdl:message>
+  <wsdl:message name="setHedgeAggregateAssetResponse" />
+  <wsdl:message name="getTimeZonesRequest">
+    <wsdl:part name="dayDate" type="xsd:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="executeCapacityAnalysisResponse">
+    <wsdl:part name="executeCapacityAnalysisReturn" type="impl:CapacityAnalysisResults" />
+  </wsdl:message>
+  <wsdl:message name="calculateRequest">
+    <wsdl:part name="wsCalcParams" type="impl:CalcParameters" />
+  </wsdl:message>
+  <wsdl:message name="executeHedgerResponse">
+    <wsdl:part name="executeHedgerReturn" type="impl:HedgeResults" />
+  </wsdl:message>
+  <wsdl:message name="getCostParametersResponse">
+    <wsdl:part name="getCostParametersReturn" type="impl:CostParameters" />
+  </wsdl:message>
+  <wsdl:message name="getCostParametersNamesRequest" />
+  <wsdl:message name="compareACEStrategiesResponse">
+    <wsdl:part name="compareACEStrategiesReturn" type="impl:StrategyComparisonResults" />
+  </wsdl:message>
+  <wsdl:message name="getHedgeAggregateAssetResponse">
+    <wsdl:part name="getHedgeAggregateAssetReturn" type="impl:HedgeAggregateAsset" />
+  </wsdl:message>
+  <wsdl:message name="getRiskModelNamesRequest" />
+  <wsdl:message name="getTimeZoneRequest">
+    <wsdl:part name="id" type="xsd:string" />
+    <wsdl:part name="dayDate" type="xsd:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="deleteHedgeAggregateAssetResponse" />
+  <wsdl:message name="getBenchmarkNamesResponse">
+    <wsdl:part name="getBenchmarkNamesReturn" type="impl:ArrayOfLabelValue" />
+  </wsdl:message>
+  <wsdl:message name="getAllCountriesResponse">
+    <wsdl:part name="getAllCountriesReturn" type="impl:ArrayOfCountryData" />
+  </wsdl:message>
+  <wsdl:message name="getCostParametersRequest">
+    <wsdl:part name="name" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getITGSectorsResponse">
+    <wsdl:part name="getITGSectorsReturn" type="impl:ArrayOfNameIdGroup" />
+  </wsdl:message>
+  <wsdl:message name="setHedgeAggregateAssetRequest">
+    <wsdl:part name="HedgeAggregateAsset" type="impl:HedgeAggregateAsset" />
+  </wsdl:message>
+  <wsdl:message name="getReadyDataStatusRequest">
+    <wsdl:part name="typeName" type="xsd:string" />
+    <wsdl:part name="frequency" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="setBenchmarkResponse" />
+  <wsdl:message name="getResultIdResponse">
+    <wsdl:part name="getResultIdReturn" type="xsd:long" />
+  </wsdl:message>
+  <wsdl:message name="getTimeZoneNamesRequest" />
+  <wsdl:message name="getDefaultsResponse">
+    <wsdl:part name="getDefaultsReturn" type="impl:ArrayOfLabelValue" />
+  </wsdl:message>
+  <wsdl:message name="getAllCurrenciesRequest" />
+  <wsdl:message name="deleteBenchmarkRequest">
+    <wsdl:part name="benchmarkName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getTransitionSourcePortfolioRequest">
+    <wsdl:part name="wsTargetPortfolio" type="impl:Portfolio" />
+    <wsdl:part name="wsTradelist" type="impl:Tradelist" />
+  </wsdl:message>
+  <wsdl:message name="getPortfolioRequest">
+    <wsdl:part name="portfolioName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getTimeZonesResponse">
+    <wsdl:part name="getTimeZonesReturn" type="impl:ArrayOfTimeZone" />
+  </wsdl:message>
+  <wsdl:message name="deleteTradelistResponse" />
+  <wsdl:message name="deleteCostParametersRequest">
+    <wsdl:part name="costParametersName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getCostParametersNamesResponse">
+    <wsdl:part name="getCostParametersNamesReturn" type="impl:ArrayOf_xsd_string" />
+  </wsdl:message>
+  <wsdl:message name="deleteHedgeAggregateAssetRequest">
+    <wsdl:part name="country" type="xsd:string" />
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deletePortfolioRequest">
+    <wsdl:part name="portfolioName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getTradelistNamesResponse">
+    <wsdl:part name="getTradelistNamesReturn" type="impl:ArrayOf_xsd_string" />
+  </wsdl:message>
+  <wsdl:message name="setDefaultsResponse" />
+  <wsdl:message name="setCostParametersResponse" />
+  <wsdl:message name="getITGSectorsRequest" />
+  <wsdl:message name="deleteTradelistRequest">
+    <wsdl:part name="tradelistName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getAllHedgeAggregateAssetsRequest">
+    <wsdl:part name="category" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="calculateCostCurveResponse">
+    <wsdl:part name="calculateCostCurveReturn" type="impl:CostCurveResults" />
+  </wsdl:message>
+  <wsdl:message name="getBenchmarkNamesRequest">
+    <wsdl:part name="benchmarkCategory" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="calculateCostCurveRequest">
+    <wsdl:part name="wsCostCurveParams" type="impl:CostCurveParams" />
+  </wsdl:message>
+  <wsdl:message name="getBenchmarkResponse">
+    <wsdl:part name="getBenchmarkReturn" type="impl:Benchmark" />
+  </wsdl:message>
+  <wsdl:message name="getTransitionInKindsResponse">
+    <wsdl:part name="getTransitionInKindsReturn" type="impl:Tradelist" />
+  </wsdl:message>
+  <wsdl:message name="setTradelistResponse" />
+  <wsdl:message name="getAllHedgeAggregateAssetsResponse">
+    <wsdl:part name="getAllHedgeAggregateAssetsReturn" type="impl:ArrayOfHedgeAggregateAsset" />
+  </wsdl:message>
+  <wsdl:message name="getTimeZoneResponse">
+    <wsdl:part name="getTimeZoneReturn" type="impl:TimeZone" />
+  </wsdl:message>
+  <wsdl:message name="getDefaultsRequest" />
+  <wsdl:message name="getPortfolioResponse">
+    <wsdl:part name="getPortfolioReturn" type="impl:Portfolio" />
+  </wsdl:message>
+  <wsdl:message name="getTransitionSourcePortfolioResponse">
+    <wsdl:part name="getTransitionSourcePortfolioReturn" type="impl:Portfolio" />
+  </wsdl:message>
+  <wsdl:message name="executeCapacityAnalysisRequest">
+    <wsdl:part name="wsCapacityAnalysisParams" type="impl:CapacityAnalysisParams" />
+  </wsdl:message>
+  <wsdl:message name="getVolumeProfileRequest">
+    <wsdl:part name="wsVolumeProfileParams" type="impl:VolumeProfileParameters" />
+  </wsdl:message>
+  <wsdl:message name="setTradelistRequest">
+    <wsdl:part name="tradelist" type="impl:Tradelist" />
+  </wsdl:message>
+  <wsdl:message name="getCalculationResultsResponse">
+    <wsdl:part name="getCalculationResultsReturn" type="impl:CalcResults" />
+  </wsdl:message>
+  <wsdl:message name="getResultIdRequest">
+    <wsdl:part name="wsCalcParams" type="impl:CalcParameters" />
+    <wsdl:part name="waitForResults" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getVolumeProfileResponse">
+    <wsdl:part name="getVolumeProfileReturn" type="impl:ArrayOfVolumeProfileSecurityResult" />
+  </wsdl:message>
+  <wsdl:message name="calculateAsyncRequest">
+    <wsdl:part name="wsCalcParams" type="impl:CalcParameters" />
+    <wsdl:part name="waitForResults" type="xsd:boolean" />
+    <wsdl:part name="persisteResults" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="calculateResponse">
+    <wsdl:part name="calculateReturn" type="impl:CalcResults" />
+  </wsdl:message>
+  <wsdl:message name="getPortfolioNamesResponse">
+    <wsdl:part name="getPortfolioNamesReturn" type="impl:ArrayOf_xsd_string" />
+  </wsdl:message>
+  <wsdl:message name="getReadyDataStatusResponse">
+    <wsdl:part name="getReadyDataStatusReturn" type="impl:ArrayOfLabelValue" />
+  </wsdl:message>
+  <wsdl:message name="getCalculationResultsRequest">
+    <wsdl:part name="resultId" type="xsd:long" />
+  </wsdl:message>
+  <wsdl:message name="getTransitionTargetPortfolioRequest">
+    <wsdl:part name="wsSourcePortfolio" type="impl:Portfolio" />
+    <wsdl:part name="wsTradelist" type="impl:Tradelist" />
+  </wsdl:message>
+  <wsdl:message name="deleteCostParametersResponse" />
+  <wsdl:message name="executeHedgerRequest">
+    <wsdl:part name="hedgeCalcParams" type="impl:HedgeCalcParameters" />
+  </wsdl:message>
+  <wsdl:message name="executeTradeOptRequest">
+    <wsdl:part name="wsTradeOptParams" type="impl:TradeOptParameters" />
+  </wsdl:message>
+  <wsdl:message name="compareACEStrategiesRequest">
+    <wsdl:part name="wsCalcParams" type="impl:CalcParameters" />
+  </wsdl:message>
+  <wsdl:message name="setCostParametersRequest">
+    <wsdl:part name="wsCostParameters" type="impl:CostParameters" />
+  </wsdl:message>
+  <wsdl:message name="getAllCountriesRequest" />
+  <wsdl:message name="executeTradeOptResponse">
+    <wsdl:part name="executeTradeOptReturn" type="impl:TradeOptResults" />
+  </wsdl:message>
+  <wsdl:message name="getTransitionInKindsRequest">
+    <wsdl:part name="wsSourcePortfolio" type="impl:Portfolio" />
+    <wsdl:part name="wsTargetPortfolio" type="impl:Portfolio" />
+  </wsdl:message>
+  <wsdl:message name="getTradelistNamesRequest" />
+  <wsdl:message name="getTransitionTradelistRequest">
+    <wsdl:part name="wsSourcePortfolio" type="impl:Portfolio" />
+    <wsdl:part name="wsTargetPortfolio" type="impl:Portfolio" />
+  </wsdl:message>
+  <wsdl:message name="deletePortfolioResponse" />
+  <wsdl:message name="setBenchmarkRequest">
+    <wsdl:part name="benchmark" type="impl:Benchmark" />
+  </wsdl:message>
+  <wsdl:message name="getTradelistResponse">
+    <wsdl:part name="getTradelistReturn" type="impl:Tradelist" />
+  </wsdl:message>
+  <wsdl:message name="getAllCurrenciesResponse">
+    <wsdl:part name="getAllCurrenciesReturn" type="impl:ArrayOfLabelValue" />
+  </wsdl:message>
+  <wsdl:message name="getBenchmarkRequest">
+    <wsdl:part name="benchmarkName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="setPortfolioResponse" />
+  <wsdl:message name="getTradelistRequest">
+    <wsdl:part name="tradelistName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getHedgeAggregateAssetRequest">
+    <wsdl:part name="country" type="xsd:string" />
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="setDefaultsRequest">
+    <wsdl:part name="defaultValues" type="impl:ArrayOfLabelValue" />
+  </wsdl:message>
+  <wsdl:message name="getTimeZoneNamesResponse">
+    <wsdl:part name="getTimeZoneNamesReturn" type="impl:ArrayOf_xsd_string" />
+  </wsdl:message>
+  <wsdl:message name="getTransitionTradelistResponse">
+    <wsdl:part name="getTransitionTradelistReturn" type="impl:Tradelist" />
+  </wsdl:message>
+  <wsdl:message name="getTransitionTargetPortfolioResponse">
+    <wsdl:part name="getTransitionTargetPortfolioReturn" type="impl:Portfolio" />
+  </wsdl:message>
+  <wsdl:message name="getPortfolioNamesRequest" />
+  <wsdl:message name="setPortfolioRequest">
+    <wsdl:part name="portfolio" type="impl:Portfolio" />
+  </wsdl:message>
+  <wsdl:message name="getRiskModelNamesResponse">
+    <wsdl:part name="getRiskModelNamesReturn" type="impl:ArrayOfLabelValue" />
+  </wsdl:message>
+  <wsdl:portType name="CalculationService">
+    <wsdl:operation name="getTimeZone" parameterOrder="id dayDate">
+      <wsdl:input name="getTimeZoneRequest" message="impl:getTimeZoneRequest" />
+      <wsdl:output name="getTimeZoneResponse" message="impl:getTimeZoneResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setDefaults" parameterOrder="defaultValues">
+      <wsdl:input name="setDefaultsRequest" message="impl:setDefaultsRequest" />
+      <wsdl:output name="setDefaultsResponse" message="impl:setDefaultsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTradelist" parameterOrder="tradelistName">
+      <wsdl:input name="getTradelistRequest" message="impl:getTradelistRequest" />
+      <wsdl:output name="getTradelistResponse" message="impl:getTradelistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getBenchmark" parameterOrder="benchmarkName">
+      <wsdl:input name="getBenchmarkRequest" message="impl:getBenchmarkRequest" />
+      <wsdl:output name="getBenchmarkResponse" message="impl:getBenchmarkResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPortfolio" parameterOrder="portfolioName">
+      <wsdl:input name="getPortfolioRequest" message="impl:getPortfolioRequest" />
+      <wsdl:output name="getPortfolioResponse" message="impl:getPortfolioResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllHedgeAggregateAssets" parameterOrder="category">
+      <wsdl:input name="getAllHedgeAggregateAssetsRequest" message="impl:getAllHedgeAggregateAssetsRequest" />
+      <wsdl:output name="getAllHedgeAggregateAssetsResponse" message="impl:getAllHedgeAggregateAssetsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getHedgeAggregateAsset" parameterOrder="country id">
+      <wsdl:input name="getHedgeAggregateAssetRequest" message="impl:getHedgeAggregateAssetRequest" />
+      <wsdl:output name="getHedgeAggregateAssetResponse" message="impl:getHedgeAggregateAssetResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteTradelist" parameterOrder="tradelistName">
+      <wsdl:input name="deleteTradelistRequest" message="impl:deleteTradelistRequest" />
+      <wsdl:output name="deleteTradelistResponse" message="impl:deleteTradelistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setBenchmark" parameterOrder="benchmark">
+      <wsdl:input name="setBenchmarkRequest" message="impl:setBenchmarkRequest" />
+      <wsdl:output name="setBenchmarkResponse" message="impl:setBenchmarkResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllCurrencies">
+      <wsdl:input name="getAllCurrenciesRequest" message="impl:getAllCurrenciesRequest" />
+      <wsdl:output name="getAllCurrenciesResponse" message="impl:getAllCurrenciesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDefaults">
+      <wsdl:input name="getDefaultsRequest" message="impl:getDefaultsRequest" />
+      <wsdl:output name="getDefaultsResponse" message="impl:getDefaultsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="calculate" parameterOrder="wsCalcParams">
+      <wsdl:input name="calculateRequest" message="impl:calculateRequest" />
+      <wsdl:output name="calculateResponse" message="impl:calculateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTransitionTradelist" parameterOrder="wsSourcePortfolio wsTargetPortfolio">
+      <wsdl:input name="getTransitionTradelistRequest" message="impl:getTransitionTradelistRequest" />
+      <wsdl:output name="getTransitionTradelistResponse" message="impl:getTransitionTradelistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTransitionInKinds" parameterOrder="wsSourcePortfolio wsTargetPortfolio">
+      <wsdl:input name="getTransitionInKindsRequest" message="impl:getTransitionInKindsRequest" />
+      <wsdl:output name="getTransitionInKindsResponse" message="impl:getTransitionInKindsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTransitionSourcePortfolio" parameterOrder="wsTargetPortfolio wsTradelist">
+      <wsdl:input name="getTransitionSourcePortfolioRequest" message="impl:getTransitionSourcePortfolioRequest" />
+      <wsdl:output name="getTransitionSourcePortfolioResponse" message="impl:getTransitionSourcePortfolioResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTransitionTargetPortfolio" parameterOrder="wsSourcePortfolio wsTradelist">
+      <wsdl:input name="getTransitionTargetPortfolioRequest" message="impl:getTransitionTargetPortfolioRequest" />
+      <wsdl:output name="getTransitionTargetPortfolioResponse" message="impl:getTransitionTargetPortfolioResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setTradelist" parameterOrder="tradelist">
+      <wsdl:input name="setTradelistRequest" message="impl:setTradelistRequest" />
+      <wsdl:output name="setTradelistResponse" message="impl:setTradelistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setCostParameters" parameterOrder="wsCostParameters">
+      <wsdl:input name="setCostParametersRequest" message="impl:setCostParametersRequest" />
+      <wsdl:output name="setCostParametersResponse" message="impl:setCostParametersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCostParameters" parameterOrder="name">
+      <wsdl:input name="getCostParametersRequest" message="impl:getCostParametersRequest" />
+      <wsdl:output name="getCostParametersResponse" message="impl:getCostParametersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setPortfolio" parameterOrder="portfolio">
+      <wsdl:input name="setPortfolioRequest" message="impl:setPortfolioRequest" />
+      <wsdl:output name="setPortfolioResponse" message="impl:setPortfolioResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setHedgeAggregateAsset" parameterOrder="HedgeAggregateAsset">
+      <wsdl:input name="setHedgeAggregateAssetRequest" message="impl:setHedgeAggregateAssetRequest" />
+      <wsdl:output name="setHedgeAggregateAssetResponse" message="impl:setHedgeAggregateAssetResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="executeHedger" parameterOrder="hedgeCalcParams">
+      <wsdl:input name="executeHedgerRequest" message="impl:executeHedgerRequest" />
+      <wsdl:output name="executeHedgerResponse" message="impl:executeHedgerResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getResultId" parameterOrder="wsCalcParams waitForResults">
+      <wsdl:input name="getResultIdRequest" message="impl:getResultIdRequest" />
+      <wsdl:output name="getResultIdResponse" message="impl:getResultIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getBenchmarkNames" parameterOrder="benchmarkCategory">
+      <wsdl:input name="getBenchmarkNamesRequest" message="impl:getBenchmarkNamesRequest" />
+      <wsdl:output name="getBenchmarkNamesResponse" message="impl:getBenchmarkNamesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getRiskModelNames">
+      <wsdl:input name="getRiskModelNamesRequest" message="impl:getRiskModelNamesRequest" />
+      <wsdl:output name="getRiskModelNamesResponse" message="impl:getRiskModelNamesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTradelistNames">
+      <wsdl:input name="getTradelistNamesRequest" message="impl:getTradelistNamesRequest" />
+      <wsdl:output name="getTradelistNamesResponse" message="impl:getTradelistNamesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllCountries">
+      <wsdl:input name="getAllCountriesRequest" message="impl:getAllCountriesRequest" />
+      <wsdl:output name="getAllCountriesResponse" message="impl:getAllCountriesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="calculateAsync" parameterOrder="wsCalcParams waitForResults persisteResults">
+      <wsdl:input name="calculateAsyncRequest" message="impl:calculateAsyncRequest" />
+      <wsdl:output name="calculateAsyncResponse" message="impl:calculateAsyncResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCalculationResults" parameterOrder="resultId">
+      <wsdl:input name="getCalculationResultsRequest" message="impl:getCalculationResultsRequest" />
+      <wsdl:output name="getCalculationResultsResponse" message="impl:getCalculationResultsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTimeZoneNames">
+      <wsdl:input name="getTimeZoneNamesRequest" message="impl:getTimeZoneNamesRequest" />
+      <wsdl:output name="getTimeZoneNamesResponse" message="impl:getTimeZoneNamesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="executeTradeOpt" parameterOrder="wsTradeOptParams">
+      <wsdl:input name="executeTradeOptRequest" message="impl:executeTradeOptRequest" />
+      <wsdl:output name="executeTradeOptResponse" message="impl:executeTradeOptResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="executeCapacityAnalysis" parameterOrder="wsCapacityAnalysisParams">
+      <wsdl:input name="executeCapacityAnalysisRequest" message="impl:executeCapacityAnalysisRequest" />
+      <wsdl:output name="executeCapacityAnalysisResponse" message="impl:executeCapacityAnalysisResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPortfolioNames">
+      <wsdl:input name="getPortfolioNamesRequest" message="impl:getPortfolioNamesRequest" />
+      <wsdl:output name="getPortfolioNamesResponse" message="impl:getPortfolioNamesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deletePortfolio" parameterOrder="portfolioName">
+      <wsdl:input name="deletePortfolioRequest" message="impl:deletePortfolioRequest" />
+      <wsdl:output name="deletePortfolioResponse" message="impl:deletePortfolioResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteHedgeAggregateAsset" parameterOrder="country id">
+      <wsdl:input name="deleteHedgeAggregateAssetRequest" message="impl:deleteHedgeAggregateAssetRequest" />
+      <wsdl:output name="deleteHedgeAggregateAssetResponse" message="impl:deleteHedgeAggregateAssetResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteBenchmark" parameterOrder="benchmarkName">
+      <wsdl:input name="deleteBenchmarkRequest" message="impl:deleteBenchmarkRequest" />
+      <wsdl:output name="deleteBenchmarkResponse" message="impl:deleteBenchmarkResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="calculateCostCurve" parameterOrder="wsCostCurveParams">
+      <wsdl:input name="calculateCostCurveRequest" message="impl:calculateCostCurveRequest" />
+      <wsdl:output name="calculateCostCurveResponse" message="impl:calculateCostCurveResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getITGSectors">
+      <wsdl:input name="getITGSectorsRequest" message="impl:getITGSectorsRequest" />
+      <wsdl:output name="getITGSectorsResponse" message="impl:getITGSectorsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCostParametersNames">
+      <wsdl:input name="getCostParametersNamesRequest" message="impl:getCostParametersNamesRequest" />
+      <wsdl:output name="getCostParametersNamesResponse" message="impl:getCostParametersNamesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteCostParameters" parameterOrder="costParametersName">
+      <wsdl:input name="deleteCostParametersRequest" message="impl:deleteCostParametersRequest" />
+      <wsdl:output name="deleteCostParametersResponse" message="impl:deleteCostParametersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTimeZones" parameterOrder="dayDate">
+      <wsdl:input name="getTimeZonesRequest" message="impl:getTimeZonesRequest" />
+      <wsdl:output name="getTimeZonesResponse" message="impl:getTimeZonesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="compareACEStrategies" parameterOrder="wsCalcParams">
+      <wsdl:input name="compareACEStrategiesRequest" message="impl:compareACEStrategiesRequest" />
+      <wsdl:output name="compareACEStrategiesResponse" message="impl:compareACEStrategiesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getReadyDataStatus" parameterOrder="typeName frequency">
+      <wsdl:input name="getReadyDataStatusRequest" message="impl:getReadyDataStatusRequest" />
+      <wsdl:output name="getReadyDataStatusResponse" message="impl:getReadyDataStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getVolumeProfile" parameterOrder="wsVolumeProfileParams">
+      <wsdl:input name="getVolumeProfileRequest" message="impl:getVolumeProfileRequest" />
+      <wsdl:output name="getVolumeProfileResponse" message="impl:getVolumeProfileResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ITGLogicWebServicePortSoapBinding" type="impl:CalculationService">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getTimeZone">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTimeZoneRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTimeZoneResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setDefaults">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setDefaultsRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setDefaultsResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTradelist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTradelistRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTradelistResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBenchmark">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getBenchmarkRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getBenchmarkResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPortfolio">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getPortfolioRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getPortfolioResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllHedgeAggregateAssets">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAllHedgeAggregateAssetsRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getAllHedgeAggregateAssetsResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getHedgeAggregateAsset">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getHedgeAggregateAssetRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getHedgeAggregateAssetResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteTradelist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteTradelistRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="deleteTradelistResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setBenchmark">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setBenchmarkRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setBenchmarkResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllCurrencies">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAllCurrenciesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getAllCurrenciesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDefaults">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDefaultsRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getDefaultsResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="calculate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="calculateRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="calculateResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTransitionTradelist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTransitionTradelistRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTransitionTradelistResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTransitionInKinds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTransitionInKindsRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTransitionInKindsResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTransitionSourcePortfolio">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTransitionSourcePortfolioRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTransitionSourcePortfolioResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTransitionTargetPortfolio">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTransitionTargetPortfolioRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTransitionTargetPortfolioResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTradelist">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setTradelistRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setTradelistResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCostParameters">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setCostParametersRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setCostParametersResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCostParameters">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCostParametersRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getCostParametersResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setPortfolio">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setPortfolioRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setPortfolioResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setHedgeAggregateAsset">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setHedgeAggregateAssetRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setHedgeAggregateAssetResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="executeHedger">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="executeHedgerRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="executeHedgerResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getResultId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getResultIdRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getResultIdResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBenchmarkNames">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getBenchmarkNamesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getBenchmarkNamesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRiskModelNames">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRiskModelNamesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getRiskModelNamesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTradelistNames">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTradelistNamesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTradelistNamesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllCountries">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAllCountriesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getAllCountriesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="calculateAsync">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="calculateAsyncRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="calculateAsyncResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCalculationResults">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCalculationResultsRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getCalculationResultsResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTimeZoneNames">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTimeZoneNamesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTimeZoneNamesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="executeTradeOpt">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="executeTradeOptRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="executeTradeOptResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="executeCapacityAnalysis">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="executeCapacityAnalysisRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="executeCapacityAnalysisResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPortfolioNames">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getPortfolioNamesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getPortfolioNamesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePortfolio">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deletePortfolioRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="deletePortfolioResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteHedgeAggregateAsset">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteHedgeAggregateAssetRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="deleteHedgeAggregateAssetResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteBenchmark">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteBenchmarkRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="deleteBenchmarkResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="calculateCostCurve">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="calculateCostCurveRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="calculateCostCurveResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getITGSectors">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getITGSectorsRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getITGSectorsResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCostParametersNames">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCostParametersNamesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getCostParametersNamesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCostParameters">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="deleteCostParametersRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="deleteCostParametersResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTimeZones">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTimeZonesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTimeZonesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="compareACEStrategies">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="compareACEStrategiesRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="compareACEStrategiesResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReadyDataStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getReadyDataStatusRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getReadyDataStatusResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVolumeProfile">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getVolumeProfileRequest">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getVolumeProfileResponse">
+        <wsdlsoap:body use="encoded" namespace="urn:v3_0.logic.itginc.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ITGLogicWebService">
+    <wsdl:port name="ITGLogicWebServicePort" binding="impl:ITGLogicWebServicePortSoapBinding">
+      <wsdlsoap:address location="https://logic.itginc.com/services/CalculationService_v3_0" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

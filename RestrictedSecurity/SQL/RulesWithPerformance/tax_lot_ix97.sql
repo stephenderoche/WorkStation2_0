@@ -1,0 +1,10 @@
+
+CREATE NONCLUSTERED INDEX tax_lot_ix97 ON [dbo].[tax_lot]
+(
+	[account_id] ASC,
+	[security_id] ASC,
+	[trade_date] ASC
+)
+INCLUDE ( 	[lot_number]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+

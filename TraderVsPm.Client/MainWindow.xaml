@@ -1,0 +1,197 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SecurityHistoryTPlus.Client.SecurityHistoryMainWindow"
+        Title="" Height="571" Width="682" xmlns:my="clr-namespace:System;assembly=mscorlib" Name="Historicallookup">
+    <Window.Resources>
+
+        <Storyboard x:Key="Button">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="btnGetAccountName" Duration = "0:0:01">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.004"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.133"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.327"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.521"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0.776"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="btnGetAccountName" Duration = "0:0:01">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-67.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-69.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-69"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-68.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="-63.167"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="btnGetAccountName" Duration = "0:0:01">
+                <EasingColorKeyFrame KeyTime="0" Value="#FF2D7E5E"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF0427F7"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF0326FF"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FF0327F5"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.9" Value="#FF0327F5"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="btnGetAccountName" Duration = "0:0:01">
+                <EasingColorKeyFrame KeyTime="0" Value="WhiteSmoke"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FFF4F4F5"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFF3F3F3"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FFF3F3F7"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.9" Value="#FFF3F3F7"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="button">
+                <EasingColorKeyFrame KeyTime="0:0:0.9" Value="#FF2B05E9"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="button">
+                <EasingColorKeyFrame KeyTime="0:0:0.9" Value="#FFF5F2F2"/>
+            </ColorAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="button">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.9" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="button">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="-360"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="button_Copy">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-35.538"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-187.125"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-300.964"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="-360"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-360"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="-360"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentControl.Content)" Storyboard.TargetName="button_Copy">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.8" Value="Cancel"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="Cancel"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="button_Copy">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="button_Copy">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="1.35"/>
+            </DoubleAnimationUsingKeyFrames>
+
+
+        </Storyboard>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <my:Boolean x:Key="IsTextSearchEnabled1">True</my:Boolean>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="Button_BeginStoryboard" Storyboard="{StaticResource Button}"/>
+        </EventTrigger>
+
+    </Window.Triggers>
+    <Grid Background="#FFD6D8DE" ShowGridLines="False" SnapsToDevicePixels="True" Width="651" ForceCursor="False" Height="513">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="13" />
+            <ColumnDefinition Width="56" />
+            <ColumnDefinition Width="369*" />
+        </Grid.ColumnDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup"/>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="76*"/>
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="92*"/>
+            <RowDefinition Height="108*" />
+            <RowDefinition Height="108*"/>
+        </Grid.RowDefinitions>
+
+        <Button Background="Beige" Content="Cancel" HorizontalAlignment="Right" Margin="0,91,27,4" Name="btnCancel" RenderTransformOrigin="0.5,0.5" Width="107" Grid.Row="6" Click="button2_Click" Grid.Column="4">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+          <TabControl Grid.ColumnSpan="5" Grid.RowSpan="6" Height="384" HorizontalAlignment="Left" Margin="12,8,0,0" Name="tabControl1" VerticalAlignment="Top" Width="627" Grid.Row="1">
+            <TabItem Header="Security History" Name="tabItem1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="80*" />
+                        <ColumnDefinition Width="314*" />
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dataGrid" AlternatingRowBackground="AliceBlue" AlternationCount="2" AutoGenerateColumns="False" Margin="6,32,6,0" ItemsSource="{Binding Table1}" FontStyle="Italic" Foreground="black" Height="308" VerticalAlignment="Top" IsTextSearchEnabled="{StaticResource IsTextSearchEnabled1}" Grid.ColumnSpan="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Account" Binding="{Binding account_sh_name }" FontWeight="Bold" FontStyle="Oblique" Width="Auto" />
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding quantity_ordered, StringFormat=n2}" Width="Auto" />
+                            <DataGridTextColumn Header="Broker" Binding="{Binding broker_name}" Width="Auto" />
+                            <DataGridTextColumn Header="Direction" Binding="{Binding direction_sh_name}" Width="Auto" />
+                            <DataGridTextColumn Header="Price" Binding="{Binding total_average_price}" Width="Auto" />
+                            <DataGridTextColumn Header="Net Amount" Binding="{Binding net_amount, StringFormat=n2}" Width="Auto" />
+                            <DataGridTextColumn Header="Trade Date" Binding="{Binding trade_date, StringFormat=d}" Width="Auto" />
+                            <DataGridTextColumn Header="Settlement Date" Binding="{Binding settlement_date, StringFormat=d}" Width="Auto" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="8,0,0,325" Name="txtBrokerSearch" VerticalAlignment="Bottom" Width="101" LostFocus="filter" />
+                    <Label Content="Filter Account" Height="23" HorizontalAlignment="Left" Margin="115,2,0,0" Name="lblfilter" VerticalAlignment="Top" Width="84" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Positions Holdings" Name="tabItem2">
+                <Grid Height="280" Width="486" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="298*" />
+                        <ColumnDefinition Width="106*" />
+                        <ColumnDefinition Width="14*" />
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dataGridPositions"
+			            AlternatingRowBackground="AliceBlue"
+			            AlternationCount="2"
+			            AutoGenerateColumns="False" Margin="-2,2,6,0"
+			            ItemsSource="{Binding Table1}" FontStyle="Italic" Foreground="black"  Height="273" VerticalAlignment="Top" IsTextSearchEnabled="True" Grid.ColumnSpan="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Account Name" Binding="{Binding Account Name}" FontWeight="Bold" FontStyle="Oblique" Width="Auto" />
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, StringFormat=n2}" Width="Auto"  />
+                            <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="Auto"  />
+                            <DataGridTextColumn Header="Asset Type" Binding="{Binding Major_Asset}" Width="Auto"  />
+                            <DataGridTextColumn Header="Manager" Binding="{Binding Manager}" Width="Auto"  />
+                            <DataGridTextColumn Header="Issuer Name" Binding="{Binding Issuer Name}" Width="Auto"  />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+           
+        </TabControl>
+        <TextBox Height="19" HorizontalAlignment="Left" Margin="68,16,0,0" Name="txtaccount_id" VerticalAlignment="Top" Width="178" Text="All" Grid.ColumnSpan="4" />
+        <TextBox Height="19" HorizontalAlignment="Right" Margin="0,16,121,0" Name="SecurityTextBox" VerticalAlignment="Top" Width="178" Text="AAPL" Grid.Column="4" />
+        <TextBox Height="19" HorizontalAlignment="Left" Margin="63,40,0,0" Name="txtissuer" VerticalAlignment="Top" Width="178" Text="APPLE INC" Grid.Column="4" />
+        <TextBox Height="19" HorizontalAlignment="Left" Margin="68,63,0,0" Name="txtstartdate" Text="01/01/2014" VerticalAlignment="Top" Width="178" Grid.ColumnSpan="4" />
+        <TextBox Height="19" HorizontalAlignment="Left" Margin="63,64,0,0" Name="txtenddate" Text="10/31/2014" VerticalAlignment="Top" Width="178" Grid.Column="4" />
+        <Label Content="Account" Height="28" HorizontalAlignment="Left" Margin="12,10,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="From:" Height="26" HorizontalAlignment="Left" Margin="12,61,0,0" Name="label4" VerticalAlignment="Top" />
+        <Label Content="To:" Height="26" HorizontalAlignment="Left" Margin="0,62,0,0" Name="label5" VerticalAlignment="Top" Grid.Column="4" />
+        <RadioButton Content="Security" Grid.Column="3" Height="16" HorizontalAlignment="Left" Margin="48,19,0,0" Name="radioSecurity" VerticalAlignment="Top" Width="93" IsChecked="True" Grid.ColumnSpan="2" />
+        <RadioButton Content="Issuer" Height="16" HorizontalAlignment="Left" Margin="48,40,0,0" Name="radioissuer" VerticalAlignment="Top" Width="93" Grid.Column="3" Grid.ColumnSpan="2" />
+        <Button Content="Update Values" Grid.Column="4" HorizontalAlignment="Left" Margin="265,33,0,32" Name="button1" Width="92" Click="button1_Click" Background="White" />
+        <!--<DataGrid Name="dataGrid1" Grid.ColumnSpan="2" Grid.Row="3"/>-->
+    </Grid>
+</Window>
+

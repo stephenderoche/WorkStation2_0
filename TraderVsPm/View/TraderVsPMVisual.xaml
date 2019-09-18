@@ -1,0 +1,480 @@
+﻿<UserControl x:Class="TraderVsPM.Client.View.TraderVsPMVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+           xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             Background="White"
+             xmlns:local="clr-namespace:TraderVsPM.Client"
+         xmlns:dxut="clr-namespace:DevExpress.Xpf.Utils.Themes;assembly=DevExpress.Xpf.Core.v18.1"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Loaded="UserControl_Loaded" 
+          >
+    <UserControl.Resources>
+
+        <sys:Double x:Key="maxHeaderHeight">
+            50
+        </sys:Double>
+
+        <DataTemplate x:Key="wrapHeader">
+            <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+        </DataTemplate>
+
+
+        <Style x:Key="SelectedRowStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                    <Setter Property="dxg:RowControl.Background" Value="Gray" />
+                    <Setter Property="TextElement.Foreground" Value="White" />
+                </DataTrigger>
+                <Trigger Property="dxg:GridViewBase.IsFocusedRow" Value="True">
+                    <Setter Property="dxg:RowControl.Background" Value="CadetBlue" />
+                    <Setter Property="TextElement.Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+
+
+    <Grid Column="0" Background="LightGray"    >
+        <Grid.Resources>
+
+            <DataTemplate x:Key="renameColumnHeaderTemplate">
+                <Grid>
+                    <dxe:TextEdit
+                        EditValue="{Binding Path=DataContext.Header, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}}" 
+                        Foreground="Black" 
+                        Visibility="{Binding Path=DataContext.(local:ColumnBehavior.IsRenameEditorActivated),
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}, 
+                         Converter={local:VisibilityConverter},
+                        Mode=TwoWay}"                    
+                        Name="textEdit"
+                        LostFocus="OnRenameEditorLostFocus"/>
+
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="{Binding}" 
+                        Visibility="{Binding Path=Visibility, ElementName=textEdit, Converter={local:ReverseVisibilityConverter}}"
+                        MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="0" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="wrapHeader">
+                <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+            </DataTemplate>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="125"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".8*"/>
+            <ColumnDefinition Width=".2*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <GridSplitter Grid.Column="1" Background="Black"  Grid.Row="1"
+			Width="7" HorizontalAlignment="Left"
+			x:Name="lblvborder" FontWeight="Bold" Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Stretch" />
+        <Grid Background="LightGray" Margin="5,0,0,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="200"/>
+
+
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel Grid.Column="0" Margin="5,0,0,0" Orientation="Vertical">
+                <TextBlock Text="Account:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="65" Height="20" FontWeight="Bold" Margin="0,5,0,0"/>
+                <TextBlock Text="From:" Height="20" HorizontalAlignment="Left"  Name="label5" VerticalAlignment="Top"  FontWeight="Bold" Margin="0,5,0,0"/>
+                <TextBlock Text="To:" Height="20" HorizontalAlignment="Left"  Name="label1" VerticalAlignment="Top" FontWeight="Bold" Margin="0,5,0,0"/>
+                <TextBlock Text="Desk:" Width ="178" VerticalAlignment="Top" FontWeight="Bold" Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="5,0,0,0" Orientation="Vertical">
+                <dxe:ComboBoxEdit EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+            Margin="0,5,0,0"             
+			 x:Name="comboBoxEdit1" 
+            Height="20"
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			EditValueChanged="comboBoxEdit1_EditValueChanged"  
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"
+                              
+			IsTextEditable="True"  IsPopupOpen="True" SelectedIndexChanged="comboBoxEdit1_SelectedIndexChanged" 
+                            
+                          
+                              >
+                    <dxmvvm:Interaction.Triggers>
+                        <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+                    </dxmvvm:Interaction.Triggers>
+                    <dxe:ComboBoxEditItem Content="WM01"/>
+                </dxe:ComboBoxEdit>
+                <dxe:DateEdit EditValue="{Binding Parameters.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="20" HorizontalAlignment="Left"  Name="txtstartdate" Text="01/01/2014" VerticalAlignment="Top" Width="178" Grid.Row="0" Margin="0,5,0,0"/>
+                <dxe:DateEdit EditValue="{Binding Parameters.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+         Height="19" HorizontalAlignment="Left"  Name="txtenddate"  VerticalAlignment="Top" Width="178" Grid.Row="0" Margin="0,5,0,0"/>
+
+                <dxe:ComboBoxEdit Text="{Binding Parameters.DeskName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  x:Name="cmboDesk" HorizontalAlignment="Left"  VerticalAlignment="top" SelectedIndexChanged="cmboDesk_SelectedIndexChanged" 
+                  Width="178" FontFamily="Calibri Black" FontSize="14" Height="20" Margin="0,5,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="chkActive" IsChecked="{Binding Parameters.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			Content="Active" HorizontalAlignment="Left"
+                  Margin="0,5,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" Unchecked="chkActive_Unchecked" Checked="chkActive_Checked"  Height="22" />
+                    <CheckBox x:Name="chkCrossable" 
+			Content="Crossable" HorizontalAlignment="Left" IsChecked="{Binding Parameters.Crossable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="0,5,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold" RenderTransformOrigin="0.607,-3.545" Height="22" Checked="chkCrossable_Checked" Unchecked="chkCrossable_Unchecked" />
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Margin="5,0,0,0" Orientation="Vertical">
+                <TextBlock Text="Asset type:" HorizontalAlignment="Left" Height="20"  VerticalAlignment="Top" Width="80" FontWeight="Bold" Margin="0,5,0,0"/>
+                <dx:SimpleButton Content="Security" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="Button_Security" Margin="0,5,0,0" Height="20" />
+                <dx:SimpleButton x:Name="btnIssuer" Content="Issuer" HorizontalAlignment="Left" Height="20"  VerticalAlignment="Top" Width="75" Click="btnIssuer_Click" Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Margin="5,0,0,0" Orientation="Vertical">
+                <dxe:ComboBoxEdit Height="20" HorizontalAlignment="Left"  x:Name="cboAssetType" VerticalAlignment="Top" Width="178"  EditValueChanged="cboAssetType_SelectionChanged_1" Margin="0,5,0,0"/>
+                <dxe:ComboBoxEdit EditValue="{Binding Parameters.SecurityName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+            Margin="0,5,0,0"
+                              
+			  x:Name="SecurityTextBox" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"
+			IsTextEditable="True"  IsPopupOpen="True" EditValueChanged="SecurityComboBoxEdit_EditValueChanged_1" LostFocus="SecurityComboBoxEdit_LostFocus_1"
+                            >
+                    <dxmvvm:Interaction.Triggers>
+                        <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+                    </dxmvvm:Interaction.Triggers>
+                    <dxe:ComboBoxEditItem Content="IBM.US"/>
+                </dxe:ComboBoxEdit>
+                <dxe:ComboBoxEdit EditValue="{Binding Parameters.IssuerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+              Margin="0,5,0,0"
+                             Height="20"     
+			  x:Name="txtissuer" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"
+			IsTextEditable="True"  IsPopupOpen="True" EditValueChanged="IssuerComboBoxEdit_EditValueChanged" LostFocus="IssuerComboBoxEdit_LostFocus" >
+
+                </dxe:ComboBoxEdit>
+                <dx:SimpleButton  Content="Update" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Name="button1" Width="72" Click="button_Update" Grid.Row="0" Foreground="Black" Margin="0,5,5,5" Height="25"/>
+            </StackPanel>
+
+
+
+
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="1" Margin="5,0,0,0">
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="73*"/>
+            </Grid.RowDefinitions>-->
+            <dxg:GridControl   AutoGenerateColumns="None" EnableSmartColumnsGeneration="False"   x:Name="dataGrid"   Visibility="Visible"
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="5,0,0,0"
+                          HorizontalAlignment="Stretch" 
+                          HorizontalContentAlignment="Stretch" 
+                          FontSize="12" FontFamily="Calibri" 
+                          ItemsSource="{Binding  MyDataTable.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                          SelectionMode="Row"
+                          dx:DXSerializer.StoreLayoutMode="All"
+                          dxg:GridSerializationOptions.AddNewColumns="true" 
+                          dxg:GridSerializationOptions.RemoveOldColumns="False" 
+                          SelectionChanged="dataGrid_SelectionChanged" 
+                           >
+                <dxg:GridControl.View  >
+
+                    <dxg:TableView 
+                 	x:Name="viewPMVsTrader" FadeSelectionOnLostFocus="False" 
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    PageSize="30"
+                    AllowChangeBandParent="True" 
+                    AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu"
+                    AllowPaging="False" 
+                     GroupSummaryDisplayMode="AlignByColumns"
+                    >
+                        <dxg:TableView.ColumnMenuCustomizations>
+
+                            <dxb:BarItemLinkSeparator dxb:BarItemLinkActionBase.ItemLinkIndex="1" />
+                            <dxb:BarButtonItem Content="Display Format" ItemClick="BarButtonItem_ItemClick"/>
+                        </dxg:TableView.ColumnMenuCustomizations>
+                        <!--endregion #Add-->
+                        <!--region #Remove-->
+                        <dxg:TableView.TotalSummaryMenuCustomizations>
+                            <dxb:RemoveBarItemAndLinkAction ItemName="{x:Static dxg:DefaultSummaryMenuItemNames.Customize}" />
+                        </dxg:TableView.TotalSummaryMenuCustomizations>
+
+                    </dxg:TableView>
+
+                </dxg:GridControl.View>
+                <dxg:GridColumn Header="block id" Binding="{Binding block_id}" Width="Auto" IsSmart="True" FieldName="block_id">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Account" Binding="{Binding account}" Width="Auto" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Symbol" Binding="{Binding symbol}" Width="Auto" IsSmart="True" FieldName="symbol">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Desk Name" Binding="{Binding desk_name}" Width="Auto" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="PM" Binding="{Binding name}" Width="Auto" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Dir" Binding="{Binding Direction}" Width="Auto" IsSmart="True" FieldName="Direction">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="X" Binding="{Binding crossable}" Width="Auto" IsSmart="True" FieldName="crossable">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="% Done" Binding="{Binding percentdone}" Width="Auto" IsSmart="True" FieldName="percentdone">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="p2" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Qty Ordered" Binding="{Binding quantity_ordered}" Width="Auto" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n2" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Qty Placed" Binding="{Binding quantity_placed}" Width="Auto" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n2" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Qty Executed" Binding="{Binding quantity_executed}" Width="Auto" IsSmart="True" FieldName="quantity_executed">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n2" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Qty Remaining" Binding="{Binding remaining}" Width="Auto" IsSmart="True" FieldName="remaining">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n2" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Avg Price" Binding="{Binding average_price_executed}" Width="Auto" IsSmart="True" FieldName="average_price_executed">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n4" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Arrival Price" Binding="{Binding arrival_price}" Width="Auto" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n4" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Committed Price" Binding="{Binding committed_price}" Width="Auto" IsSmart="True" FieldName="committed_price">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n4" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Diff" Binding="{Binding diff}" Width="Auto" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n4" HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Trade Date" Binding="{Binding created_time}" Width="Auto" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Block Note" Binding="{Binding note}" Width="Auto" IsSmart="True" FieldName="note">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridControl.ContextMenu>
+                    <ContextMenu PlacementTarget="{Binding ElementName=dgModels}">
+                        <ContextMenu.Resources>
+                            <Style x:Key="SimpleSysResources" TargetType="{x:Type MenuItem}">
+                                <Setter Property="FontSize" Value="16" />
+                            </Style>
+                        </ContextMenu.Resources>
+                        <MenuItem Header="Add Commitment Price" Style="{StaticResource SimpleSysResources}" Click="add_commitment" FontFamily="Calibri" FontSize="12" />
+                    </ContextMenu>
+                </dxg:GridControl.ContextMenu>
+
+
+            </dxg:GridControl>
+            <dx:WaitIndicator DeferedVisibility="{Binding IsWaitIndicatorVisible}" Name="TempbusyIndicator" Content="Loading..." Focusable="True" Margin="5,0,0,0" Grid.RowSpan="2" >
+                <dx:WaitIndicator.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Please Wait" FontSize="20"/>
+                            <TextBlock Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </dx:WaitIndicator.ContentTemplate>
+            </dx:WaitIndicator>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".5*"/>
+            </Grid.RowDefinitions>
+
+            <GridSplitter  VerticalAlignment="top" Grid.Row="1" Height="7" Background="Black"  
+			x:Name="lblborder" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+
+            <!--<StackPanel Grid.Row="0">-->
+            <!--Journal-->
+            <Label  VerticalAlignment="Top"  Height="30"   
+			x:Name="lblJournal" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="15"  />
+
+            <dxg:GridControl ItemsSource="{Binding  Table1}" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="false" x:Name="journalGrid"   
+			FontWeight="SemiBold" SelectionMode="Row" AllowLiveDataShaping="True" Margin="7,7,0,0" HorizontalAlignment="Stretch" 
+			FontSize="12" FontFamily="Calibri" Height ="auto"
+			dxg:DataControlSerializationOptions.AddNewColumns="true" 
+			dxg:DataControlSerializationOptions.RemoveOldColumns="False"
+			
+			PreviewKeyDown="GridControl_PreviewKeyDown"
+                        
+                          >
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowConditionalFormattingMenu="True" ShowGroupPanel="False" AutoWidth="False"  
+					x:Name="viewTJournal" FadeSelectionOnLostFocus="False" 
+					NavigationStyle="Row" AllowEditing="True"
+					CustomRowAppearance="viewAccountTax_CustomRowAppearance" CustomCellAppearance="viewAccountTax_CustomCellAppearance" />
+                </dxg:GridControl.View>
+
+                <dxg:GridColumn Header="Journal Entry" Binding="{Binding note}" Width="Auto" IsSmart="True" AllowEditing="False">
+
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Modified Time" Binding="{Binding modified_time}" Width="Auto" IsSmart="True" AllowEditing="False">
+
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Name" Binding="{Binding Name}" Width="Auto" IsSmart="True" AllowEditing="False">
+
+                </dxg:GridColumn>
+
+            </dxg:GridControl>
+
+            <dx:SimpleButton Content="Add New Journal"  Click="Button_Click_Add_new_row" Height="30" 
+                VerticalAlignment="Bottom" Foreground="Green" FontSize="14" FontWeight="ExtraBold" Margin=" 7,0,0,0" />
+            <!--</StackPanel>-->
+
+
+            <!--Forcaster-->
+
+            <StackPanel Grid.Row="1">
+                <Label Grid.Column="1" VerticalAlignment="Top" Grid.Row="2" Height="33" Background="PaleVioletRed" Content="Average Forcaster"
+			x:Name="lblAverageForcast" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="19" Margin="7,7,0,0"  />
+
+                <Label Grid.Column="1" VerticalAlignment="Top" Grid.Row="2" Height="30" Background="LightGray"  
+			x:Name="lblIfIBuy" FontWeight="Bold" HorizontalContentAlignment="left" FontSize="17" Margin="7,7,0,0" />
+
+                <dxe:SpinEdit Grid.Column="1" Grid.Row="2" Background="white"  Height="40" 
+                      VerticalAlignment="Top" Name="Spe_Remaining" FontSize="19" FontWeight="Bold"
+                      MaskUseAsDisplayFormat="True" Margin="7,7,0,0"
+                      DisplayFormatString="n2" HorizontalContentAlignment="Center" EditValueChanged="Spe_Remaining_EditValueChanged" />
+
+                <Label Grid.Column="1" VerticalAlignment="Top" Grid.Row="2" Height="40" Background="LightGray"  
+			x:Name="lblataprice" FontWeight="Bold" HorizontalContentAlignment="left" FontSize="17" Margin="7,7,0,0" />
+
+
+                <dxe:SpinEdit Grid.Column="1" Grid.Row="2" Background="white"  Height="40" 
+                      VerticalAlignment="Top" Name="Spe_price" FontSize="19" FontWeight="Bold"
+                      DisplayFormatString="p4" HorizontalContentAlignment="Center" EditValueChanged="Spe_price_EditValueChanged" Margin="7,7,0,0"/>
+
+                <Label Grid.Column="1" VerticalAlignment="Top" Grid.Row="2" Height="40" Background="LightGray"  
+			x:Name="lblavgwillbe" FontWeight="Bold" HorizontalContentAlignment="Left" FontSize="17" Margin="7,7,0,0">
+
+                </Label>
+
+                <dx:SimpleButton Grid.Row="2" Grid.Column="1" Height="30" 
+                VerticalAlignment="Top"  
+                 Margin="7,0,0,0" Content="Update Forcast" Foreground="PaleVioletRed" FontSize="17" FontWeight="ExtraBold" Click="Button_Click_1" />
+            </StackPanel>
+
+
+        </Grid>
+
+
+
+
+    </Grid>
+
+</UserControl>

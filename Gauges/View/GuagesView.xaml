@@ -1,0 +1,96 @@
+﻿<UserControl
+  
+         
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+    x:Class="Guages.Client.View.GuagesView"
+    Loaded="UserControl_Loaded" 
+   
+   Background="white" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontFamily="Calibri" Width="auto" Height="auto" 
+>
+
+ 
+
+    <Grid >
+        <dxga:CircularGaugeControl Margin="0,25,0,0" Background="#165c56"  Name="GuageRev">
+            <dxga:CircularGaugeControl.Scales>
+                <dxga:ArcScale Name="ScaleReverse" >
+                    <dxga:ArcScale.Needles>
+                        <dxga:ArcScaleNeedle x:Name="needleReverse" Value="{Binding Path=Parameters.Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsInteractive="True" ValueChanged="needle_ValueChanged" >
+                            <dxga:ArcScaleNeedle.Animation>
+                                <dxga:IndicatorAnimation />
+                            </dxga:ArcScaleNeedle.Animation>
+                        </dxga:ArcScaleNeedle>
+                    </dxga:ArcScale.Needles>
+                    <dxga:ArcScale.Ranges>
+                        <dxga:ArcScaleRange EndValue="20%" >
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation Fill="Red"/>
+                            </dxga:ArcScaleRange.Presentation>
+                        </dxga:ArcScaleRange>
+                        <dxga:ArcScaleRange EndValue="80%" StartValue="20%" >
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation Fill="Yellow"/>
+                            </dxga:ArcScaleRange.Presentation>
+                        </dxga:ArcScaleRange>
+                        <dxga:ArcScaleRange EndValue="100%" StartValue="80%" >
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation Fill="Green"/>
+                            </dxga:ArcScaleRange.Presentation>
+                        </dxga:ArcScaleRange>
+                    </dxga:ArcScale.Ranges>
+                    <dxga:ArcScale.Layers>
+                        <dxga:ArcScaleLayer/>
+                    </dxga:ArcScale.Layers>
+                </dxga:ArcScale>
+            </dxga:CircularGaugeControl.Scales>
+            <dxga:CircularGaugeControl.Model>
+                <dxga:CircularClassicModel />
+            </dxga:CircularGaugeControl.Model>
+        </dxga:CircularGaugeControl>
+
+        <dxga:CircularGaugeControl Margin="0,25,0,0" Background="#165c56" Visibility="Hidden" Name="GuageNotRev">
+            <dxga:CircularGaugeControl.Scales>
+                <dxga:ArcScale Name="Scale" >
+                    <dxga:ArcScale.Needles>
+                        <dxga:ArcScaleNeedle x:Name="needle" Value="{Binding Path=Parameters.Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsInteractive="True" ValueChanged="needle_ValueChanged" >
+                            <dxga:ArcScaleNeedle.Animation>
+                                <dxga:IndicatorAnimation />
+                            </dxga:ArcScaleNeedle.Animation>
+                        </dxga:ArcScaleNeedle>
+                    </dxga:ArcScale.Needles>
+                    <dxga:ArcScale.Ranges>
+                        <dxga:ArcScaleRange EndValue="20%" >
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation Fill="Green"/>
+                            </dxga:ArcScaleRange.Presentation>
+                        </dxga:ArcScaleRange>
+                        <dxga:ArcScaleRange EndValue="80%" StartValue="20%" >
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation Fill="Yellow"/>
+                            </dxga:ArcScaleRange.Presentation>
+                        </dxga:ArcScaleRange>
+                        <dxga:ArcScaleRange EndValue="100%" StartValue="80%" >
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation Fill="Red"/>
+                            </dxga:ArcScaleRange.Presentation>
+                        </dxga:ArcScaleRange>
+                    </dxga:ArcScale.Ranges>
+                    <dxga:ArcScale.Layers>
+                        <dxga:ArcScaleLayer/>
+                    </dxga:ArcScale.Layers>
+                </dxga:ArcScale>
+            </dxga:CircularGaugeControl.Scales>
+            <dxga:CircularGaugeControl.Model>
+                <dxga:CircularClassicModel />
+            </dxga:CircularGaugeControl.Model>
+        </dxga:CircularGaugeControl>
+
+        <Label Content= "{Binding Path=Parameters.GuageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top"  FontFamily="Calibri Black" FontSize="18" Foreground="Black" x:Name="lblheader1"  Width="auto" Grid.Column="0" Margin="0,0,0,0" FontWeight="Bold"/>
+    
+
+    </Grid>
+
+</UserControl>
+

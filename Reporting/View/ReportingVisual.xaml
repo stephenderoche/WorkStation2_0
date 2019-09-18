@@ -1,0 +1,157 @@
+﻿<UserControl xmlns:dxrud="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesigner"  x:Class="Reporting.Client.View.ReportingVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:Reporting.Client"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Loaded="UserControl_Loaded" 
+             
+           
+            
+             >
+ 
+    <Grid VerticalAlignment="Stretch" Width="auto" Background="LightGray" Height="Auto" HorizontalAlignment="Stretch" >
+    
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="850" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+
+        <GridSplitter Grid.Row="1" VerticalAlignment="top"  Height="7" Background="LightGray" Grid.Column="1" 
+			x:Name="lblborder" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+
+
+        <GridSplitter  HorizontalAlignment="left" Grid.Column="1" Width="7" Background="LightGray"  Grid.Row="1"
+                       x:Name="lblborder1" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" />
+
+
+
+
+
+
+        <dxe:DateEdit EditValue="{Binding Parameters.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
+			HorizontalAlignment="Left" Margin="372,41,0,0" VerticalAlignment="Top" Width="150" x:Name="txtenddate" FontFamily="Calibri" FontSize="14" Height="20"  EditValueChanged="start_EditValueChanged" Grid.ColumnSpan="1"/>
+        <dxe:DateEdit EditValue="{Binding Parameters.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="1" Grid.Column="1"
+			HorizontalAlignment="Left" Margin="370,13,0,0" VerticalAlignment="Top" Width="150" x:Name="txtstartdate" FontFamily="Calibri" FontSize="14" Height="20" EditValueChanged="end_EditValueChanged"/>
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+                          Grid.Column="1"
+            Grid.ColumnSpan="1"
+			Margin="105,13,0,0"  x:Name="comboBoxEdit1" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			EditValueChanged="comboBoxEdit1_EditValueChanged"  
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"
+                              
+			IsTextEditable="True" LostFocus="comboBoxEdit1_LostFocus" IsPopupOpen="True" 
+                            
+                          
+                              >
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="WM01"/>
+        </dxe:ComboBoxEdit>
+        <ComboBox Text="{Binding Parameters.DeskName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
+        	x:Name="cmboDesk" HorizontalAlignment="Left" Margin="105,41,0,0" VerticalAlignment="top" SelectionChanged="cmboDesk_SelectedIndexChanged" 
+        	Width="178" FontFamily="Calibri Black" FontSize="14" Height="20" />
+        <Label Content="Desk:" HorizontalAlignment="Left" Margin="19,39,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" Grid.ColumnSpan="1" Grid.Column="1"/>
+        <Label Content="Account:" HorizontalAlignment="Left" Margin="19,13,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" Grid.ColumnSpan="1" Grid.Column="1"/>
+        <Label Content="Security:" HorizontalAlignment="Left" Margin="19,69,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" Grid.ColumnSpan="1" Grid.Column="1"/>
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.SecurityName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left"  Grid.Column="1"
+                          Grid.ColumnSpan="1"                
+			Margin="105,69,0,0"  x:Name="SecurityComboBoxEdit" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"
+			IsTextEditable="True" LostFocus="SecurityComboBoxEdit_LostFocus_1" IsPopupOpen="True" EditValueChanged="SecurityComboBoxEdit_EditValueChanged_1" 
+                            >
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="IBM.US"/>
+        </dxe:ComboBoxEdit>
+        <Label Content="Broker:" HorizontalAlignment="Left" Margin="19,95,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" Grid.ColumnSpan="1" Grid.Column="1"/>
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.Broker, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          HorizontalAlignment="Left" 
+                          Grid.Column="1"
+                          Grid.Row="0"
+                          Margin="105,96,0,0"  x:Name="BrokerComboBoxEdit" 
+                          AllowDrop="True"
+                          VerticalAlignment="Top" Width="178"  
+                          IncrementalFiltering="True" 
+                          ImmediatePopup="True" 
+                          AutoComplete="False" 
+                          FilterCondition="Contains" 
+                          ValidateOnTextInput="False"
+                          IsSynchronizedWithCurrentItem="True"
+                          IsTextEditable="True" LostFocus="BrokerComboBoxEdit_LostFocus_1" IsPopupOpen="True" EditValueChanged="BrokerComboBoxEdit_EditValueChanged_1" 
+        >
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="IBM.US"/>
+        </dxe:ComboBoxEdit>
+        <Label Content="Reason code:" HorizontalAlignment="Left" Margin="296,92,0,0" VerticalAlignment="Top" Width="73" Height="23" FontWeight="Bold" Grid.ColumnSpan="1" Grid.Column="1"/>
+
+<ComboBox  Height="24" HorizontalAlignment="Left"  x:Name="cboReasonCodeType" VerticalAlignment="Top" Width="149" Background="White" SelectionChanged="cboReasonCodeType_SelectionChanged" FontSize="14" Grid.Row="0" Grid.Column="1" Margin="374,91,0,0"/>
+
+        <Label Content="To Date:" HorizontalAlignment="Left" Margin="296,38,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" Grid.ColumnSpan="1" Grid.Column="1"/>
+        <Label Content="From Date:" HorizontalAlignment="Left" Margin="296,10,0,0" VerticalAlignment="Top" Width="81" Height="23" FontWeight="Bold" Grid.ColumnSpan="1" Grid.Column="1"/>
+        <Label Content="Block Id:" HorizontalAlignment="Left" Margin="296,64,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" Grid.ColumnSpan="1" Grid.Column="1"/>
+        <TextBox  Text="{Binding Parameters.BlockID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="1" Grid.Column="1"
+            HorizontalAlignment="Left" x:Name="BlockID"     FontFamily="Calibri" FontSize="14" Width="150"  Margin="373,66,0,0" Height="20" VerticalAlignment="Top"/>
+
+
+        
+        <StackPanel Grid.Row="0" Grid.RowSpan="2" >
+            <Button Margin="7,8,10,0"  Height="20"  Width="250" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Background="GreenYellow" Grid.Row="0" Click="RunBroker_Click" Content="Commissions by Broker"></Button>
+            <Button Margin="7,8,10,0"  Height="20"  Width="250" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Background="GreenYellow" Grid.Row="1" Click="RunBrokerReason_Click" Content="Commissions by Broker/Reason"></Button>
+            <Button Margin="7,8,10,0"  Height="20"  Width="250" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Background="GreenYellow" Grid.Row="1" Click="RunAccountReason_Click" Content="Commissions by Account/Reason"></Button>
+            <Button Margin="7,8,10,0"  Height="20"  Width="250" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Background="GreenYellow" Grid.Row="1" Click="RunAccountBrokerReason_Click" Content="Commissions by Account/Broker/Reason"></Button>
+            <Button Margin="7,8,10,0"  Height="20"  Width="250" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Background="Yellow" Grid.Row="1" Click="RunAccountSummary_Click" Content="Account Summary"></Button>
+
+</StackPanel>
+
+        <Grid Grid.Column="1" Grid.Row="1" >
+
+        <dxp:DocumentPreviewControl x:Name="documentPreview1"  Grid.Column="1" Grid.Row="1" Height="auto" Width="auto"  Margin="10,10,0,0" Grid.ColumnSpan="1" Grid.RowSpan="1" Background="LightGray"
+                                     Loaded="documentPreview1_Loaded" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+        </dxp:DocumentPreviewControl>
+
+        </Grid>
+         <!--<dxrud:ReportDesigner  x:Name="documentPreview1"  Grid.Column="1" Grid.Row="1" Height="auto" Width="auto"  Margin="10,10,0,0" Grid.ColumnSpan="1" Grid.RowSpan="1" Background="LightGray"
+                               DocumentSource="{Binding Report,Mode=OneWay,UpdateSourceTrigger=Default}" Loaded="documentPreview1_Loaded" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+            >
+        </dxrud:ReportDesigner>-->
+
+    </Grid>
+</UserControl>

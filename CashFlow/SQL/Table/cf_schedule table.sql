@@ -1,0 +1,2 @@
+create table cf_schedule(date_projected date default getdate(), security_id numeric(10), cf_year numeric(4), cf_month numeric(2), cf_date date, payment numeric(10,4), payment_to_principal numeric(10,4),
+                          payment_to_interest numeric(10,4), outstanding_loan numeric(10,4));

@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D4DE0DC5-1366-4C91-B4E9-89E18F28588A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Guages.Client</RootNamespace>
+    <AssemblyName>Guages.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\..\Temp\devexpress17\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\..\Release_x64\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\..\Temp\devexpress17\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v18.1.Core, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Images.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v18.1.Core, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Charts.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Core.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Gauges.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v18.1.Core, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Printing.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Linedata.Client.Widget.AccountSummaryDataProvider">
+      <HintPath>..\..\..\DLL\Linedata.Client.Widget.AccountSummaryDataProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Client.Widget.BaseWidget">
+      <HintPath>..\..\..\DLL\Linedata.Client.Widget.BaseWidget.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Client.Workstation.LongviewAdapter.DataContracts">
+      <HintPath>..\..\..\DLL\Linedata.Client.Workstation.LongviewAdapter.DataContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Client.Workstation.LongviewAdapterClient">
+      <HintPath>..\..\..\DLL\Linedata.Client.Workstation.LongviewAdapterClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Client.Workstation.SharedReferences">
+      <HintPath>..\..\..\DLL\Linedata.Client.Workstation.SharedReferences.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Framework.Foundation, Version=5.2.0.0, Culture=neutral, PublicKeyToken=379f934f80b268e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DLL\Linedata.Framework.Foundation.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Framework.WidgetFrame.PluginBase">
+      <HintPath>..\..\..\DLL\Linedata.Framework.WidgetFrame.PluginBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Framework.WidgetFrame.ThemesAndStyles">
+      <HintPath>..\..\..\DLL\Linedata.Framework.WidgetFrame.ThemesAndStyles.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Framework.WidgetFrame.UISupport">
+      <HintPath>..\..\..\DLL\Linedata.Framework.WidgetFrame.UISupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Shared.Api">
+      <HintPath>..\..\..\DLL\Linedata.Shared.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Shared.Widget.Common">
+      <HintPath>..\..\..\DLL\Linedata.Shared.Widget.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Shared.Workstation.Api">
+      <HintPath>..\..\..\DLL\Linedata.Shared.Workstation.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Shared.Workstation.Api.PortfolioManagement">
+      <HintPath>..\..\..\DLL\Linedata.Shared.Workstation.Api.PortfolioManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReactiveUI">
+      <HintPath>..\..\..\DLL\ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="SalesSharedContracts">
+      <HintPath>..\..\..\DLL\SalesSharedContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\..\..\DLL\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="ReactiveDomain.Core">
+      <HintPath>..\..\..\DLL\ReactiveDomain.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ReactiveDomain.Messaging">
+      <HintPath>..\..\..\DLL\ReactiveDomain.Messaging.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\AccountItem.cs" />
+    <Compile Include="Helpers\ColumnBehavior.cs" />
+    <Compile Include="Helpers\ComboBoxItem.cs" />
+    <Compile Include="Helpers\VisibilityConverter.cs" />
+    <Compile Include="Model\GaugesSettingViewModel.cs" />
+    <Compile Include="Plugin\GuagesParameters.cs" />
+    <Compile Include="Plugin\GuagesPlugin.cs" />
+    <Compile Include="Plugin\GaugesWidget.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\GuagesViewModel.cs" />
+    <Compile Include="View\GuagesView.xaml.cs">
+      <DependentUpon>GuagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestSampleViewerSettingView.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DefaultXMl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\GuagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestSampleViewerSettingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQL\se_gauge_type table.sql" />
+    <Content Include="SQL\se_get_gauge_message_count.sql" />
+    <Content Include="SQL\se_get_gauge_type.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

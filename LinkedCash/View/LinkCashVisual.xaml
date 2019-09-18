@@ -1,0 +1,311 @@
+﻿<UserControl x:Class="LinkCash.Client.View.LinkCashVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+           xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+             Background="White"
+             xmlns:local="clr-namespace:LinkCash.Client"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Loaded="UserControl_Loaded" 
+          >
+    <UserControl.Resources>
+
+        <ControlTemplate x:Key="{dxgt:TableViewThemeKey IsThemeIndependent=true, ResourceKey=DataPresenterTemplate}" TargetType="{x:Type dxg:DataPresenter}">
+            <Border Background="White">
+                <ContentPresenter />
+            </Border>
+           
+        </ControlTemplate>
+       
+
+        <SolidColorBrush x:Key="UnfocusedRowBrush" Color="#FF666666" />
+
+        <Style TargetType="dxg:GridColumnHeader">
+            <Setter Property="Background" Value="LightSkyBlue"/>
+        </Style>
+        <Style TargetType="dxg:BackgroundBorderControl">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="dxg:BandHeaderControl">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="dxg:HeaderItemsControl">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="dxg:GridSearchControl">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="dxg:GroupFooterRowControl">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="dxg:HeaderContentControl">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style x:Key="{dxgt:GroupRowThemeKey ResourceKey=GroupItemsControlStyle}" TargetType="{x:Type dx:CachedItemsControl}">
+            <Setter Property="ClipToBounds" Value="true" />
+            <Setter Property="dxg:GridColumn.HeaderPresenterType" Value="GroupPanel" />
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+
+        <sys:Double x:Key="maxHeaderHeight">
+            50
+        </sys:Double>
+
+        <DataTemplate x:Key="wrapHeader">
+            <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+        </DataTemplate>
+
+
+        <Style x:Key="SelectedRowStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                    <Setter Property="dxg:RowControl.Background" Value="Gray" />
+                    <Setter Property="TextElement.Foreground" Value="White" />
+                </DataTrigger>
+                <Trigger Property="dxg:GridViewBase.IsFocusedRow" Value="True">
+                    <Setter Property="dxg:RowControl.Background" Value="CadetBlue" />
+                    <Setter Property="TextElement.Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+
+   
+     <Grid Column="0">
+        <Grid.Resources>
+            <DataTemplate x:Key="renameColumnHeaderTemplate">
+                <Grid>
+                    <dxe:TextEdit
+                        EditValue="{Binding Path=DataContext.Header, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}}" 
+                        Foreground="Black" 
+                        Visibility="{Binding Path=DataContext.(local:ColumnBehavior.IsRenameEditorActivated), 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}, 
+                        Converter={local:VisibilityConverter},
+                        Mode=TwoWay}"                    
+                        Name="textEdit"
+                        LostFocus="OnRenameEditorLostFocus"/>
+
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="{Binding}" 
+                        Visibility="{Binding Path=Visibility, ElementName=textEdit, Converter={local:ReverseVisibilityConverter}}"
+                        MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="0" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="wrapHeader">
+                <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+            </DataTemplate>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+
+            </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <ComboBox Text="{Binding Parameters.DeskName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  x:Name="cmboDesk" HorizontalAlignment="Left"  VerticalAlignment="top" SelectionChanged="cmboDesk_SelectedIndexChanged" 
+                  Width="178" FontFamily="Calibri Black" FontSize="14" Height="20" Background="White"/>
+            <Button Background="LightGreen" Width="10" Height="20" HorizontalAlignment="Left"  VerticalAlignment="top" Name="BtnRefresh" Click="BtnRefresh_Click"></Button>
+        </StackPanel>
+
+        <dxg:GridControl x:Name="_dataGridLink"  dx:DXSerializer.StoreLayoutMode="All"  Grid.Row="1" AutoGenerateColumns="AddNew"
+                         AutoPopulateColumns="True" EnableSmartColumnsGeneration="True" 
+                          Margin="0,0,0,0" 
+                           dxg:GridSerializationOptions.AddNewColumns="true" 
+                         dxg:GridSerializationOptions.RemoveOldColumns="False" 
+                         AutoExpandAllGroups="True"
+                         
+            ItemsSource="{Binding  LinkTable.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}">
+
+
+
+            <dxg:GridControl.View  >
+
+                <dxg:TableView 
+                    x:Name="viewRoboDrift"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="False" 
+                    AllowChangeBandParent="True" 
+                     AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu"
+                    IsGroupFooterMenuEnabled="True"
+                    GroupSummaryDisplayMode="AlignByColumns"
+                    ShowFixedTotalSummary="False"
+                    
+                    
+                    
+              CustomRowAppearance="viewAccountTax_CustomRowAppearance"  
+                                CustomCellAppearance="viewAccountTax_CustomCellAppearance"
+                    >
+
+
+                    <dxg:TableView.GroupValueTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Value, StringFormat=' {0}'}" />
+                                <TextBlock Text="{Binding RowData.Row.GroupDescription, StringFormat='Dexcription: {0}'}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxg:TableView.GroupValueTemplate>
+
+                </dxg:TableView>
+
+            </dxg:GridControl.View>
+
+
+
+            <dxg:GridControl.Columns>
+
+                <dxg:GridColumn Header="estimated_cash" Binding="{Binding estimated_cash, StringFormat=n2}" FieldName="estimated_cash" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+
+
+                <dxg:GridColumn Header="ending_Estimated_cash" Binding="{Binding ending_Estimated_cash, StringFormat=n2}" FieldName="ending_Estimated_cash" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Estimated_price" Binding="{Binding estimated_price, StringFormat=n2}" FieldName="estimated_price" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="estimated_cash_difference" Binding="{Binding estimated_cash_difference, StringFormat=n2}" FieldName="estimated_cash_difference" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Quantity Ordered" Binding="{Binding Quantity_ordered, StringFormat=n2}" FieldName="Quantity_ordered" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Actual Executed Cash" Binding="{Binding actual_cash, StringFormat=n2}" FieldName="actual_cash" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+
+
+
+
+                <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+
+            </dxg:GridControl.Columns>
+
+
+
+          
+
+
+        </dxg:GridControl>
+
+        <!--<dxg:GridControl x:Name="_dataGridLink"    Grid.Row="1"  AutoGenerateColumns="AddNew" Grid.Column="1"
+                         AutoPopulateColumns="True" EnableSmartColumnsGeneration="True" 
+                         ItemsSource="{Binding LinkTable.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}" 
+                          Margin="7,30,0,0" 
+                            AutoGeneratingColumn="grid_AutoGeneratingColumn_1"
+                           dxg:GridSerializationOptions.RemoveOldColumns="False"
+                              dx:DXSerializer.StoreLayoutMode="All"
+
+                              ShowBorder="false">
+
+            <dxg:GridControl.View  >
+
+                <dxg:TableView 
+                    
+                    x:Name="viewlinkGrid"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    AllowChangeBandParent="True" 
+                    AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" 
+                    
+                    IsGroupFooterMenuEnabled="True"
+                    GroupSummaryDisplayMode="AlignByColumns"
+                    CustomRowAppearance="viewAccountTax_CustomRowAppearance"  
+                    CustomCellAppearance="viewAccountTax_CustomCellAppearance"
+                    
+                    >
+                    <dxg:TableView.FooterTemplate>
+                        <DataTemplate>
+                            <Border Background="LightGray">
+
+                            </Border>
+                        </DataTemplate>
+                    </dxg:TableView.FooterTemplate>
+                </dxg:TableView>
+
+            </dxg:GridControl.View>
+
+
+
+            <dxg:GridControl.Columns>
+
+
+
+            </dxg:GridControl.Columns>
+
+            <dxg:GridControl.GroupSummary>
+                <dxg:GridSummaryItem DisplayFormat="Sum: {0:c2}" FieldName="balance_value" 
+                        ShowInColumn="" SummaryType="Sum" Alignment="Left" />
+            </dxg:GridControl.GroupSummary>
+
+
+        </dxg:GridControl>-->
+
+
+    </Grid>
+
+</UserControl>

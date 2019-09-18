@@ -1,0 +1,19 @@
+﻿<Window x:Class="OrderImportPane.Client.StatusWindow"
+      x:Name="statusWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:my="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d"
+	   MouseDown="statusWindow_MouseDown" StylusButtonDown="statusWindow_StylusButtonDown" TextInput="statusWindow_TextInput" WindowStyle="SingleBorderWindow"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    Topmost="True"
+    Height="290" Width="547" ToolTip="Click to close" ShowInTaskbar="False" Title="Import Status" FontSize="20" SizeToContent="Height">
+    <Border BorderThickness="2" BorderBrush="LightGray">
+        <Grid>
+            <Label Content="{Binding ElementName=statusWindow, Path=StatusText}" HorizontalAlignment="Stretch" Name="labelStatus" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" />
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,1614 @@
+﻿<XtraSerializer version="1.0" application="GridControl">
+  <property name="#LayoutVersion" isnull="true" />
+  <property name="$GridControl" iskey="true" value="GridControl">
+    <property name="UseFieldNameForSerialization">true</property>
+    <property name="GroupCount">0</property>
+    <property name="GroupSummary" iskey="true" value="0" />
+    <property name="SortInfo" iskey="true" value="0" />
+    <property name="Columns" iskey="true" value="225">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn1</property>
+        <property name="UnboundType">Decimal</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">0</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item2" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn2</property>
+        <property name="UnboundType">Decimal</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">1</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item3" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn3</property>
+        <property name="UnboundType">Decimal</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">2</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item4" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn4</property>
+        <property name="UnboundType">Decimal</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">3</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item5" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn5</property>
+        <property name="UnboundType">String</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">4</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item6" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn6</property>
+        <property name="UnboundType">String</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">5</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item7" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">security_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">6</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item8" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">major_asset_code</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">7</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item9" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">minor_asset_code</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">8</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item10" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">security_name_1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">9</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item11" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">security_name_2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">10</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item12" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">security_name_3</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">11</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item13" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">symbol</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">12</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item14" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">principal_curr</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">13</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item15" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">income_curr</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">14</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item16" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">pricing_factor</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">15</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item17" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">principal_factor</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">16</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item18" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">income_factor</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">17</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item19" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">price_previous</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">18</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item20" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">price_ask</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">19</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item21" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">price_bid</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">20</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item22" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">major_asset_description</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">21</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item23" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">quantity_ordered</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">22</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item24" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">market_value_ordered</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">23</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item25" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">quantity_confirmed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">24</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item26" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">total_quantity_executed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">25</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item27" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">total_average_price</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">26</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item28" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">block_price_limit_type</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">27</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item29" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">block_price_limit_1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">28</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item30" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">block_price_limit_2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">29</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item31" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">block_settle_date</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">30</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item32" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_archived</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">31</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item33" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_currently_archived</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">32</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item34" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_closed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">33</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item35" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_engaged</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">34</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item36" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_allocated</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">35</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item37" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">step_out</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">36</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item38" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_primary_marked</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">37</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item39" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_primary_pending</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">38</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item40" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_primary_confirmed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">39</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item41" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_primary_canceled</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">40</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item42" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">primary_error_code</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">41</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item43" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_secondary_marked</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">42</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item44" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_secondary_pending</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">43</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item45" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_secondary_confirmed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">44</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item46" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_secondary_canceled</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">45</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item47" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">secondary_error_code</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">46</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item48" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">47</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item49" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">direction</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">48</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item50" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">broker_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">49</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item51" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">stepped_out</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">50</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item52" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">exchange_code</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">51</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item53" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">trade_date</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">52</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item54" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">settlement_date</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">53</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item55" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_type</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">54</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item56" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_reason</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">55</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item57" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">quantity_placed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">56</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item58" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">mv_placed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">57</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item59" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">price_limit_type</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">58</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item60" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">price_limit_1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">59</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item61" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">price_limit_2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">60</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item62" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">quantity_executed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">61</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item63" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">average_price</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">62</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item64" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">unused_col1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">63</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item65" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">unused_col2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">64</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item66" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">65</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item67" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">taxes</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">66</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item68" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">other_charges</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">67</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item69" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_local</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">68</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item70" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">exchange_fee</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">69</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item71" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">stamp_taxes</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">70</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item72" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">levy</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">71</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item73" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">other_taxes_fees</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">72</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item74" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">net_amount</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">73</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item75" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">event_counter</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">74</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item76" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">creator</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">75</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item77" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">create_time</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">76</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item78" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">modifier</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">77</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item79" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">modified_time</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">78</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item80" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">reviewer</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">79</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item81" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">review_time</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">80</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item82" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">primary_sender</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">81</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item83" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">primary_send_time</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">82</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item84" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">secondary_sender</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">83</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item85" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">secondary_send_time</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">84</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item86" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">exchange_mnemonic</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">85</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item87" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">exchange_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">86</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item88" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_type_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">87</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item89" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_reason_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">88</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item90" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">broker_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">89</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item91" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">trader_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">90</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item92" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">reviewer_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">91</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item93" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">primary_sender_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">92</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item94" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">secondary_sender_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">93</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item95" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">direction_sh_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">94</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item96" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">display_curr</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">95</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item97" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">block_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">96</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item98" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">original_broker_mnemonic</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">97</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item99" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">directed_broker</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">98</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item100" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">user_id_1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">99</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item101" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">user_id_2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">100</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item102" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">user_id_3</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">101</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item103" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">user_id_4</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">102</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item104" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">user_id_5</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">103</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item105" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">user_id_6</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">104</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item106" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">user_id_7</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">105</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item107" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">user_id_8</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">106</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item108" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">primary_modified_flag</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">107</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item109" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">secondary_modified_flag</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">108</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item110" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_type_code</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">109</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item111" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">broker_ticket_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">110</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item112" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_type_sh_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">111</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item113" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_reason_sh_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">112</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item114" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_fx_forward</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">113</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item115" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">oasys_note</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">114</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item116" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">imputed_commission_flag</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">115</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item117" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_sh_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">116</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item118" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_name_1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">117</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item119" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_name_2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">118</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item120" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_user_id_1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">119</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item121" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_user_id_2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">120</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item122" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_user_id_3</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">121</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item123" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_user_id_4</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">122</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item124" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_user_id_5</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">123</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item125" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_user_id_6</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">124</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item126" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_user_id_7</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">125</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item127" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_user_id_8</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">126</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item128" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">electronic_execution_flag</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">127</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item129" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_warehoused</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">128</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item130" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">fx_price_direction</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">129</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item131" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">settlement_fx_rate</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">130</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item132" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_rate_type_code</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">131</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item133" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_rate_type_mnemonic</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">132</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item134" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_rate</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">133</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item135" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">134</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item136" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">135</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item137" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_3</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">136</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item138" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_4</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">137</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item139" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_5</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">138</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item140" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_6</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">139</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item141" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_7</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">140</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item142" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_8</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">141</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item143" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_9</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">142</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item144" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_10</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">143</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item145" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_11</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">144</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item146" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_12</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">145</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item147" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_13</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">146</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item148" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_14</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">147</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item149" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_15</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">148</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item150" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_16</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">149</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item151" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_1</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">150</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item152" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_2</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">151</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item153" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_3</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">152</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item154" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_4</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">153</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item155" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_5</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">154</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item156" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_6</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">155</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item157" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_7</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">156</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item158" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_8</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">157</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item159" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_9</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">158</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item160" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_10</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">159</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item161" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_11</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">160</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item162" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_12</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">161</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item163" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_13</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">162</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item164" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_14</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">163</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item165" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_15</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">164</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item166" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_16</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">165</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item167" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">original_ticket_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">166</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item168" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">trade_time</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">167</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item169" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">coupon</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">168</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item170" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">maturity_date</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">169</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item171" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_calculated_flag</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">170</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item172" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">exchange_country_code</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">171</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item173" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">exchange_listed_flag</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">172</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item174" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">security_attribute</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">173</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item175" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">security_par_value</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">174</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item176" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">strategy_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">175</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item177" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">accrued_interest</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">176</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item178" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_schedule_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">177</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item179" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">commission_schedule_mnemonic</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">178</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item180" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">counterparty_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">179</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item181" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">counterparty_short_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">180</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item182" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">repo_spread</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">181</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item183" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">repo_investment_rate</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">182</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item184" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_17</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">183</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item185" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_18</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">184</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item186" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_19</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">185</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item187" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_20</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">186</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item188" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_21</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">187</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item189" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_22</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">188</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item190" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_23</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">189</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item191" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_24</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">190</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item192" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_25</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">191</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item193" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_26</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">192</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item194" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_27</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">193</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item195" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_28</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">194</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item196" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_29</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">195</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item197" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_30</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">196</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item198" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_31</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">197</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item199" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">blocked_order_user_field_32</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">198</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item200" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_17</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">199</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item201" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_18</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">200</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item202" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_19</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">201</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item203" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_20</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">202</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item204" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_21</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">203</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item205" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_22</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">204</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item206" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_23</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">205</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item207" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_24</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">206</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item208" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_25</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">207</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item209" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_26</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">208</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item210" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_27</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">209</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item211" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_28</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">210</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item212" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_29</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">211</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item213" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_30</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">212</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item214" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_31</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">213</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item215" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ticket_user_field_32</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">214</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item216" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">swt_assign_unwind_type</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">215</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item217" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">booking_price</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">216</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item218" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">traded_price</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">217</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item219" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">contract_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">218</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item220" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">trader_note</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">219</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item221" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">block_note</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">220</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item222" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">package_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">221</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item223" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">package_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">222</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item224" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">contract_ccp_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">223</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item225" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">contract_ccp_lei</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">224</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+    </property>
+    <property name="View" isnull="true" iskey="true">
+      <property name="FormatConditions" iskey="true" value="0" />
+      <property name="AllowConditionalFormattingMenu">true</property>
+      <property name="AllowChangeColumnParent">true</property>
+      <property name="AllowChangeBandParent">true</property>
+      <property name="AllowPerPixelScrolling">true</property>
+      <property name="ShowGroupPanel">false</property>
+      <property name="ColumnChooserState" isnull="true" iskey="true">
+        <property name="Location">969,175</property>
+        <property name="Size">220,250</property>
+      </property>
+      <property name="ShowTotalSummary">true</property>
+    </property>
+    <property name="TotalSummary" iskey="true" value="0" />
+    <property name="MRUFilters" iskey="true" value="0" />
+    <property name="GroupSummarySortInfo" iskey="true" value="0" />
+  </property>
+</XtraSerializer>

@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<x:rulesPackage xmlns:x="urn:schemas-linedata-com:compliance:rulesPackage">
+  <x:origin>
+    <x:product>Linedata Longview Trading System</x:product>
+    <x:version>75.3.0.50903</x:version>
+    <x:dataSource>LVTS_753</x:dataSource>
+    <x:created>2019-07-03T12:20:49</x:created>
+  </x:origin>
+  <x:comment>
+  </x:comment>
+  <x:parameterTypes>
+    <x:parameterType id="3">
+      <x:name>Percentage</x:name>
+      <x:type>generalParamType</x:type>
+      <x:clrTypeName>System.Decimal</x:clrTypeName>
+      <x:numericPrecision>8</x:numericPrecision>
+    </x:parameterType>
+    <x:parameterType id="2">
+      <x:name>Integer</x:name>
+      <x:type>generalParamType</x:type>
+      <x:clrTypeName>System.Int32</x:clrTypeName>
+      <x:numericPrecision>0</x:numericPrecision>
+    </x:parameterType>
+  </x:parameterTypes>
+  <x:rules>
+    <x:rule id="20760" standard="false">
+      <x:displayName>Do not sell a security going long term at a &gt;${Gain} gain in the next {Days} days.</x:displayName>
+      <x:className>Rule21401</x:className>
+      <x:description>Do not sell a security going long term at a &gt;$X gain in the next X days</x:description>
+      <x:comment>Do not sell a security going long term at a &gt;$X gain in the next X days</x:comment>
+      <x:preTradeAllowed>true</x:preTradeAllowed>
+      <x:postTradeAllowed>true</x:postTradeAllowed>
+      <x:assignAsDisclosureRule>false</x:assignAsDisclosureRule>
+      <x:RuleSkinType>0</x:RuleSkinType>
+      <x:parameters>
+        <x:parameter>
+          <x:name>Days</x:name>
+          <x:description>Days Till LT</x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="2" name="Integer" />
+          <x:defaultValue>60</x:defaultValue>
+        </x:parameter>
+        <x:parameter>
+          <x:name>Gain</x:name>
+          <x:description>Gain</x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="2" name="Integer" />
+          <x:defaultValue>500</x:defaultValue>
+        </x:parameter>
+      </x:parameters>
+      <x:code>
+      </x:code>
+    </x:rule>
+    <x:rule id="20758" standard="false">
+      <x:displayName>Do not reverse a trade that was placed within the last {Days} days for any reason</x:displayName>
+      <x:className>Rule8193</x:className>
+      <x:description>Do not reverse a trade that was placed within the last</x:description>
+      <x:comment>Do not reverse a trade that was placed within the last</x:comment>
+      <x:preTradeAllowed>true</x:preTradeAllowed>
+      <x:postTradeAllowed>true</x:postTradeAllowed>
+      <x:assignAsDisclosureRule>false</x:assignAsDisclosureRule>
+      <x:RuleSkinType>0</x:RuleSkinType>
+      <x:parameters>
+        <x:parameter>
+          <x:name>Days</x:name>
+          <x:description>Days to not reverse</x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="2" name="Integer" />
+          <x:defaultValue>7</x:defaultValue>
+        </x:parameter>
+      </x:parameters>
+      <x:code>
+      </x:code>
+    </x:rule>
+    <x:rule id="20762" standard="false">
+      <x:displayName>Do not reverse a trade that was placed within the last {Days} days unless the price has fluctuated to the client's favor by &gt;{PriceFluctuation}%</x:displayName>
+      <x:className>Rule23707</x:className>
+      <x:description>Do not reverse a trade that was placed within the last X days unless the price has fluctuated to the clients favor by &gt;x%</x:description>
+      <x:comment> </x:comment>
+      <x:preTradeAllowed>true</x:preTradeAllowed>
+      <x:postTradeAllowed>true</x:postTradeAllowed>
+      <x:assignAsDisclosureRule>false</x:assignAsDisclosureRule>
+      <x:RuleSkinType>0</x:RuleSkinType>
+      <x:parameters>
+        <x:parameter>
+          <x:name>Days</x:name>
+          <x:description>Days Ago</x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="2" name="Integer" />
+          <x:defaultValue>30</x:defaultValue>
+        </x:parameter>
+        <x:parameter>
+          <x:name>PriceFluctuation</x:name>
+          <x:description>Price Change %</x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="3" name="Percentage" />
+          <x:defaultValue>5.0000</x:defaultValue>
+        </x:parameter>
+      </x:parameters>
+      <x:code>
+      </x:code>
+    </x:rule>
+    <x:rule id="20765" standard="false">
+      <x:displayName>Wash Sale</x:displayName>
+      <x:className>Rule58</x:className>
+      <x:description>Wash Sale Pre</x:description>
+      <x:comment> </x:comment>
+      <x:preTradeAllowed>true</x:preTradeAllowed>
+      <x:postTradeAllowed>true</x:postTradeAllowed>
+      <x:assignAsDisclosureRule>false</x:assignAsDisclosureRule>
+      <x:RuleSkinType>0</x:RuleSkinType>
+      <x:parameters>
+        <x:parameter>
+          <x:name>Days</x:name>
+          <x:description>Days</x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="2" name="Integer" />
+          <x:defaultValue>30</x:defaultValue>
+        </x:parameter>
+      </x:parameters>
+      <x:code>
+      </x:code>
+    </x:rule>
+    <x:rule id="20763" standard="false">
+      <x:displayName>DN BS  same side/symbol within {Days} days unless the price has fluctuated to the client's favor by &gt;{PriceFlucuation}%</x:displayName>
+      <x:className>Rule26321</x:className>
+      <x:description>DN BS  same side/symbol within x days unless the price has fluctuated to the clients favor by &gt; X</x:description>
+      <x:comment> </x:comment>
+      <x:preTradeAllowed>true</x:preTradeAllowed>
+      <x:postTradeAllowed>true</x:postTradeAllowed>
+      <x:assignAsDisclosureRule>false</x:assignAsDisclosureRule>
+      <x:RuleSkinType>0</x:RuleSkinType>
+      <x:parameters>
+        <x:parameter>
+          <x:name>Days</x:name>
+          <x:description>Days</x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="2" name="Integer" />
+          <x:defaultValue>7</x:defaultValue>
+        </x:parameter>
+        <x:parameter>
+          <x:name>PriceFluctuation</x:name>
+          <x:description>Price Change</x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="3" name="Percentage" />
+          <x:defaultValue>5.0000</x:defaultValue>
+        </x:parameter>
+      </x:parameters>
+      <x:code>
+      </x:code>
+    </x:rule>
+  </x:rules>
+  <x:filterFolders />
+  <x:ruleFolders>
+    <x:ruleFolder id="123" name="PreProcessed" standard="false">
+      <x:ruleRef id="20763" name="DN BS  same side/symbol within {Days} days unless the price has fluctuated to the client's favor by &gt;{PriceFlucuation}%" />
+      <x:ruleRef id="20758" name="Do not reverse a trade that was placed within the last {Days} days for any reason" />
+      <x:ruleRef id="20762" name="Do not reverse a trade that was placed within the last {Days} days unless the price has fluctuated to the client's favor by &gt;{PriceFluctuation}%" />
+      <x:ruleRef id="20760" name="Do not sell a security going long term at a &gt;${Gain} gain in the next {Days} days." />
+      <x:ruleRef id="20765" name="Wash Sale" />
+    </x:ruleFolder>
+    <x:ruleFolder id="2" name="All Rules" standard="false" />
+  </x:ruleFolders>
+  <x:ruleFolderTree>
+    <x:ruleFolderTreeNode>
+      <x:ruleFolderRef id="2" name="All Rules" />
+      <x:ruleFolderTreeNode>
+        <x:ruleFolderRef id="123" name="PreProcessed" />
+      </x:ruleFolderTreeNode>
+    </x:ruleFolderTreeNode>
+  </x:ruleFolderTree>
+</x:rulesPackage>

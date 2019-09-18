@@ -1,0 +1,1118 @@
+﻿<UserControl x:Class="ModelHelper.Client.View.ModelHelperVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+             xmlns:dxit="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+        
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:ModelHelper.Client"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+
+          
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Loaded="UserControl_Loaded" 
+             
+           
+            
+             >
+    <!--<UserControl.Resources>
+
+   
+
+        <local:ButtonLabelConverter x:Key="ButtonLabelConverter"></local:ButtonLabelConverter>
+        <local:ButtonLabelConverterReverse x:Key="ButtonLabelConverterReverse"></local:ButtonLabelConverterReverse>
+
+        <SolidColorBrush x:Key="UnfocusedRowBrush" Color="#FF666666" />
+
+        <Style TargetType="dxg:GridColumnHeader">
+            <Setter Property="Background" Value="LightSkyBlue"/>
+        </Style>
+        <Style TargetType="dxg:GridControl">
+            <Setter Property="Background" Value="LightSkyBlue"/>
+        </Style>
+        <sys:Double x:Key="maxHeaderHeight">
+            40
+        </sys:Double>
+
+        <DataTemplate x:Key="wrapHeader">
+            <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+        </DataTemplate>
+
+
+
+
+
+        <Style x:Key="{dxgt:GroupRowThemeKey ResourceKey=GroupRowStyle, IsThemeIndependent=True}" >
+        
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SelectionState}" Value="Focused">
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextFocusedBrush, ThemeName=MetropolisDark}}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="SelectedRowStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                    <Setter Property="dxg:RowControl.Background" Value="Gray" />
+                    <Setter Property="TextElement.Foreground" Value="White" />
+                </DataTrigger>
+                <Trigger Property="dxg:GridViewBase.IsFocusedRow" Value="True">
+                    <Setter Property="dxg:RowControl.Background" Value="CadetBlue" />
+                    <Setter Property="TextElement.Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>-->
+
+
+    <Grid VerticalAlignment="Stretch" Width="auto"  Height="Auto" HorizontalAlignment="Stretch" Background="#ffe5e3d8" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <!--<Grid.Resources>
+
+            <ControlTemplate x:Key="{dxgt:GroupRowThemeKey ResourceKey=GroupRowContentTemplate, IsThemeIndependent=True}" TargetType="{x:Type ContentControl}">
+                <Grid Background="Transparent" >
+                    <Border x:Name="groupRowBorder"  Background="{TemplateBinding Background}"
+                        BorderBrush="#FF515151" BorderThickness="0,0,0,1" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True" >
+                        <Grid>
+                            <Border x:Name="groupRowBorderSelected"  
+                                Background="#FFF78A09" >
+                                <Border.Visibility>
+                                    <Binding Path="SelectionState">
+                                        <Binding.Converter>
+                                            <dxg:SelectionStateToVisibilityConverter Value="Selected" />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Border.Visibility>
+                            </Border>
+                            <Border x:Name="groupRowBorderFocused" Background="{Binding ., Converter={StaticResource con}}">
+                                
+                                <Border.Visibility>
+                                    <Binding Path="SelectionState">
+                                        <Binding.Converter>
+                                            <dxg:SelectionStateToVisibilityConverter Value="Focused" />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Border.Visibility>
+                            </Border>
+                            <Border Visibility="Collapsed" 
+                                Background="{StaticResource UnfocusedRowBrush}" 
+                                dxg:FadeSelectionHelper.IsKeyboardFocusWithinView="{Binding Path=View.IsKeyboardFocusWithinView}" 
+                                dxg:FadeSelectionHelper.FadeSelectionOnLostFocus="{Binding Path=View.ActualFadeSelectionOnLostFocus}"
+                                dxg:FadeSelectionHelper.Opacity="1" 
+                                dxg:FadeSelectionHelper.IsSelected="{Binding SelectionState, Converter={dxg:SelectionStateToBooleanConverter}}" />
+                            <ContentPresenter>
+                                <ContentPresenter.Margin>
+                                    <Binding Path="GroupLevel">
+                                        <Binding.Converter>
+                                            <dxg:GroupLevelToMarginConverter />
+                                        </Binding.Converter>
+                                        <Binding.ConverterParameter>
+                                            <Thickness>28,0,0,0</Thickness>
+                                        </Binding.ConverterParameter>
+                                    </Binding>
+                                </ContentPresenter.Margin>
+                            </ContentPresenter>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate 
+                             x:Key="{dxgt:GridControlThemeKey ResourceKey=BorderTemplate, IsThemeIndependent=True}"
+                             TargetType="{x:Type ContentControl}">
+                <Border Background="#FFE5E5D8">
+                    <Border.Padding>
+                        <Binding Path="(dxg:GridBorderHelper.ShowBorder)" RelativeSource="{RelativeSource TemplatedParent}">
+                            <Binding.Converter>
+                                <dx:BoolToObjectConverter FalseValue="0" TrueValue="1" />
+                            </Binding.Converter>
+                        </Binding>
+                    </Border.Padding>
+                    <Border Background="#FFE5E5D8">
+                        <ContentPresenter />
+                    </Border>
+                </Border>
+            </ControlTemplate>
+
+
+
+            <DataTemplate x:Key="renameColumnHeaderTemplate">
+                <Grid>
+                    <dxe:TextEdit
+                        EditValue="{Binding Path=DataContext.Header, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}}" 
+                        Foreground="Black" 
+                        Visibility="{Binding Path=DataContext.(local:ColumnBehavior.IsRenameEditorActivated), 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}, 
+                        Converter={local:VisibilityConverter},
+                        Mode=TwoWay}"                    
+                        Name="textEdit"
+                        LostFocus="OnRenameEditorLostFocus"/>
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="{Binding}" 
+                        Visibility="{Binding Path=Visibility, ElementName=textEdit, Converter={local:ReverseVisibilityConverter}}"
+                        MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center"
+                        />
+                    
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="wrapHeader">
+                <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+            </DataTemplate>
+        </Grid.Resources>-->
+
+        <GridSplitter  HorizontalAlignment="left" Grid.Column="1" Width="7" Background="LightGray" Opacity="30" Grid.Row="0"
+                       x:Name="lblborder3" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch"  />
+
+        <GridSplitter  HorizontalAlignment="left" Grid.Column="2" Width="7" Background="LightGray"  Grid.Row="0"
+                       x:Name="lblborder1" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10" />
+
+
+        <!--Model section-->
+        <Grid VerticalAlignment="Stretch" Width="auto" Height="auto" HorizontalAlignment="Stretch" Grid.Column="0"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="400" />
+                <RowDefinition Height="auto" MinHeight="100"/>
+            </Grid.RowDefinitions>
+
+            <GridSplitter  VerticalAlignment="top" Grid.Row="2" Height="7" Background="LightGray"  
+                           x:Name="lblborder9" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+
+            <Label Name="Lblmodel" Content="Available Models:" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Grid.Row="0"  Opacity=".5"></Label>
+            <!--Model list section-->
+                <dxg:GridControl   AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"   x:Name="_dataGridModel"   
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="0,0,9,0" Grid.Row="1" Grid.Column="0"
+                          HorizontalAlignment="Stretch" 
+                           Background="LightGray"
+                          HorizontalContentAlignment="Stretch" 
+                          FontSize="12" FontFamily="Calibri" 
+                          ItemsSource="{Binding ByModel.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                          SelectionMode="Row"
+                          dx:DXSerializer.StoreLayoutMode="All"
+                          dxg:GridSerializationOptions.AddNewColumns="true" 
+                          dxg:GridSerializationOptions.RemoveOldColumns="False"
+                          MouseDown="_dataGridModel_MouseDown"
+                           >
+                <dxg:GridControl.View  >
+
+                    <dxg:TableView 
+                    x:Name="_viewDataGridModel"
+                    GroupSummaryDisplayMode="AlignByColumns"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    Background="LightGray"
+                    AllowChangeBandParent="True" 
+                    AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu"
+              
+                    >
+
+                    </dxg:TableView>
+
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+
+
+                        <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                    </dxg:GridControl.Columns>
+
+                <dxg:GridControl.ContextMenu>
+                    <ContextMenu PlacementTarget="{Binding ElementName=dgModels}">
+                        <ContextMenu.Resources>
+                            <Style x:Key="SimpleSysResources" TargetType="{x:Type MenuItem}">
+                                <Setter Property = "FontSize" Value="16"/>
+                            </Style>
+                        </ContextMenu.Resources>
+
+
+                    </ContextMenu>
+                </dxg:GridControl.ContextMenu>
+            </dxg:GridControl>
+
+               
+                <!--Model info -->
+                <dxg:GridControl   AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"   x:Name="_dataGridModelInfo"   
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="0,35,9,0" Grid.Row="2" Grid.Column="0"
+                          HorizontalAlignment="Stretch" 
+                          HorizontalContentAlignment="Stretch" 
+                          FontSize="12" FontFamily="Calibri" 
+                          ItemsSource="{Binding ModelInfo.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                          SelectionMode="Row"
+                          dx:DXSerializer.StoreLayoutMode="All"
+                          dxg:GridSerializationOptions.AddNewColumns="true" 
+                          dxg:GridSerializationOptions.RemoveOldColumns="False"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          
+                           >
+                    <dxg:GridControl.View  >
+
+                    <dxg:TableView 
+                    x:Name="_viewDataGridModelInfo"
+                    GroupSummaryDisplayMode="AlignByColumns"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    AllowChangeBandParent="True" 
+                    AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu">
+             
+
+                    </dxg:TableView>
+
+                    </dxg:GridControl.View>
+
+
+
+                    <dxg:GridControl.Columns>
+
+
+                        <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                        <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                    </dxg:GridControl.Columns>
+
+                    <dxg:GridControl.ContextMenu>
+                        <ContextMenu PlacementTarget="{Binding ElementName=dgModels}">
+                            <ContextMenu.Resources>
+                                <Style x:Key="SimpleSysResources" TargetType="{x:Type MenuItem}">
+                                    <Setter Property = "FontSize" Value="16"/>
+                                </Style>
+                            </ContextMenu.Resources>
+
+
+                        </ContextMenu>
+                    </dxg:GridControl.ContextMenu>
+
+
+                </dxg:GridControl>
+
+         
+           
+        </Grid>
+        <!--Account drift section-->
+        <Grid VerticalAlignment="Stretch" Width="auto" Height="auto" HorizontalAlignment="Stretch" Grid.Column="1" Margin="0,7"  >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GridSplitter  HorizontalAlignment="left" Grid.Column="1" Width="7" Background="LightGray"  Grid.Row="2"
+                           x:Name="lblborder4" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch"  />
+
+            <GridSplitter  VerticalAlignment="top" Grid.Row="2" Height="7" Background="LightGray"  Grid.ColumnSpan="2"
+                           x:Name="lblborder" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+
+            <Grid Grid.Row="0"  Grid.Column="0" ColumnSpan="2" Opacity=".5">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Label Name="lblModelaccounts"  Content="Models accounts:" FontSize="14"  Height="25" Width="auto" FontWeight="Bold" HorizontalAlignment="Left" Grid.Column="1" ></Label>
+                <Label Content="Cash % needed:" FontSize="14"  FontWeight="Bold" Width="auto" Height="25" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="3"/>
+                <dxe:TextEdit   HorizontalAlignment="Left"   Width="50" Height="20"  Grid.Row="0" MaskType="Numeric" Background="Yellow" Foreground="Black" LostFocus="TextEdit_LostFocus" x:Name="TxtTarget" Grid.Column="5"/>
+                    
+                     
+
+            </Grid>
+            <!--Grid-->
+            <dxg:GridControl   AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"   x:Name="_dataGridAccount"   
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="8,0,0,0" Grid.Column="0" Grid.Row="1"
+                          Grid.ColumnSpan="2"
+                               
+                          HorizontalAlignment="Stretch" 
+                          HorizontalContentAlignment="Stretch" 
+                          FontSize="12" FontFamily="Calibri" 
+                          ItemsSource="{Binding ByAccount.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                          SelectionMode="Row"
+                          dx:DXSerializer.StoreLayoutMode="All"
+                          dxg:GridSerializationOptions.AddNewColumns="true" 
+                          dxg:GridSerializationOptions.RemoveOldColumns="False"  MouseDown="_dataGridAccount_MouseDown"
+                          
+                           
+                               >
+                <dxg:GridControl.View  >
+
+           
+
+                    <dxg:TableView 
+                   
+                    x:Name="_viewDataGridAccount"
+                        GroupSummaryDisplayMode="AlignByColumns"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    AllowChangeBandParent="True" 
+                    AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu">
+                    </dxg:TableView>
+
+                </dxg:GridControl.View>
+
+
+
+
+                <dxg:GridControl.Columns>
+
+                    <dxg:GridColumn Header="model_id" Binding="{Binding model_id}"  Width="75" SortMode="DisplayText" FieldName="model_id" IsSmart="True">
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="account_id" Binding="{Binding account_id}"  Width="75" SortMode="DisplayText" FieldName="account_id" IsSmart="True">
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="short_name" Binding="{Binding short_name}"  Width="75" SortMode="DisplayText" FieldName="short_name" IsSmart="True">
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Cash %" Binding="{Binding cash_percent}"  Width="75" SortMode="DisplayText" FieldName="cash_percent" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="p2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Cash % Short" Binding="{Binding cash_percent_shortfall}"  Width="75" SortMode="DisplayText" FieldName="cash_percent_shortfall" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="p2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Cash MV Short" Binding="{Binding Cash_mv_shortfall}"  Width="75" SortMode="DisplayText" FieldName="Cash_mv_shortfall" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="n2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Account Market Value" Binding="{Binding account_market_value}"  Width="75" SortMode="DisplayText" FieldName="account_market_value" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="n2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Drift" Binding="{Binding hasdrift}"  Width="75" SortMode="DisplayText" FieldName="hasdrift" IsSmart="True">
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Drift %" Binding="{Binding drift_percent}"  Width="75" SortMode="DisplayText" FieldName="drift_percent" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="p2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Drift MV" Binding="{Binding drift_mv}"  Width="75" SortMode="DisplayText" FieldName="drift_mv" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="n2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+
+
+                    <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                </dxg:GridControl.Columns>
+
+                <dxg:GridControl.ContextMenu>
+                    <ContextMenu PlacementTarget="{Binding ElementName=dgModels}">
+                        <ContextMenu.Resources>
+                            <Style x:Key="SimpleSysResources" TargetType="{x:Type MenuItem}">
+                                <Setter Property = "FontSize" Value="16"/>
+                            </Style>
+                        </ContextMenu.Resources>
+
+
+                        <MenuItem Header= "Open Account" Style="{StaticResource SimpleSysResources}" Click="OpenReport_Click" FontFamily="Calibri" FontSize="12" />
+
+                    </ContextMenu>
+                </dxg:GridControl.ContextMenu>
+
+
+            </dxg:GridControl>
+
+            <!--top Accounts chart-->
+            <dxc:ChartControl  DataSource="{Binding ByTopAccount.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                Name="TopAccountsBar"  AnimationMode="OnDataChanged"  Visibility="Visible" Margin="7,7,0,0" Width="auto" Height="auto" Grid.Row="2" Grid.Column="0" Background="LightGray">
+
+                <dxc:ChartControl.Titles>
+                    <dxc:Title x:Name="TopAccounts"  Visible="True"  Content="Top Accounts" FontFamily="Calibri Black" Foreground="Black" Opacity=".75" FontSize="14" HorizontalAlignment="Center" Margin="0,0,0,0"  Width="80"   />
+                </dxc:ChartControl.Titles>
+                <dxc:ChartControl.Diagram>
+                    <dxc:XYDiagram2D      >
+                        <dxc:XYDiagram2D.Series>
+                            <dxc:BarSideBySideSeries2D DisplayName="Holdings MV" BarWidth="0.5" ArgumentDataMember="Account" ValueDataMember="MV" CrosshairEnabled="True" CrosshairLabelPattern="Acoount: {A}; MV: {V:n2}">
+
+                                <dxc:BarSideBySideSeries2D.Model>
+                                    <dxc:Quasi3DBar2DModel />
+                                </dxc:BarSideBySideSeries2D.Model>
+
+                            </dxc:BarSideBySideSeries2D>
+                        </dxc:XYDiagram2D.Series>
+                        <dxc:XYDiagram2D.AxisY >
+                            <dxc:AxisY2D GridLinesMinorVisible="True"   >
+                                <dxc:AxisY2D.Label >
+                                    <dxc:AxisLabel TextPattern="{}{V:#,##0}" FontWeight="Bold"/>
+                                </dxc:AxisY2D.Label>
+                                <dxc:AxisY2D.VisualRange  >
+                                    <dxc:Range 
+    							SideMarginsValue="0" AutoSideMargins="True" />
+                                </dxc:AxisY2D.VisualRange>
+                                <dxc:AxisY2D.WholeRange  >
+                                    <dxc:Range 
+    							SideMarginsValue="0"  />
+                                </dxc:AxisY2D.WholeRange>
+                            </dxc:AxisY2D>
+                        </dxc:XYDiagram2D.AxisY>
+                        <dxc:XYDiagram2D.AxisX >
+                            <dxc:AxisX2D GridLinesMinorVisible="True" MinorCount="1" Interlaced="True" LogarithmicBase="2" >
+                                <dxc:AxisX2D.Label >
+                                    <dxc:AxisLabel Angle="90"  FontWeight="Bold" />
+                                </dxc:AxisX2D.Label>
+                                <dxc:AxisX2D.QualitativeScaleOptions>
+                                    <dxc:QualitativeScaleOptions AutoGrid="False"/>
+                                </dxc:AxisX2D.QualitativeScaleOptions>
+
+                            </dxc:AxisX2D>
+                        </dxc:XYDiagram2D.AxisX>
+                    </dxc:XYDiagram2D>
+                </dxc:ChartControl.Diagram>
+                <dxc:ChartControl.Legend>
+                    <dxc:Legend BorderThickness="4" FontWeight="Bold"/>
+                </dxc:ChartControl.Legend>
+            </dxc:ChartControl>
+            <!--top Security chart-->
+            <dxc:ChartControl DataSource="{Binding ByTopSecurity.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}" Background="LightGray"
+                x:Name ="TopSecurities"    AnimationMode="OnDataChanged"  Visibility="Visible" AutoLayout="True" Margin="7,7,0,0" Grid.Row="2" Grid.Column="1">
+                <dxc:ChartControl.Titles>
+                    <dxc:Title x:Name="TopSecurity"  Content="Top Securities" FontFamily="Calibri Black" FontSize="14" Foreground="Black" Opacity=".75" HorizontalAlignment="Center" Margin="0,0,0,0"  Width="112"   />
+                </dxc:ChartControl.Titles>
+                <dxc:ChartControl.CrosshairOptions>
+                    <dxc:CrosshairOptions ShowValueLine="True" ShowValueLabels="True"/>
+                </dxc:ChartControl.CrosshairOptions>
+                <dxc:XYDiagram2D  Margin="0,4,0,-4" LabelsResolveOverlappingMinIndent="0">
+                    <dxc:XYDiagram2D.AxisY >
+                        <dxc:AxisY2D GridLinesMinorVisible="True"   >
+                            <dxc:AxisY2D.Label >
+                                <dxc:AxisLabel TextPattern="{}{V:#,##0}" FontWeight="Bold"/>
+                            </dxc:AxisY2D.Label>
+                            <dxc:AxisY2D.VisualRange  >
+                                <dxc:Range 
+                                    SideMarginsValue="0" AutoSideMargins="True" />
+                            </dxc:AxisY2D.VisualRange>
+                            <dxc:AxisY2D.WholeRange  >
+                                <dxc:Range 
+                                    SideMarginsValue="0"  />
+                            </dxc:AxisY2D.WholeRange>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:XYDiagram2D.AxisX >
+                        <dxc:AxisX2D GridLinesMinorVisible="True" MinorCount="1" Interlaced="True" LogarithmicBase="2">
+                            <dxc:AxisX2D.Label >
+                                <dxc:AxisLabel Angle="90"  FontWeight="Bold" />
+                            </dxc:AxisX2D.Label>
+                            <dxc:AxisX2D.QualitativeScaleOptions>
+                                <dxc:QualitativeScaleOptions AutoGrid="False"/>
+                            </dxc:AxisX2D.QualitativeScaleOptions>
+
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:BubbleSeries2D Transparency="0.2"  ColorEach="True" 
+                                        CrosshairLabelPattern="security: {A}; MV: {V:n2}; %: {W:n2}" ArgumentDataMember="Symbol" ValueDataMember="MV" WeightDataMember="PctTotal" LegendTextPattern="#,##0.00" ToolTipEnabled="True" LabelsVisibility="True"   />
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl>
+        </Grid>
+
+        <!--Security drift section-->
+
+        <Grid VerticalAlignment="Stretch" Width="auto" Height="auto" HorizontalAlignment="Stretch" Grid.Column="2" Margin="0,7"  >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+
+            <GridSplitter  VerticalAlignment="top" Grid.Row="2" Height="7" Background="LightGray"  
+                           x:Name="lblborder6" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+
+
+            <Grid Grid.Row="0" Opacity="0.5">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="auto"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Label Name="lblSecurityDrift" Content="Security Drift:" FontSize="14"    FontWeight="Bold" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" ></Label>
+                <Label Name ="Lblcashshortfall" Content="Shortfall:" FontSize="14" FontWeight="Bold"   Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left"></Label>
+                <Label Name ="LblacountMV" Content="MV:" FontSize="14"  FontWeight="Bold"   Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left"/>
+                <ToggleButton HorizontalAlignment="Left"  Grid.Row="0" Grid.Column="9"  Name="ToggleButtonP" IsChecked="True" >
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Content" Value="Drift"/>
+                            <Setter Property="Background" Value="LightGray"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Content" Value="Price"/>
+                                    <Setter Property="Background" Value="LightGoldenrodYellow"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+                <Button   HorizontalAlignment="Left" Content="Print" ToolTip="Print" Grid.Row="0" Grid.Column="7" Click="PrintSecurity_Click">
+                             <Button.Template>
+
+                                            <ControlTemplate>
+                                                    <Border  CornerRadius="50"
+                                                             Width="60"
+                                                             
+                                                             Padding="4"
+                                                            Background="Aquamarine"
+                                                            BorderBrush="Black"
+                                                            BorderThickness="1">
+                                                        <TextBlock HorizontalAlignment="Center">Print
+                                                        </TextBlock>
+                                                    </Border>
+
+                                            </ControlTemplate>
+                             </Button.Template>
+                </Button>
+              
+           
+
+                <Grid Grid.Row="1" Grid.Column="0" ColumnSpan="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8" />
+                     <ColumnDefinition Width="auto"/>
+                 </Grid.ColumnDefinitions>
+
+                    <Button      HorizontalAlignment="Left"  Background="GreenYellow" Grid.Row="0" Click="RefreshButton_Click" Grid.Column="1">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <TextBlock  Width="30">
+                                    <TextBlock.Background>
+                                        <VisualBrush>
+                                            <VisualBrush.Visual>
+                                                <Polygon Points="25,0 5,30 45,30"
+                                                         Fill="LightYellow"
+                                                         Stroke="Black"
+                                                         StrokeThickness="2" />
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </TextBlock.Background>
+                                </TextBlock>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                    </Button>
+                    <RadioButton Name="RdoAll" Content="All" HorizontalAlignment="Left"   FontWeight="Bold" IsChecked="True" Grid.Row="1" Grid.Column="3" />
+                    <RadioButton Name="RdoNegitive" Content="Negative" HorizontalAlignment="Left"    FontWeight="Bold" Grid.Column="5" />
+                    <RadioButton Name="RdoPositve" Content="Positive" HorizontalAlignment="Left"    FontWeight="Bold" Grid.Column="7" />
+                    
+             </Grid>
+            </Grid>
+            <!--securities Grid-->
+            <dxg:GridControl   AutoGenerateColumns="None" EnableSmartColumnsGeneration="False"   x:Name="_dataGridSecurity"   
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="8,0,0,0" Grid.Row="1" 
+                          HorizontalAlignment="Stretch" 
+                          HorizontalContentAlignment="Stretch" 
+                          FontSize="12" FontFamily="Calibri" 
+                          ItemsSource="{Binding BySecurity.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                          SelectionMode="Row"
+                          dx:DXSerializer.StoreLayoutMode="All"
+                          dxg:GridSerializationOptions.AddNewColumns="true" 
+                          dxg:GridSerializationOptions.RemoveOldColumns="False"
+                          Visibility="{Binding ElementName=ToggleButtonP,Path=IsChecked,Converter={StaticResource ButtonLabelConverter}}">
+                               
+
+
+                <dxg:GridControl.View  >
+
+                    <dxg:TableView 
+                    x:Name="_viewDataGridSecurity"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    AllowChangeBandParent="True" 
+                    AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu">
+
+                    <dxg:TableView.GroupRowStyle>
+                        <Style>
+                            <Setter Property="TextElement.Foreground" Value="Blue"/>
+                            <Setter Property="dxg:BackgroundBorderControl.Background" Value="LightGray"/>
+                        </Style>
+                    </dxg:TableView.GroupRowStyle>
+
+                        
+
+                    </dxg:TableView>
+
+                </dxg:GridControl.View>
+                <dxg:GridControl.GroupSummary>
+                    <dxg:GridSummaryItem FieldName="drift_mv" SummaryType="Sum" Alignment="Left" ShowInColumn="drift"  />
+                </dxg:GridControl.GroupSummary>
+
+
+                <dxg:GridControl.Columns>
+
+                    <dxg:GridColumn Header="Drift +-" Binding="{Binding drift}"  Width="75" SortMode="DisplayText" FieldName="drift" IsSmart="True">
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightCoral"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="security_id" Binding="{Binding security_id}"  Width="75" SortMode="DisplayText" FieldName="security_id" IsSmart="True">
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightCoral"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="symbol" Binding="{Binding symbol}"  Width="75" SortMode="DisplayText" FieldName="symbol" IsSmart="True">
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightCoral"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+                    <dxg:GridColumn Header="Target" Binding="{Binding target}"  Width="75" SortMode="DisplayText" FieldName="target" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="p2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightCoral"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Header="Holding %" Binding="{Binding holding_percent}"  Width="75" SortMode="DisplayText" FieldName="holding_percent" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="p2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightCoral"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Header="Drift MV" Binding="{Binding drift_mv}"  Width="75" SortMode="DisplayText" FieldName="drift_mv" IsSmart="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings  DisplayFormat="n2" />
+                        </dxg:GridColumn.EditSettings>
+                        <dxg:GridColumn.HeaderStyle>
+                            <Style TargetType="Control">
+                                <Setter Property="Background" Value="LightCoral"/>
+                            </Style>
+                        </dxg:GridColumn.HeaderStyle>
+                    </dxg:GridColumn>
+
+
+                    <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                </dxg:GridControl.Columns>
+
+                <dxg:GridControl.ContextMenu>
+                    <ContextMenu PlacementTarget="{Binding ElementName=dgModels}">
+                        <ContextMenu.Resources>
+                            <Style x:Key="SimpleSysResources" TargetType="{x:Type MenuItem}">
+                                <Setter Property = "FontSize" Value="16"/>
+                            </Style>
+                        </ContextMenu.Resources>
+                  
+                    </ContextMenu>
+                </dxg:GridControl.ContextMenu>
+
+
+            </dxg:GridControl>
+
+            <dxg:GridControl   AutoGenerateColumns="None" EnableSmartColumnsGeneration="False"   x:Name="_dataGridPriceHistory"   
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="8,0,0,0" Grid.Row="1" 
+                          HorizontalAlignment="Stretch" 
+                          HorizontalContentAlignment="Stretch" 
+                          FontSize="12" FontFamily="Calibri" 
+                          ItemsSource="{Binding BySecurity.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                          SelectionMode="Row"
+                          dx:DXSerializer.StoreLayoutMode="All"
+                          dxg:GridSerializationOptions.AddNewColumns="true" 
+                          dxg:GridSerializationOptions.RemoveOldColumns="False"
+                          Visibility="{Binding ElementName=ToggleButtonP,Path=IsChecked,Converter={StaticResource ButtonLabelConverterReverse}}"
+                           MouseDoubleClick="_dataGridPriceHistory_MouseDown"
+                          >
+
+
+
+                <dxg:GridControl.View  >
+
+                    <dxg:TableView 
+                    x:Name="_viewGridPriceHistory"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    AllowChangeBandParent="True" 
+                    AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu">
+
+                        <dxg:TableView.GroupRowStyle>
+                            <Style>
+                                <Setter Property="TextElement.Foreground" Value="Purple"/>
+                                <Setter Property="dxg:BackgroundBorderControl.Background" Value="LightGray"/>
+                            </Style>
+                        </dxg:TableView.GroupRowStyle>
+
+
+
+                    </dxg:TableView>
+
+                </dxg:GridControl.View>
+
+
+                <dxg:GridColumn Header="Drift +-" Binding="{Binding drift}"  Width="75" SortMode="DisplayText" FieldName="drift" IsSmart="True">
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="security_id" Binding="{Binding security_id}"  Width="75" SortMode="DisplayText" FieldName="security_id" IsSmart="True">
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="symbol" Binding="{Binding symbol}"  Width="75" SortMode="DisplayText" FieldName="symbol" IsSmart="True">
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header="Target" Binding="{Binding target}"  Width="75" SortMode="DisplayText" FieldName="target" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings  DisplayFormat="p2" />
+                    </dxg:GridColumn.EditSettings>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Holding %" Binding="{Binding holding_percent}"  Width="75" SortMode="DisplayText" FieldName="holding_percent" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings  DisplayFormat="p2" />
+                    </dxg:GridColumn.EditSettings>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Drift MV" Binding="{Binding drift_mv}"  Width="75" SortMode="DisplayText" FieldName="drift_mv" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings  DisplayFormat="n2" />
+                    </dxg:GridColumn.EditSettings>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Purchase Price" Binding="{Binding purchase_price}"  Width="75" SortMode="DisplayText" FieldName="purchase_price" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings  DisplayFormat="n2" />
+                    </dxg:GridColumn.EditSettings>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Target Price" Binding="{Binding target_price}"  Width="75" SortMode="DisplayText" FieldName="target_price" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings  DisplayFormat="n2" />
+                    </dxg:GridColumn.EditSettings>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Current Price" Binding="{Binding current_price}"  Width="75" SortMode="DisplayText" FieldName="current_price" IsSmart="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings  DisplayFormat="n2" />
+                    </dxg:GridColumn.EditSettings>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="Control">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+
+
+
+
+                <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                    <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+              
+
+             
+
+            </dxg:GridControl>
+
+            <!--drift dxg:DetailSummaryControlBase chart-->
+            <dxc:ChartControl DataSource="{Binding BySecurity.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}" Background="LightGray"
+                Name="targetOverlay" AnimationMode="OnDataChanged"  AutoLayout="True" Margin="7,7,0,0" Grid.Row="2">
+                <dxc:ChartControl.CrosshairOptions>
+                    <dxc:CrosshairOptions ShowValueLine="True" ShowValueLabels="True"/>
+                </dxc:ChartControl.CrosshairOptions>
+                <dxc:ChartControl.Titles>
+                    <dxc:Title x:Name="title2" Content="Drift Summary"  FontFamily="Calibri" FontSize="14"  HorizontalAlignment="Center" Foreground="Black" Opacity=".75" />
+                </dxc:ChartControl.Titles>
+
+                <dxc:ChartControl.Diagram>
+                    <dxc:XYDiagram2D LabelsResolveOverlappingMinIndent="0">
+                        <dxc:XYDiagram2D.Series>
+                            <dxc:AreaSeries2D    
+                                DisplayName="Target" Transparency="0.5" ArgumentDataMember="symbol" ValueDataMember="target" DataContext="{Binding Table1}" >
+
+                            </dxc:AreaSeries2D>
+                            <dxc:AreaSeries2D 
+                                DisplayName="Holding" Transparency="0.5" ArgumentDataMember="symbol" ValueDataMember="holding_percent" DataContext="{Binding Table1}">
+
+                            </dxc:AreaSeries2D>
+                        </dxc:XYDiagram2D.Series>
+                        <!--region #SideMarginsEnabled-->
+                        <dxc:XYDiagram2D.AxisY >
+                            <dxc:AxisY2D GridLinesMinorVisible="True"   >
+                                <dxc:AxisY2D.Label >
+                                    <dxc:AxisLabel TextPattern="{}{V:P2}" FontWeight="Bold"/>
+                                </dxc:AxisY2D.Label>
+                                <dxc:AxisY2D.VisualRange  >
+                                    <dxc:Range 
+                                        SideMarginsValue="0" AutoSideMargins="True" />
+                                </dxc:AxisY2D.VisualRange>
+                                <dxc:AxisY2D.WholeRange  >
+                                    <dxc:Range 
+                                        SideMarginsValue="0"  />
+                                </dxc:AxisY2D.WholeRange>
+                            </dxc:AxisY2D>
+                        </dxc:XYDiagram2D.AxisY>
+                        <dxc:XYDiagram2D.AxisX>
+                            <dxc:AxisX2D >
+                                <dxc:AxisX2D.Range>
+                                    <dxc:AxisRange SideMarginsEnabled="False" />
+                                </dxc:AxisX2D.Range>
+                                <dxc:AxisX2D.Label >
+                                    <dxc:AxisLabel Angle="45"  FontWeight="Bold" />
+                                </dxc:AxisX2D.Label>
+                                <dxc:AxisX2D.QualitativeScaleOptions>
+                                    <dxc:QualitativeScaleOptions AutoGrid="False"/>
+                                </dxc:AxisX2D.QualitativeScaleOptions>
+                            </dxc:AxisX2D>
+
+
+                        </dxc:XYDiagram2D.AxisX>
+                        <!--endregion #SideMarginsEnabled-->
+                    </dxc:XYDiagram2D>
+                </dxc:ChartControl.Diagram>
+                <dxc:ChartControl.Legend>
+                    <dxc:Legend Visible="True"/>
+                </dxc:ChartControl.Legend>
+            </dxc:ChartControl>
+
+        </Grid>
+
+
+
+    </Grid>
+</UserControl>

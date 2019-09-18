@@ -1,0 +1,690 @@
+﻿<UserControl x:Class="ComplianceDashBoard.Client.View.ComplianceDashBoardVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:ComplianceDashBoard.Client"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Background="LightGray"
+             Loaded="UserControl_Loaded" 
+             >
+
+    <UserControl.Resources>
+
+
+      
+   
+        <Style TargetType="dxg:GridColumnHeader">
+            <Setter Property="Background" Value="LightGray"/>
+        </Style>
+        <sys:Double x:Key="maxHeaderHeight">
+            40
+        </sys:Double>
+
+        <DataTemplate x:Key="wrapHeader">
+            <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+        </DataTemplate>
+       
+
+    </UserControl.Resources>
+
+    <Grid VerticalAlignment="Stretch" Width="auto" Height="Auto" HorizontalAlignment="Stretch" >
+
+        <Grid.Resources>
+            <DataTemplate x:Key="renameColumnHeaderTemplate">
+                <Grid>
+                    <dxe:TextEdit
+                        EditValue="{Binding Path=DataContext.Header, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}}" 
+                        Foreground="Black" 
+                        Visibility="{Binding Path=DataContext.(local:ColumnBehavior.IsRenameEditorActivated), 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}, 
+                        Converter={local:VisibilityConverter},
+                        Mode=TwoWay}"                    
+                        Name="textEdit"
+                        LostFocus="OnRenameEditorLostFocus"/>
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="{Binding}" 
+                        Visibility="{Binding Path=Visibility, ElementName=textEdit, Converter={local:ReverseVisibilityConverter}}"
+                        MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center"
+                    />
+
+                </Grid>
+            </DataTemplate>
+
+            <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="border" Background="LightBlue" Height="20"  Width="80" BorderThickness="1" BorderBrush="Black" >
+                                <ContentPresenter HorizontalAlignment="Center" />
+                            </Border>
+
+
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="border" Background="LightYellow" Height="20"  Width="80" BorderThickness="1" BorderBrush="Black" >
+                                <ContentPresenter HorizontalAlignment="Center" />
+                            </Border>
+
+
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+          
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <GridSplitter  VerticalAlignment="top" Grid.Row="1" Height="7" Background="White"  
+                           x:Name="lblborder9" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+        <GridSplitter  VerticalAlignment="top" Grid.Row="2" Height="7" Background="White"  
+                           x:Name="Gridrow3" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+        <GridSplitter  VerticalAlignment="top" Grid.Row="3" Height="7" Background="White"  
+                           x:Name="Gridrow4" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+
+        
+        <Grid>
+            <Grid.Resources>
+                <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                <Border HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="border" Background="Salmon" Height="20"  Width="80" BorderThickness="1" BorderBrush="Black" Opacity="50">
+                                    <ContentPresenter HorizontalAlignment="Center" Opacity="50" />
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" TargetName="border" Value="lightgreen"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="border" Background="LightBlue" Height="20"  Width="80" BorderThickness="1" BorderBrush="Black" >
+                                    <ContentPresenter HorizontalAlignment="Center" />
+                                </Border>
+
+
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="215"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <GridSplitter  HorizontalAlignment="left" Grid.Column="1" Width="7" Background="White"  Grid.Row="0"
+                       x:Name="lblborder1" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0" />
+            <GridSplitter  HorizontalAlignment="left" Grid.Column="2" Width="7" Background="White"  Grid.Row="0"
+                       x:Name="lblborder2" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0" />
+            <GridSplitter  HorizontalAlignment="left" Grid.Column="3" Width="7" Background="White"  Grid.Row="0"
+                       x:Name="lblborder3" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0" />
+            <GridSplitter  HorizontalAlignment="left" Grid.Column="4" Width="7" Background="White"  Grid.Row="0"
+                       x:Name="lblborder4" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0" />
+            <GridSplitter  HorizontalAlignment="left" Grid.Column="5" Width="7" Background="White"  Grid.Row="0"
+                       x:Name="lblborder5" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0" />
+            <GridSplitter  HorizontalAlignment="left" Grid.Column="6" Width="7" Background="White"  Grid.Row="0"
+                       x:Name="lblborder6" FontWeight="Bold" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0" />
+
+            <dxe:ComboBoxEdit EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              HorizontalAlignment="left" Height="20" Width="200" 
+                              BorderThickness="2"
+                              BorderBrush="Black"
+                              Background="LightGray"
+                              FontWeight="Bold"
+                                x:Name="comboBoxEdit1" 
+                              AllowDrop="True"
+                              VerticalAlignment="Top"   
+                              EditValueChanged="comboBoxEdit1_EditValueChanged"  
+                              IncrementalFiltering="True" 
+                              ImmediatePopup="True" 
+                              AutoComplete="False" 
+                              FilterCondition="Contains" 
+                              ValidateOnTextInput="False"
+                              IsSynchronizedWithCurrentItem="True"
+                              IsTextEditable="True" LostFocus="comboBoxEdit1_LostFocus" IsPopupOpen="True" 
+                              Margin="7,5"
+                            >
+                <dxmvvm:Interaction.Triggers>
+                    <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+                </dxmvvm:Interaction.Triggers>
+                <dxe:ComboBoxEditItem Content="WM01"/>
+            </dxe:ComboBoxEdit>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0"  VerticalAlignment="Top" Margin="10,0">
+                <ToggleButton HorizontalAlignment="Center"    Name="TBToReview" IsChecked="{Binding Parameters.ToReview, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False" Click="onClick" Opacity="50"
+                              Height="20" Width="80" ToolTip="To Review"  Content="To Review" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center">
+                </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    Name="TBReviewed" IsChecked="{Binding Parameters.Review, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False" Click="onClick"
+                               Height="20" Width="80" ToolTip="Reviewed"  Content="Reviewed" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center">
+                </ToggleButton>
+             </StackPanel>
+                <StackPanel Grid.Column="1"  VerticalAlignment="Top" >
+                    <ToggleButton HorizontalAlignment="left"    Name="TBToApproved" IsChecked="{Binding Parameters.ToApprove, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False" Click="onClick"
+                               Height="20" Width="80" ToolTip="Approved"  Content="To Approved" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center">
+
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    Name="TBApproved" IsChecked="{Binding Parameters.Approve, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False" Click="onClick"
+                               Height="20" Width="80" ToolTip="Approved"  Content="Approved" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center">
+
+                </ToggleButton>
+               
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0"  VerticalAlignment="Top" Margin="10,0,0,0">
+                    <ToggleButton HorizontalAlignment="left"    Name="TBActiveFail" IsChecked="{Binding Parameters.ActiveFail, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="Active Fail"  Content="Active Fail" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    x:Name="TBPass" IsChecked="{Binding Parameters.ShowPass, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5,0,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="Pass"  Content="Pass" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+
+                    </ToggleButton>
+                </StackPanel>
+                <StackPanel Grid.Column="1"  VerticalAlignment="Top">
+
+                    <ToggleButton HorizontalAlignment="left"    Name="TBPassiveFail" IsChecked="{Binding Parameters.PassiveFail, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="Passive Fail"  Content="Passive Fail" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    Name="TBWarning" IsChecked="{Binding Parameters.ShowWarning, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False" 
+                                 Height="20" Width="80" ToolTip="Warning"  Content="Warning" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick" >
+
+                    </ToggleButton>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Height="200" VerticalAlignment="Top" Margin="10,0">
+                    <ToggleButton HorizontalAlignment="left"    Name="TBAsleep" IsChecked="{Binding Parameters.ShowAsleep, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="Asleep"  Content="Asleep" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    x:Name="TBOpen" IsChecked="{Binding Parameters.ShowOpen, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5,0,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="Open"  Content="Open" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    x:Name="TBClosed" IsChecked="{Binding Parameters.ShowClosed, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5,0,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="Closed"  Content="Closed" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Height="200" VerticalAlignment="Top" Margin="0,0,0,0">
+                    <ToggleButton HorizontalAlignment="left"    Name="TBNoAction" IsChecked="{Binding Parameters.ShowNoAction, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="0,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="No Action"  Content="No Action" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    Name="TBSuspend" IsChecked="{Binding Parameters.ShowSuspend, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="0,5" Focusable="False" 
+                                  Height="20" Width="80" ToolTip="Suspend"  Content="Suspend" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    Name="TBResolved" IsChecked="{Binding Parameters.ShowResolved, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="0,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="Resolved"  Content="Resolved" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0"  VerticalAlignment="Top" Margin="10,0,0,0">
+                    <ToggleButton HorizontalAlignment="left"    Name="TBLastDay" IsChecked="{Binding Parameters.LastDay, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="Last Day"  Content="Last Day" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    x:Name="TB2days" IsChecked="{Binding Parameters.TwoDay, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5,0,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="2 Days"  Content="2 Days" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+
+                </StackPanel>
+                <StackPanel Grid.Column="1"  VerticalAlignment="Top" >
+                    <ToggleButton HorizontalAlignment="left"    Name="TB5Days" IsChecked="{Binding Parameters.FiveDay, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False"
+                                  Height="20" Width="80" ToolTip="5 Days"  Content="5 Days" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+                    <ToggleButton HorizontalAlignment="left"    Name="TB1Month" IsChecked="{Binding Parameters.Month, Mode=TwoWay, UpdateSourceTrigger=Default}" Margin="5,5" Focusable="False" 
+                                  Height="20" Width="80" ToolTip="1 Month"  Content="1 Month" Style="{StaticResource ToggleButtonStyle}" HorizontalContentAlignment="Center" Click="onClick">
+
+                    </ToggleButton>
+
+                </StackPanel>
+            </Grid>
+          
+            <dxc:ChartControl Name="ChartHierarchy" BorderThickness="0" ToolTipEnabled="True" Padding="0,10,10,10" HorizontalAlignment="Left"
+               Background="{x:Null}"
+                Margin="7" Visibility="Visible" Grid.Column="5"
+                              DataSource="{Binding  MyDataTableChart.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+            >
+                <!--<dxmvvm:Interaction.Behaviors>
+                    <local:PieChartSelectionBehavior
+                        ExpandAnimation="{StaticResource ExplodeAnimation}"
+                        CollapseAnimation="{StaticResource CollapseAnimation}" />
+                    <local:PieChartRotationBehavior />
+                </dxmvvm:Interaction.Behaviors>-->
+                <dxc:ChartControl.Diagram>
+                    <dxc:SimpleDiagram2D BorderBrush="Transparent">
+                        <dxc:SimpleDiagram2D.Series>
+                            <dxc:PieSeries2D
+                                x:Name="Series"
+                                ArgumentScaleType="Qualitative"
+                                AnimationAutoStartMode="PlayOnce"  LegendTextPattern="{}{A}: {V}" 
+                        DataSource="{Binding Table1}" ArgumentDataMember="Name" ValueDataMember="Count">
+                                <dxc:PieSeries2D.PointAnimation>
+                                    <dxc:Pie2DFlyInAnimation
+                                        Duration="0:0:1.5"
+                                        PointOrder="Random" />
+                                </dxc:PieSeries2D.PointAnimation>
+                                <dxc:PieSeries2D.Label>
+                                    <dxc:SeriesLabel
+                                        Visible="True"
+                                        dxc:PieSeries.LabelPosition="Inside"
+                                        RenderMode="RectangleConnectedToCenter"
+                                        TextPattern="{}{A}, {V}" />
+                                </dxc:PieSeries2D.Label>
+                                <dxc:PieSeries2D.TotalLabel>
+                                    <dxc:PieTotalLabel
+                                        x:Name="pieTotalLabel"
+                                        TextPattern="Non Filtered: {}{TV:0}"
+                                        FontSize="8"
+                                        Opacity="0.7"
+                                        Visibility="Visible"
+                                        Content="Non Filtered">
+                                        <dxc:PieTotalLabel.Resources>
+                                            <Storyboard
+                                                x:Key="pieTotalLabelStoryboard">
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="pieTotalLabel"
+                                                    Storyboard.TargetProperty="(dxc:PieTotalLabel.Opacity)"
+                                                    From="0"
+                                                    To="1"
+                                                    Duration="0:0:1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <BackEase
+                                                            EasingMode="EaseIn" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </dxc:PieTotalLabel.Resources>
+                                        <!--<dxc:PieTotalLabel.ContentTemplate>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <Ellipse Fill="Black"/>
+                                                    <Viewbox
+                                                        Width="{Binding Path=DonutHoleDiameter, ElementName=pieTotalLabel}"
+                                                        Height="{Binding Path=DonutHoleDiameter, ElementName=pieTotalLabel}"
+                                                        
+                                                        MinHeight="100"
+                                                        MinWidth="100"
+                                                        >
+                                                        <Border
+                                                            Padding="25">
+                                                            <StackPanel>
+                                                                <TextBlock
+                                                                    HorizontalAlignment="Center"
+                                                                    Text="Market Value"
+                                                                    FontSize="25"
+                                                                    FontWeight="Bold" />
+                                                                <TextBlock
+                                                                    HorizontalAlignment="Center"
+                                                                    Text="{Binding DataContext.MV, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                    FontSize="50"
+                                                                    FontWeight="Bold" />
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </Viewbox>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </dxc:PieTotalLabel.ContentTemplate>-->
+                                    </dxc:PieTotalLabel>
+                                </dxc:PieSeries2D.TotalLabel>
+
+                            </dxc:PieSeries2D>
+                        </dxc:SimpleDiagram2D.Series>
+                    </dxc:SimpleDiagram2D>
+                </dxc:ChartControl.Diagram>
+                <dxc:ChartControl.Legends>
+                    <dxc:Legend x:Name="legend" HorizontalPosition="Right" 
+                VerticalPosition="Center" 
+                Orientation="Vertical" Opacity="0"
+                            >
+                        <dxc:Legend.Resources>
+                            <Storyboard
+                                                x:Key="legendStoryboard">
+                                <DoubleAnimation
+                                                    Storyboard.TargetName="legend"
+                                                    Storyboard.TargetProperty="(dxc:Legend.Opacity)"
+                                                    From="0"
+                                                    To="1"
+                                                    Duration="0:0:2">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BackEase
+                                                            EasingMode="EaseIn" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </dxc:Legend.Resources>
+                    </dxc:Legend>
+                </dxc:ChartControl.Legends>
+            </dxc:ChartControl>
+            <dxc:ChartControl Name="ChartHierarchy1" BorderThickness="0" ToolTipEnabled="True" Padding="0,10,10,10" HorizontalAlignment="Left"
+               Background="{x:Null}"
+                Margin="7" Visibility="Visible" Grid.Column="6"
+                              DataSource="{Binding  MyDataTableFilteredChart.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+            >
+               
+                <dxc:ChartControl.Diagram>
+                    <dxc:SimpleDiagram2D BorderBrush="Transparent">
+                        <dxc:SimpleDiagram2D.Series>
+                            <dxc:PieSeries2D
+                                x:Name="Series1"
+                                ArgumentScaleType="Qualitative"
+                                AnimationAutoStartMode="PlayOnce"  LegendTextPattern="{}{A}: {V}" 
+                        DataSource="{Binding Table1}" ArgumentDataMember="Name" ValueDataMember="Count">
+                                <dxc:PieSeries2D.PointAnimation>
+                                    <dxc:Pie2DFlyInAnimation
+                                        Duration="0:0:1.5"
+                                        PointOrder="Random" />
+                                </dxc:PieSeries2D.PointAnimation>
+                                <dxc:PieSeries2D.Label>
+                                    <dxc:SeriesLabel
+                                        Visible="True"
+                                        dxc:PieSeries.LabelPosition="Inside"
+                                        RenderMode="RectangleConnectedToCenter"
+                                        TextPattern="{}{A}, {V}" />
+                                </dxc:PieSeries2D.Label>
+                                <dxc:PieSeries2D.TotalLabel>
+                                    <dxc:PieTotalLabel
+                                        x:Name="pieTotalLabel1"
+                                        TextPattern="Filtered: {}{TV:0}"
+                                        FontSize="8"
+                                        Opacity="0.7"
+                                        Visibility="Visible"
+                                        Content="Filtered">
+                                        <dxc:PieTotalLabel.Resources>
+                                            <Storyboard
+                                                x:Key="pieTotalLabelStoryboard">
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="pieTotalLabel"
+                                                    Storyboard.TargetProperty="(dxc:PieTotalLabel.Opacity)"
+                                                    From="0"
+                                                    To="1"
+                                                    Duration="0:0:1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <BackEase
+                                                            EasingMode="EaseIn" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </dxc:PieTotalLabel.Resources>
+                                        <!--<dxc:PieTotalLabel.ContentTemplate>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <Ellipse Fill="Black"/>
+                                                    <Viewbox
+                                                        Width="{Binding Path=DonutHoleDiameter, ElementName=pieTotalLabel}"
+                                                        Height="{Binding Path=DonutHoleDiameter, ElementName=pieTotalLabel}"
+                                                        
+                                                        MinHeight="100"
+                                                        MinWidth="100"
+                                                        >
+                                                        <Border
+                                                            Padding="25">
+                                                            <StackPanel>
+                                                                <TextBlock
+                                                                    HorizontalAlignment="Center"
+                                                                    Text="Market Value"
+                                                                    FontSize="25"
+                                                                    FontWeight="Bold" />
+                                                                <TextBlock
+                                                                    HorizontalAlignment="Center"
+                                                                    Text="{Binding DataContext.MV, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                    FontSize="50"
+                                                                    FontWeight="Bold" />
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </Viewbox>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </dxc:PieTotalLabel.ContentTemplate>-->
+                                    </dxc:PieTotalLabel>
+                                </dxc:PieSeries2D.TotalLabel>
+
+                            </dxc:PieSeries2D>
+                        </dxc:SimpleDiagram2D.Series>
+                    </dxc:SimpleDiagram2D>
+                </dxc:ChartControl.Diagram>
+                <dxc:ChartControl.Legends>
+                    <dxc:Legend x:Name="legend1" HorizontalPosition="Right" 
+                VerticalPosition="Center" 
+                Orientation="Vertical" Opacity="0"
+                            >
+                        <dxc:Legend.Resources>
+                            <Storyboard
+                                                x:Key="legendStoryboard">
+                                <DoubleAnimation
+                                                    Storyboard.TargetName="legend"
+                                                    Storyboard.TargetProperty="(dxc:Legend.Opacity)"
+                                                    From="0"
+                                                    To="1"
+                                                    Duration="0:0:2">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BackEase
+                                                            EasingMode="EaseIn" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </dxc:Legend.Resources>
+                    </dxc:Legend>
+                </dxc:ChartControl.Legends>
+            </dxc:ChartControl>
+
+        </Grid>
+
+        <dxg:GridControl   AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"   x:Name="_dataGrid"   Grid.ColumnSpan="6" 
+                                      FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="7,7,0,0" Grid.Row="1" Background="LightGray"
+                                      HorizontalAlignment="Stretch" 
+                                      HorizontalContentAlignment="Stretch" 
+                                      FontSize="12" FontFamily="Calibri" 
+                                      ItemsSource="{Binding  MyDataTableBreach.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                                      SelectionMode="Row"
+                                      dx:DXSerializer.StoreLayoutMode="All"
+                                       dxg:GridSerializationOptions.AddNewColumns="true" 
+                                       dxg:GridSerializationOptions.RemoveOldColumns="False"
+                           MouseDown="_dataGridModel_MouseDown"
+                                  
+                                       >
+            <dxg:GridControl.View  >
+
+                <dxg:TableView 
+                                x:Name="_viewDataGrid"
+                                AllowPerPixelScrolling="True" 
+                                ShowTotalSummary="True" 
+                                AllowChangeBandParent="True" 
+                                AllowChangeColumnParent="True"
+                                ShowGroupPanel="False" 
+                                AllowConditionalFormattingMenu="True"
+                                Margin="7"
+                                ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu"
+                          
+                                >
+
+                </dxg:TableView>
+
+            </dxg:GridControl.View>
+
+
+
+            <dxg:GridControl.Columns>
+
+
+
+
+                <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="Decimal" 
+                                                ReadOnly="False" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="Decimal" 
+                                                ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="Decimal" 
+                                                ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="Decimal" 
+                                                ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="String" 
+                                                ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="String" 
+                                                ReadOnly="False" />
+            </dxg:GridControl.Columns>
+
+        </dxg:GridControl>
+        <dxg:GridControl   AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"   x:Name="_dataGridDetail"   Grid.ColumnSpan="6" 
+                                      FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="7,7,0,0" Grid.Row="2" Background="LightGray"
+                                      HorizontalAlignment="Stretch" 
+                                      HorizontalContentAlignment="Stretch" 
+                                      FontSize="12" FontFamily="Calibri" 
+                                      ItemsSource="{Binding  BreachDetail.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                                      SelectionMode="Row"
+                                      dx:DXSerializer.StoreLayoutMode="All"
+                                      dxg:GridSerializationOptions.AddNewColumns="true" 
+                                      dxg:GridSerializationOptions.RemoveOldColumns="False">
+            <dxg:GridControl.View  >
+
+                <dxg:TableView 
+                                x:Name="_viewDataGriddetail"
+                                AllowPerPixelScrolling="True" 
+                                ShowTotalSummary="True" 
+                                AllowChangeBandParent="True" 
+                                AllowChangeColumnParent="True"
+                                ShowGroupPanel="False" 
+                                AllowConditionalFormattingMenu="True"
+                                Margin="7"
+                                ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu"
+                          
+                                >
+
+                </dxg:TableView>
+
+            </dxg:GridControl.View>
+
+
+
+            <dxg:GridControl.Columns>
+
+
+
+
+                <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="Decimal" 
+                                                ReadOnly="False" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="N2" />
+                    </dxg:GridColumn.EditSettings>
+
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="Decimal" 
+                                                ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="Decimal" 
+                                                ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="Decimal" 
+                                                ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="String" 
+                                                ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                                 UnboundType="String" 
+                                                ReadOnly="False" />
+            </dxg:GridControl.Columns>
+
+        </dxg:GridControl>
+
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,7,0,0">
+            <dx:SimpleButton Content="Open" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Asleep" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Suspend" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="No Action" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Resolve" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Close" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Active Breach" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Compare" Height="20" Width="80" HorizontalAlignment="Left" Margin="30,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle1}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Output" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle1}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Unreview" Height="20" Width="80" HorizontalAlignment="Left" Margin="30,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+            <dx:SimpleButton Content="Approve" Height="20" Width="80" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}" HorizontalContentAlignment="Center"></dx:SimpleButton>
+        </StackPanel>
+
+
+        
+
+
+    </Grid>
+</UserControl>

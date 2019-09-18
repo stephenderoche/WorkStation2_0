@@ -1,0 +1,463 @@
+﻿<UserControl x:Class="NavProcess.Client.View.NavProcessViewerVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:NavProcess.Client"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d" Height="auto" Width="auto" 
+             Loaded="UserControl_Loaded" 
+             
+           
+            
+             >
+    <UserControl.Resources>
+        <Style TargetType="dxg:GridColumnHeader">
+            <Setter Property="Background" Value="LightSeaGreen"/>
+        </Style>
+        <sys:Double x:Key="maxHeaderHeight">
+            40
+        </sys:Double>
+
+        <DataTemplate x:Key="wrapHeader">
+            <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+        </DataTemplate>
+
+
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Stretch" Width="auto" Background="white" Height="Auto" HorizontalAlignment="Stretch" >
+        <Grid.Resources>
+            
+            <DataTemplate x:Key="renameColumnHeaderTemplate">
+                <Grid>
+                    <dxe:TextEdit
+                        EditValue="{Binding Path=DataContext.Header, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}}" 
+                        Foreground="Black" 
+                        Visibility="{Binding Path=DataContext.(local:ColumnBehavior.IsRenameEditorActivated), 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxg:HeaderContentControl}, 
+                        Converter={local:VisibilityConverter},
+                        Mode=TwoWay}"                    
+                        Name="textEdit"
+                        LostFocus="OnRenameEditorLostFocus"/>
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="{Binding}" 
+                        Visibility="{Binding Path=Visibility, ElementName=textEdit, Converter={local:ReverseVisibilityConverter}}"
+                        MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center"
+                        />
+                    
+                </Grid> 
+            </DataTemplate>
+            <DataTemplate x:Key="wrapHeader">
+                <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
+            </DataTemplate>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <GridSplitter Grid.Row="1" VerticalAlignment="top"  Height="7" Background="Black"  
+			x:Name="lblborder" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" />
+
+     
+        <dxe:ComboBoxEdit EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+			HorizontalAlignment="Left" 
+            Grid.Row="0"             
+			Margin="10,5,0,0"  x:Name="comboBoxEdit1" 
+			AllowDrop="True"
+			VerticalAlignment="Top" Width="178"  
+			EditValueChanged="comboBoxEdit1_EditValueChanged"  
+			IncrementalFiltering="True" 
+			ImmediatePopup="True" 
+			AutoComplete="False" 
+			FilterCondition="Contains" 
+			ValidateOnTextInput="False"
+			IsSynchronizedWithCurrentItem="True"         
+			IsTextEditable="True" LostFocus="comboBoxEdit1_LostFocus" IsPopupOpen="True" >
+            
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+            </dxmvvm:Interaction.Triggers>
+            <dxe:ComboBoxEditItem Content="WM01"/>
+        </dxe:ComboBoxEdit>
+
+        <dx:SimpleButton Content="Print" HorizontalAlignment="Left"  Margin="223,7,0,0" Width="80" Height="20" Click="SimpleButton_Click" VerticalAlignment="Top"/>
+        <Button Content="Button"  Grid.Row="0" HorizontalAlignment="Left" Margin="191,5,0,0" VerticalAlignment="Top" Width="5" Height="20" Background="Orange" Click="Refresh_Button_Click"/>
+
+
+        <dxg:GridControl   AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"   x:Name="_dataGrid"   
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="0,35,0,0" Grid.Row="1"
+                          HorizontalAlignment="Stretch" 
+                          HorizontalContentAlignment="Stretch" 
+                          FontSize="12" FontFamily="Calibri" 
+                          ItemsSource="{Binding MyDataTable.DefaultView,Mode=OneWay,UpdateSourceTrigger=Default}"
+                          SelectionMode="Row"
+                          dx:DXSerializer.StoreLayoutMode="All"
+                          dxg:GridSerializationOptions.AddNewColumns="true" 
+                          dxg:GridSerializationOptions.RemoveOldColumns="False"
+                           >
+
+
+
+                <dxg:GridControl.View  >
+
+                <dxg:TableView 
+                    x:Name="_viewDataGrid"
+                    AllowPerPixelScrolling="True" 
+                    ShowTotalSummary="True" 
+                    AllowChangeBandParent="True" 
+                    AllowChangeColumnParent="True"
+                    ShowGroupPanel="False" 
+                    AllowConditionalFormattingMenu="True"
+                    ColumnHeaderTemplate="{StaticResource renameColumnHeaderTemplate}" ShowGridMenu="OnShowGridMenu"
+              
+                    >
+                  
+                </dxg:TableView>
+             
+            </dxg:GridControl.View>
+
+         
+
+            <!--<dxg:GridControl.Columns>
+                <dxg:GridColumn Header=" Fund " Binding="{Binding fund}"  Width="50" IsSmart="True" FieldName = "fund" >
+
+
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+                            <Setter Property="VerticalAlignment" Value="Bottom"/>
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+
+                <dxg:GridColumn Header=" account_id " Binding="{Binding account_id}"  Width="30" IsSmart="True" FieldName = "account_id">
+
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate >
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Administrator " Binding="{Binding Administrator}"  Width="30" IsSmart="True" FieldName = "Administrator">
+
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate >
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Nav Time " Binding="{Binding Target Nav Time}"  Width="30" IsSmart="True" FieldName = "Target Nav Time">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate >
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Fund Initilazation " Binding="{Binding Fund Initilazation}"  Width="30" IsSmart="True" FieldName = "Fund Initilazation">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Cap Stock " Binding="{Binding Cap Stock}"  Width="30" IsSmart="True" FieldName = "Cap Stock" >
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Corp Actions " Binding="{Binding Corp Actions}"  Width="30" IsSmart="True" FieldName = "Corp Actions">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Trades " Binding="{Binding Trades}"  Width="30" IsSmart="True" FieldName = "Trades">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Income " Binding="{Binding Income}"  Width="30" IsSmart="True" FieldName = "Income">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Amor/Acc " Binding="{Binding AmorAcc}"  Width="30" IsSmart="True" FieldName = "AmorAcc">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Expenses " Binding="{Binding Expenses}"  Width="30" IsSmart="True" FieldName = "Expenses">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" IncDist " Binding="{Binding IncDist}"  Width="30" IsSmart="True" FieldName = "IncDist">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" UnRealized GL " Binding="{Binding UnRealized GL}"  Width="30" IsSmart="True" FieldName = "UnRealized GL">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" NAV " Binding="{Binding NAV}"  Width="30" IsSmart="True" FieldName = "NAV">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Reviewed " Binding="{Binding Reviewed}"  Width="30" IsSmart="True" FieldName = "Reviewed">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Released " Binding="{Binding Released}"  Width="30" IsSmart="True" FieldName = "Released">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header=" Date " Binding="{Binding Date}"  Width="30" IsSmart="True" FieldName = "Date">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black" Background="LightSeaGreen" FontWeight="ExtraBold">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.HeaderStyle>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Background" Value="LightSeaGreen"/>
+
+
+                        </Style>
+                    </dxg:GridColumn.HeaderStyle>
+                </dxg:GridColumn>
+
+
+
+                <dxg:GridColumn FieldName="CustomColumn1" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn2" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn3" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn4" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="Decimal" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn5" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+                <dxg:GridColumn FieldName="CustomColumn6" AllowUnboundExpressionEditor="True" 
+                                     UnboundType="String" 
+                                    ReadOnly="False" />
+            </dxg:GridControl.Columns>-->
+
+            
+
+
+        </dxg:GridControl>
+     
+
+    </Grid>
+</UserControl>

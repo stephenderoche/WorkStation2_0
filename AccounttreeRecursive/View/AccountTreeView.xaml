@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="AccountTreeCashViewer.View.AccountTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+              xmlns:themes="clr-namespace:Linedata.Framework.WidgetFrame.ThemesAndStyles;assembly=Linedata.Framework.WidgetFrame.ThemesAndStyles"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:dxs="clr-namespace:AccountTreeCashViewer.View"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d" Height="auto" Width="auto"  Loaded="user_loaded"
+            
+             >
+
+    <UserControl.Resources>
+      
+        <ResourceDictionary>
+            <dxs:StringToImageConverter x:Key="StringToImageConverter" />
+            <Style TargetType="dxg:GridColumnHeader">
+            <Setter Property="Height" Value="0"/>
+        </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+  
+
+
+    <Grid HorizontalAlignment="Stretch" Name="grid1" VerticalAlignment="Stretch" Width="Auto" Margin="0,0,0,0" >
+
+       
+            <dxe:ComboBoxEdit EditValue="{Binding Parameters.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              HorizontalAlignment="Stretch" Height="20" Width="auto"
+                              BorderThickness="2"
+                              BorderBrush="Black"
+                              Background="LightGray"
+                              FontWeight="Bold"
+                              Margin="0,2,0,0"   x:Name="comboBoxEdit1" 
+                              AllowDrop="True"
+                              VerticalAlignment="Top"   
+                              EditValueChanged="comboBoxEdit1_EditValueChanged"  
+                              IncrementalFiltering="True" 
+                              ImmediatePopup="True" 
+                              AutoComplete="False" 
+                              FilterCondition="Contains" 
+                              ValidateOnTextInput="False"
+                              IsSynchronizedWithCurrentItem="True"
+                              
+                              IsTextEditable="True" LostFocus="comboBoxEdit1_LostFocus" IsPopupOpen="True" RenderTransformOrigin="0.691,0.636" 
+                            
+                          
+            >
+                <dxmvvm:Interaction.Triggers>
+                    <dxmvvm:EventToCommand EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChangedCommand}" PassEventArgsToCommand="True" />
+                </dxmvvm:Interaction.Triggers>
+                <dxe:ComboBoxEditItem Content="WM01"/>
+            </dxe:ComboBoxEdit>
+            <dxg:TreeListControl Name="treeListControl1" Loaded="treeListControl1_Loaded" ItemsSource="{Binding AccountTree,Mode=OneWay,UpdateSourceTrigger=Default}" 
+                             SelectedItemChanged="treeListControl1_SelectedItemChanged" VerticalAlignment="Stretch"  ShowBorder="False" FontWeight="Bold"
+                                 Margin="0,25,0,0">
+            <dxg:TreeListControl.Columns>
+                
+                <dxg:TreeListColumn FieldName="Child_Account_Name" Header="" />
+                <dxg:TreeListColumn FieldName="ImagePathImg" 
+                                    Binding="{Binding Child_type,Converter={StaticResource StringToImageConverter}}"
+                                    Visible="False" ShowInColumnChooser="False" />
+               
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView Name="treeListView1" AutoWidth="True" ShowIndicator="False" Margin="0,0,0,0" ImageFieldName="ImagePathImg"
+                                  KeyFieldName="Child_account_id" ParentFieldName="Parent_account_id" 
+                                  AllowConditionalFormattingMenu="True" AllowEditing="False"
+                                  ShowSearchPanelMode="Always"
+                                  AllowConditionalFormattingManager="True" 
+                                  ShowColumnHeaders="True" ShowHorizontalLines="False" ShowVerticalLines="False" ShowNodeImages="True" VerticalAlignment="Stretch">
+                   
+                </dxg:TreeListView>
+
+            </dxg:TreeListControl.View>
+
+            <dxg:TreeListControl.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="Open Account" Click="OpenReport_Click"  />
+                   
+
+                </ContextMenu>
+            </dxg:TreeListControl.ContextMenu >
+            </dxg:TreeListControl>
+     
+    </Grid>
+
+  
+</UserControl>
+

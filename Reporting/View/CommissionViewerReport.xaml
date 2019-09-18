@@ -1,0 +1,11 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing" x:Class="Reporting.Client.MainWindow"
+        Title="MainWindow" Height="839.701" Width="944.403" Loaded="Window_Loaded">
+    <Grid>
+
+        <dxp:DocumentPreviewControl x:Name="documentPreview"/>
+
+    </Grid>
+</Window>

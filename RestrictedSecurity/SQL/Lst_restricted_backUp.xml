@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<x:rulesPackage xmlns:x="urn:schemas-linedata-com:compliance:rulesPackage">
+  <x:origin>
+    <x:product>Linedata Longview Trading System</x:product>
+    <x:version>75.3.0.50903</x:version>
+    <x:dataSource>LVTS_753</x:dataSource>
+    <x:created>2019-07-05T11:42:10</x:created>
+  </x:origin>
+  <x:comment>
+  </x:comment>
+  <x:legalValueListProcs>
+    <x:legalValueListProc>
+      <x:name>get_cmpl_params_boolean</x:name>
+      <x:code>create procedure get_cmpl_params_boolean
+as
+begin
+                        set nocount on;
+                        declare @ec__errno int;
+                        declare @sp_initial_trancount int;
+                        declare @sp_trancount int;
+	insert into #legal_param_values (display_value, actual_value) values ('True', 'true');
+	insert into #legal_param_values (display_value, actual_value) values ('False', 'false');
+end
+</x:code>
+    </x:legalValueListProc>
+  </x:legalValueListProcs>
+  <x:parameterTypes>
+    <x:parameterType id="30">
+      <x:name>Security List</x:name>
+      <x:type>listAttributeParamType</x:type>
+      <x:listAttributeId>1</x:listAttributeId>
+    </x:parameterType>
+    <x:parameterType id="4">
+      <x:name>Boolean</x:name>
+      <x:type>generalParamType</x:type>
+      <x:clrTypeName>System.Boolean</x:clrTypeName>
+      <x:legalValueListProcRef>get_cmpl_params_boolean</x:legalValueListProcRef>
+    </x:parameterType>
+    <x:parameterType id="2">
+      <x:name>Integer</x:name>
+      <x:type>generalParamType</x:type>
+      <x:clrTypeName>System.Int32</x:clrTypeName>
+      <x:numericPrecision>0</x:numericPrecision>
+    </x:parameterType>
+  </x:parameterTypes>
+  <x:filters>
+    <x:filter id="9" standard="true">
+      <x:displayName>Listed Security Filter</x:displayName>
+      <x:className>ListedSecurityFilter</x:className>
+      <x:description>Filter holdings based on given security list.</x:description>
+      <x:comment> </x:comment>
+      <x:parameters>
+        <x:parameter>
+          <x:name>securityListId</x:name>
+          <x:description> </x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="2" name="Integer" />
+        </x:parameter>
+      </x:parameters>
+      <x:code>     Protected Overrides Sub ProcessData()
+        If Me.InputHoldings Is Nothing Then
+            Return
+        End If
+
+        Dim list As IMemberIntegerList = Core.FindMemberIntegerList(securityListId)
+
+        If Not list Is Nothing Then
+            For Each holding As IHolding In InputHoldings
+                If list.Contains(holding.Security.SecurityID) Then
+                    AddMatching(holding)
+                Else
+                    AddNonMatching(holding)
+                End If
+            Next
+            Return
+        Else
+            AddNonMatching(InputHoldings)
+        End If
+        'Throw New MemberListNotFoundException(securityListId, MemberListType.Security)
+    End Sub
+
+    ' MemberListNotFoundException
+    ' TODO: should MemberListNotFoundException be a public nested class of Filter?
+    Public Class MemberListNotFoundException
+        Inherits System.ApplicationException
+
+        Sub New(ByVal listId As Integer)
+            MyBase.New(String.Format("{0} 'Security' list not found.", listId))
+        End Sub
+    End Class</x:code>
+    </x:filter>
+  </x:filters>
+  <x:rules>
+    <x:rule id="271" standard="true">
+      <x:displayName>LST-Restricted Securities (0)</x:displayName>
+      <x:className>LST_RestrictedSecuritiesExclAll</x:className>
+      <x:description>Exclude All (Zero Quantity) Securities Contained Within The Restricted Securities List.</x:description>
+      <x:comment>Rule Type: Exclude All; Numerator Grouping: N/A.</x:comment>
+      <x:preTradeAllowed>true</x:preTradeAllowed>
+      <x:postTradeAllowed>true</x:postTradeAllowed>
+      <x:assignAsDisclosureRule>false</x:assignAsDisclosureRule>
+      <x:RuleSkinType>0</x:RuleSkinType>
+      <x:filters>
+        <x:filterRef id="9" name="Listed Security Filter" />
+      </x:filters>
+      <x:parameters>
+        <x:parameter>
+          <x:name>securityListId</x:name>
+          <x:description> </x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="30" name="Security List" />
+          <x:defaultValue>0</x:defaultValue>
+        </x:parameter>
+        <x:parameter>
+          <x:name>PreTradeWorsening</x:name>
+          <x:description> </x:description>
+          <x:comment> </x:comment>
+          <x:parameterTypeRef id="4" name="Boolean" />
+          <x:defaultValue>True</x:defaultValue>
+        </x:parameter>
+      </x:parameters>
+      <x:code>    '-------------------------------------------------------------------------------------
+    ' $Revision: 26 $    $Date: 1/23/06 2:17p $  $Workfile: LST_RestrictedSecuritiesExclAll.vb $
+    '-------------------------------------------------------------------------------------
+
+    '--- Parameters --- 
+    Dim m_dSecurityListId As Decimal
+    Dim m_sSecurityList As String
+    Dim m_sSecurityType As String
+
+    '--- Counters --- 
+    Dim m_iOk As Int32
+    Dim m_iFail As Int32
+    Dim m_iNbHoldings As Int32
+    Dim m_iNbHoldingsNotInList As Int32
+    Dim m_iNbTotalHoldings As Int32
+
+    '--- Output Text ---
+    Dim m_bOutputTextEnabled As Boolean = True ' for now
+    Dim m_sPrefixListMsg As String
+    Const m_ROUND_DECIMAL_PLACES As Integer = 2
+
+
+    Dim m_Worsening As RuleSupport.Worsening = New RuleSupport.Worsening(Me, New RuleSupport.Worsening.WorseningStatusDelegate(AddressOf RuleSupport.Worsening.ValueLimitWorseningStatus))
+
+     Protected Overrides Sub RuleBody()
+
+        Try
+            Me.SetResultCode(ComplianceResult.Ok)
+
+            ' Getting Rule Parameters ---------------------------------
+            m_dSecurityListId = GetDecimalParam("securityListId")
+
+            ' Getting List ---------------------------------
+            Dim CoreInfo As ICore = Account.Core
+            If CoreInfo Is Nothing Then
+                Throw New ApplicationException("Account.Core Object is not initialized")
+            End If
+
+            Dim list As IMemberIntegerList = CoreInfo.FindMemberIntegerList(CInt(m_dSecurityListId))
+            If list Is Nothing Then
+                Dim statusAndBreachText As String = "MISSING DATA: Security List Not Found:" &amp; m_dSecurityListId.ToString()
+                RuleSupport.Utility.HandleError(Me, statusAndBreachText)
+                AddOutputText("Application Error", "Security List Not Found:" &amp; m_dSecurityListId.ToString)
+                Exit Sub
+            End If
+            ' Empty list will require prefix to output message.
+            If list.Count = 0 Then
+                m_sPrefixListMsg = String.Format("Note: {0} List is empty. ", list.Mnemonic)
+            End If
+            m_sSecurityList = list.Mnemonic
+
+            ' Tracing Rule Parameters ---------------------------------
+            ParametersOutputInvestList(m_bOutputTextEnabled)
+
+            ' Sub-setting &amp; Filtering ---------------------------------
+            Dim FilteredHoldings As IHoldings = Account.Holdings
+            If FilteredHoldings Is Nothing Then
+                Throw New ApplicationException("Account Holdings Collection Is Empty")
+            Else
+                m_iNbTotalHoldings = FilteredHoldings.Count
+            End If
+
+
+            Dim InvestListFilter As New ListedSecurityFilter(FilteredHoldings, CInt(m_dSecurityListId))
+            Dim FilterErrorHoldings As IHoldings = InvestListFilter.DataExceptions
+            If Not FilterErrorHoldings Is Nothing Then
+                If FilterErrorHoldings.Count &gt; 0 Then
+                    FilterErrorHoldings.SetComplianceStatus(ComplianceStatus.Unknown, "MISSING DATA: Security Symbol NOT Found", "MISSING DATA")
+                    Me.SetResultCode(ComplianceResult.MissingData)
+                    Exit Sub
+                End If
+            End If
+            FilteredHoldings = InvestListFilter.MatchingHoldings
+            If FilteredHoldings Is Nothing Then
+                Me.SetResultCode(ComplianceResult.Error)
+                Account.SetComplianceStatus(ComplianceStatus.Unknown, "Filter process failed: Holdings collection not initialized")
+                Exit Sub
+            End If
+            m_iNbHoldings = FilteredHoldings.Count
+
+            Dim UnfilteredHoldings As IHoldings = InvestListFilter.NonMatchingHoldings
+            If UnfilteredHoldings Is Nothing Then
+                Me.SetResultCode(ComplianceResult.Error)
+                Account.SetComplianceStatus(ComplianceStatus.Unknown, "Filter process failed: Holdings not in list collection not initialized")
+                Exit Sub
+            End If
+            m_iNbHoldingsNotInList = UnfilteredHoldings.Count
+
+            If RunMode = RunModes.PostTrade Then ' Worsening in play only for pre-trade
+                UseWorseningStatusLogic = False
+            Else
+                UseWorseningStatusLogic = GetBooleanParam("PreTradeWorsening")
+            End If
+
+            '------- Testing &amp; Setting Results (Holding Level) -------------------------
+            If m_iNbHoldings &gt; 0 Then
+                Dim filteredHoldingGroups As IHoldingGroups = RuleSupport.Grouping.GroupBySecurity(FilteredHoldings)
+                For Each holdingGroup As IHoldingGroup In filteredHoldingGroups
+                    SetExcludeHoldingsResults(False, holdingGroup, m_sSecurityList)
+                Next
+
+                Dim unFilteredHoldingGroups As IHoldingGroups = RuleSupport.Grouping.GroupBySecurity(UnfilteredHoldings)
+                For Each holdingGroup As IHoldingGroup In unFilteredHoldingGroups
+                    SetExcludeHoldingsResults(True, holdingGroup, m_sSecurityList)
+                Next
+            End If
+
+            'Testing &amp; Setting Results (Global level: rule &amp; account) -----------------------------------------------
+            Dim sMsgAccount As String = Nothing
+            SetExcludeGlobalResults(Account, sMsgAccount)
+
+            ' ----- Formatting Report -------------------------------------------------------------------------------
+            ExcludeReportOutput(True)
+
+        Catch ex As System.Exception
+            Me.SetResultCode(ComplianceResult.Error)
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub ExcludeReportOutput(ByVal p_Enabled As Boolean)
+        If p_Enabled Then
+            AddOutputText(" ", " ")
+            AddOutputText("Results:", "")
+            AddOutputText("----- Total Holdings", m_iNbTotalHoldings.ToString)
+            AddOutputText("---------- Excluded Positions Held", m_iNbHoldings.ToString)
+            AddOutputText("---------- Non-Excluded Positions Held", m_iNbHoldingsNotInList.ToString)
+            AddOutputText(" ", " ")
+            AddOutputText("The Rule Result Is:", Me.RuleResultCode.ToString)
+            AddOutputText(" ", " ")
+        End If
+    End Sub
+
+    Private Sub SetExcludeGlobalResults(ByRef p_account As IComplianceAccount, ByRef p_sMessageOutAccount As String)
+        Dim sRulePurpose As String = m_sSecurityType
+        Dim accountStatus As ComplianceStatus
+
+        If m_iNbHoldings = 0 Then      'We Set The Account Status Only If No Holding Status Exists
+            p_sMessageOutAccount = String.Format("{0} {1} does not hold ANY securities contained on the {2} List.", m_sPrefixListMsg, p_account.ShortName, m_sSecurityList)
+            accountStatus = ComplianceStatus.OK
+            p_account.SetComplianceStatus(accountStatus, p_sMessageOutAccount, "Restricted Securities: No Holdings Related to this Test")
+            If Me.RuleResultCode &lt;&gt; ComplianceRunResult.MissingData Then
+                Me.SetResultCode(ComplianceResult.Ok)
+            End If
+            Exit Sub
+        End If
+
+        p_sMessageOutAccount = ""
+        If Me.RuleResultCode &lt;&gt; ComplianceRunResult.MissingData Then
+            If m_iFail &gt; 0 Then
+                Me.SetResultCode(ComplianceResult.Fail)
+                Exit Sub
+            End If
+            If m_iOk &gt; 0 Then
+                Me.SetResultCode(ComplianceResult.Ok)
+                Exit Sub
+            End If
+            '-- We should never enter in here but ... ----------------------------------
+            Me.SetResultCode(ComplianceResult.Error)
+        End If
+    End Sub
+
+    Private Sub SetExcludeHoldingsResults(ByVal inFilter As Boolean, ByRef holdingGroup As IHoldingGroup, ByVal secList As String)
+        Dim sMessage As String
+        Dim MyComplianceStatus As ComplianceStatus
+
+        If Not inFilter Then
+            sMessage = String.Format("{0}This Security may NOT be held.  Securities contained on the {1} List are NOT permitted.", m_sPrefixListMsg, secList)
+            MyComplianceStatus = ComplianceStatus.Fail
+        Else
+            sMessage = String.Format("{0}This Security is NOT contained on the {1} List.", m_sPrefixListMsg, secList)
+            MyComplianceStatus = ComplianceStatus.OK
+        End If
+
+        UpdateCounters(MyComplianceStatus, holdingGroup.Holdings.Count)
+
+        Dim security As ISecurity = DirectCast(holdingGroup.PropertyValue, ISecurity)
+        m_Worsening.SetComplianceStatusAndWorsening(holdingGroup.Holdings, MyComplianceStatus, False, sMessage, "Restricted Security: " + security.Symbol)
+    End Sub
+
+    Private Function UpdateCounters(ByVal p_ComplStatus As ComplianceStatus, ByVal p_iCount As Int32) As Boolean
+        If p_ComplStatus = ComplianceStatus.Fail Then
+            m_iFail += p_iCount
+        End If
+        If p_ComplStatus = ComplianceStatus.OK Then
+            m_iOk += p_iCount
+        End If
+
+        Return True
+    End Function
+
+    Private Function GroupBySecurity(ByVal p_Holding As IHolding, ByVal p_Holdings As IHoldings) As Object
+        Return p_Holding.Security
+    End Function
+
+    Private Sub ParametersOutputInvestList(ByVal p_bEnabled As Boolean)
+        If p_bEnabled Then
+            AddOutputText("Compliance Rule Processing In Parameters :", String.Format("Security List Mnemonic={0}", m_sSecurityList))
+            AddOutputText(" ", String.Format("RunMode={0}", RunMode))
+        End If
+    End Sub</x:code>
+    </x:rule>
+  </x:rules>
+  <x:filterFolders>
+    <x:filterFolder id="1" name="All Holdings Filters" standard="false">
+      <x:filterRef id="9" name="Listed Security Filter" />
+    </x:filterFolder>
+  </x:filterFolders>
+  <x:filterFolderTree>
+    <x:filterFolderTreeNode>
+      <x:filterFolderRef id="1" name="All Holdings Filters" />
+    </x:filterFolderTreeNode>
+  </x:filterFolderTree>
+  <x:ruleFolders>
+    <x:ruleFolder id="24" name="Issue (Security Attributes)" standard="false" />
+    <x:ruleFolder id="26" name="Issue - Security" standard="false">
+      <x:ruleRef id="271" name="LST-Restricted Securities (0)" />
+    </x:ruleFolder>
+    <x:ruleFolder id="5" name="Standard Rules" standard="false" />
+    <x:ruleFolder id="6" name="By Data Element" standard="false" />
+    <x:ruleFolder id="2" name="All Rules" standard="false" />
+  </x:ruleFolders>
+  <x:ruleFolderTree>
+    <x:ruleFolderTreeNode>
+      <x:ruleFolderRef id="2" name="All Rules" />
+      <x:ruleFolderTreeNode>
+        <x:ruleFolderRef id="5" name="Standard Rules" />
+        <x:ruleFolderTreeNode>
+          <x:ruleFolderRef id="6" name="By Data Element" />
+          <x:ruleFolderTreeNode>
+            <x:ruleFolderRef id="24" name="Issue (Security Attributes)" />
+            <x:ruleFolderTreeNode>
+              <x:ruleFolderRef id="26" name="Issue - Security" />
+            </x:ruleFolderTreeNode>
+          </x:ruleFolderTreeNode>
+        </x:ruleFolderTreeNode>
+      </x:ruleFolderTreeNode>
+    </x:ruleFolderTreeNode>
+  </x:ruleFolderTree>
+</x:rulesPackage>

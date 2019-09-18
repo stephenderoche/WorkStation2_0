@@ -1,0 +1,333 @@
+﻿<XtraSerializer version="1.0" application="GridControl">
+  <property name="#LayoutVersion" isnull="true" />
+  <property name="$GridControl" iskey="true" value="GridControl">
+    <property name="UseFieldNameForSerialization">true</property>
+    <property name="GroupCount">0</property>
+    <property name="GroupSummary" iskey="true" value="0" />
+    <property name="SortInfo" iskey="true" value="0" />
+    <property name="Columns" iskey="true" value="42">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn1</property>
+        <property name="UnboundType">Decimal</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">0</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item2" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn2</property>
+        <property name="UnboundType">Decimal</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">1</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item3" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn3</property>
+        <property name="UnboundType">Decimal</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">2</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item4" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn4</property>
+        <property name="UnboundType">Decimal</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">3</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item5" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn5</property>
+        <property name="UnboundType">String</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">4</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item6" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">CustomColumn6</property>
+        <property name="UnboundType">String</property>
+        <property name="ReadOnly">false</property>
+        <property name="AllowUnboundExpressionEditor">true</property>
+        <property name="VisibleIndex">5</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item7" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">6</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item8" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">account_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">7</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item9" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">manager_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">8</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item10" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">invoked_by</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">9</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item11" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">FromDate</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">10</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item12" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ToDate</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">11</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item13" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">p_acct</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">12</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item14" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">invoked_time</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">13</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item15" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">Name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">14</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item16" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">rule_description</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">15</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item17" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">ruleset_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">16</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item18" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">run_type</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">17</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item19" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">rule_status</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">18</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item20" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">Status</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">19</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item21" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">cmpl_res_rule_result_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">20</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item22" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">csc</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">21</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item23" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">case_severity_worst</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">22</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item24" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">breach_state</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">23</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item25" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">breach_name</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">24</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item26" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">active_passive</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">25</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item27" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">atop</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">26</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item28" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">reviewed</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">27</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item29" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">post_trade_scope</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">28</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item30" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">profile_assignment_comment</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">29</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item31" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">cmpl_invocation_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">30</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item32" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">cmpl_case_invocation_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">31</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item33" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">cmpl_case_id</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">32</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item34" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">market_value</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">33</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item35" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">nav_date</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">34</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item36" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">currency_mn</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">35</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item37" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">minor_acct_cd</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">36</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item38" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">major_acct_cd</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">37</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item39" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">net_asset_value</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">38</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item40" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">total_asset_value</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">39</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item41" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">action_comments</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">40</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+      <property name="Item42" isnull="true" iskey="true">
+        <property name="GridRow">0</property>
+        <property name="FieldName">status_text</property>
+        <property name="IsSmart">true</property>
+        <property name="VisibleIndex">41</property>
+        <property name="ActualWidth">NaN</property>
+      </property>
+    </property>
+    <property name="View" isnull="true" iskey="true">
+      <property name="FormatConditions" iskey="true" value="0" />
+      <property name="AllowConditionalFormattingMenu">true</property>
+      <property name="AllowChangeColumnParent">true</property>
+      <property name="AllowChangeBandParent">true</property>
+      <property name="AllowPerPixelScrolling">true</property>
+      <property name="ShowGroupPanel">false</property>
+      <property name="ColumnChooserState" isnull="true" iskey="true">
+        <property name="Location">969,175</property>
+        <property name="Size">220,250</property>
+      </property>
+      <property name="ShowTotalSummary">true</property>
+    </property>
+    <property name="TotalSummary" iskey="true" value="0" />
+    <property name="MRUFilters" iskey="true" value="0" />
+    <property name="GroupSummarySortInfo" iskey="true" value="0" />
+  </property>
+</XtraSerializer>
