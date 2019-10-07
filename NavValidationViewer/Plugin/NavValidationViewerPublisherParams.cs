@@ -12,7 +12,7 @@ namespace NavValidationViewer.Client.Plugin
 {
     public class NavValidationViewerPublisherParameters : ObservableObject, IWidgetParameters
     {
-        
+        private string _defaultTheme;
         private string _accountName;
         private DateTime _startDate;
         private string _loadHist;
@@ -24,7 +24,7 @@ namespace NavValidationViewer.Client.Plugin
 
         public NavValidationViewerPublisherParameters()
         {
-         
+            this._defaultTheme = "LightGray";
             this._accountName = string.Empty;
             this._startDate = DateTime.Today;
 
@@ -35,8 +35,21 @@ namespace NavValidationViewer.Client.Plugin
             this._focusFail = false;
         }
 
-  
-    
+
+        public string DefaultTheme
+        {
+            get
+            {
+                return this._defaultTheme;
+            }
+
+            set
+            {
+                this._defaultTheme = value;
+                this.RaisePropertyChanged("DefaultTheme");
+
+            }
+        }
 
 
         public string AccountName
@@ -163,7 +176,8 @@ namespace NavValidationViewer.Client.Plugin
                                    new XAttribute("loadHist", this._loadHist),
                                    new XAttribute("xml", this.XML),
                                    new XAttribute("focusFail", this._focusFail),
-                                   new XAttribute("focusData", this._focusData)
+                                   new XAttribute("focusData", this._focusData),
+                                   new XAttribute("defualtTheme", this._defaultTheme)
                                    );
 
             
@@ -175,6 +189,7 @@ namespace NavValidationViewer.Client.Plugin
         {
             if (null != param)
             {
+                XAttribute DefualtThemeAttribute = param.Attribute("defualtTheme");
                 XAttribute AccountNameAttribute = param.Attribute("accountName");
                 XAttribute StartDateAttribute = param.Attribute("startDate");
                 XAttribute ControlTypeAttribute = param.Attribute("controlType");
@@ -185,6 +200,12 @@ namespace NavValidationViewer.Client.Plugin
              
                 try
                 {
+
+                    if (DefualtThemeAttribute != null)
+                    {
+                        this._defaultTheme = (string)DefualtThemeAttribute;
+
+                    }
 
                     if (StartDateAttribute != null)
                     {

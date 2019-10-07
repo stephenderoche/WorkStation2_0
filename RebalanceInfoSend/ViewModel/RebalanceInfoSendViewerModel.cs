@@ -1266,7 +1266,7 @@ namespace RebalanceInfoSend.Client.ViewModel
         {
 
             int i = 0;
-            a.SelectAll();
+            //a.SelectAll();
             int[] listRowList = a.GetSelectedRowHandles();
 
             SecurityIDList = new List<decimal>();

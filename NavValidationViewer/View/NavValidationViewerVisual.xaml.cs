@@ -4,7 +4,7 @@
     using System.Data;
     using System.Windows;
     using System.Windows.Controls;
-    using HierarchyViewerAddIn.Shared.ServiceContracts;
+   
     using Linedata.Framework.WidgetFrame.PluginBase;
     using Linedata.Framework.Foundation;
     using Linedata.Shared.Api.ServiceModel;
@@ -23,7 +23,7 @@
     using System.Windows.Media;
     using Linedata.Shared.Widget.Common;
      using NavValidationViewer.Client;
-  
+    using DevExpress.Xpf.Core;
 
 
     public partial class NavValidationViewerVisual : UserControl
@@ -148,7 +148,8 @@
              InitializeComponent();
              this.DataContext = genericGridViewerModel;
              this._view = genericGridViewerModel;
-             GetSecurities();
+            ApplicationThemeHelper.ApplicationThemeName = _view.Parameters.DefaultTheme;
+            GetSecurities();
          
              this.comboBoxEdit1.Text = _view.AccountName;
   
@@ -674,7 +675,7 @@
 
 
         }
-        private void cmboDesk_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
+        private void cmboDesk_SelectedIndexChanged(object sender, RoutedEventArgs e)
         {
             if (cmboControlType.Items.Count == 0)
             {
@@ -697,7 +698,7 @@
             _view.Get_ChartData(Convert.ToInt32(_view.AccountId), StartDate, ControlTypeId, Loadhist_id, _view.Parameters.FocusFail, _view.Parameters.FocusData);
         }
 
-        private void cmboIntradayCode_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
+        private void cmboIntradayCode_SelectedIndexChanged(object sender, RoutedEventArgs e)
         {
 
             if (cmboIntradayCode.Items.Count == 0)

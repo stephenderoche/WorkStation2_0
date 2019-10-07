@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helper", "Helper", "{352AD5B5-CD41-4E7F-968F-A4421375ED1C}"
 EndProject
@@ -86,8 +86,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityPrice", "SecurityPrice\SecurityPrice.csproj", "{6F3746CF-D9D4-48DE-BF05-539A0363660D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityHistory", "SecurityHistory\SecurityHistory.csproj", "{DFEDCAB8-C6D8-47B1-82E5-40CB7E18B897}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraderVsPm.Client", "TraderVsPm.Client\TraderVsPm.Client.csproj", "{67771F1E-31D5-4876-8EAD-E833B3015DAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraderVsPm", "TraderVsPm\TraderVsPm.csproj", "{9FAD414D-2815-4F16-85FC-0E43B6A253BB}"
 EndProject
@@ -1163,30 +1161,6 @@ Global
 		{DFEDCAB8-C6D8-47B1-82E5-40CB7E18B897}.Test - Release|x64.ActiveCfg = Release|x64
 		{DFEDCAB8-C6D8-47B1-82E5-40CB7E18B897}.Test - Release|x64.Build.0 = Release|x64
 		{DFEDCAB8-C6D8-47B1-82E5-40CB7E18B897}.Test - Release|x86.ActiveCfg = Release|Any CPU
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Debug|x64.ActiveCfg = Debug|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Debug|x86.ActiveCfg = Debug|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Debug|x86.Build.0 = Debug|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.LVDBUG|Any CPU.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.LVDBUG|Mixed Platforms.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.LVDBUG|Mixed Platforms.Build.0 = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.LVDBUG|x64.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.LVDBUG|x86.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.LVDBUG|x86.Build.0 = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Release|Any CPU.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Release|Mixed Platforms.Build.0 = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Release|x64.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Release|x86.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Release|x86.Build.0 = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Test - Release|Any CPU.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Test - Release|Mixed Platforms.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Test - Release|Mixed Platforms.Build.0 = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Test - Release|x64.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Test - Release|x86.ActiveCfg = Release|x86
-		{67771F1E-31D5-4876-8EAD-E833B3015DAD}.Test - Release|x86.Build.0 = Release|x86
 		{9FAD414D-2815-4F16-85FC-0E43B6A253BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FAD414D-2815-4F16-85FC-0E43B6A253BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FAD414D-2815-4F16-85FC-0E43B6A253BB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -1221,5 +1195,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D758FFAD-5813-486B-86B8-742654407E76} = {352AD5B5-CD41-4E7F-968F-A4421375ED1C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89D867F3-F5D4-469C-BB94-1844CDC15B4A}
 	EndGlobalSection
 EndGlobal

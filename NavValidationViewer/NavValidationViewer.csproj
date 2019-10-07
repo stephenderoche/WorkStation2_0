@@ -144,18 +144,11 @@
     <Reference Include="DevExpress.Xpf.Printing.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="HierarchyViewerAddIn.Shared.ServiceContracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\HierarchyViewerAddIn.Shared.ServiceContracts.dll</HintPath>
-    </Reference>
     <Reference Include="Linedata.Client.Widget.AccountSummaryDataProvider">
       <HintPath>..\..\..\DLL\Linedata.Client.Widget.AccountSummaryDataProvider.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Client.Widget.BaseWidget">
       <HintPath>..\..\..\DLL\Linedata.Client.Widget.BaseWidget.dll</HintPath>
-    </Reference>
-    <Reference Include="Linedata.Client.Widget.CommonDataProvider">
-      <HintPath>..\..\..\DLL\Linedata.Client.Widget.CommonDataProvider.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Client.Workstation.LongviewAdapter">
       <HintPath>..\..\..\DLL\Linedata.Client.Workstation.LongviewAdapter.dll</HintPath>
@@ -168,6 +161,10 @@
     </Reference>
     <Reference Include="Linedata.Client.Workstation.SharedReferences">
       <HintPath>..\..\..\DLL\Linedata.Client.Workstation.SharedReferences.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Client.Workstation.Widgets, Version=2.3.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\Linedata.Client.Workstation.Widgets.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Framework.Foundation, Version=5.2.0.0, Culture=neutral, PublicKeyToken=379f934f80b268e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

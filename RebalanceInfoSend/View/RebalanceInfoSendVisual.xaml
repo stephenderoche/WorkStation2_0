@@ -18,7 +18,7 @@
           >
     <UserControl.Resources>
 
-       
+
 
         <sys:Double x:Key="maxHeaderHeight">
             50
@@ -78,7 +78,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="1000" ></ColumnDefinition>
-          
+
         </Grid.ColumnDefinitions>
 
         <GridSplitter  HorizontalAlignment="left" Grid.Column="1" Width="7" Background="Black"  Grid.Row="2" Margin="0,7,0,7"
@@ -201,7 +201,7 @@
         </Grid>
 
 
-     
+
 
         <dxg:GridControl   AutoGenerateColumns="None" EnableSmartColumnsGeneration="False"   x:Name="_dataOP"   
                           FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="5,10,10,15"  Grid.Row="2"
@@ -238,7 +238,7 @@
             <dxg:GridControl.Columns>
 
                 <dxg:GridColumn Header="security_id" Binding="{Binding security_id, StringFormat=n2}"   SortMode="DisplayText" SortOrder="Ascending" SortIndex="0" FieldName="security_id">
-                  
+
                 </dxg:GridColumn>
                 <dxg:GridColumn Header="symbol" Binding="{Binding symbol, StringFormat=n2}"   SortMode="DisplayText" SortOrder="Ascending" SortIndex="0">
 
@@ -320,7 +320,7 @@
                             <Setter Property = "FontSize" Value="16"/>
                         </Style>
                     </ContextMenu.Resources>
-             
+
 
 
                 </ContextMenu>
@@ -330,39 +330,39 @@
         </dxg:GridControl>
         <StackPanel Grid.Row="3" Orientation="Horizontal">
             <dx:SimpleButton Grid.Row="3" Width="100" Content="Compliance" Margin="5,5,0,0" Click="Complince_Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="{Binding IsComplianceEnabled}"/>
-            <dx:SimpleButton Grid.Row="3" Width="150" Content="Send Selected Rows" Margin="30,5,0,0" Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="{Binding IsSendEnabled}" />
+            <dx:SimpleButton Grid.Row="3" Width="150" Content="Send Selected Rows" Margin="30,0,0,55" Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsEnabled="{Binding IsSendEnabled}" />
             <dx:SimpleButton Grid.Row="3" Width="150" Content="Send All Rows" Margin="5,5,0,0" Click="Send_All_Click" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="{Binding IsSendEnabled}" />
 
         </StackPanel>
 
 
         <Grid Grid.Column="0" Grid.Row="2">
-        <dx:WaitIndicator DeferedVisibility="{Binding IsWaitIndicatorVisible}" Name="TempbusyIndicator" Content="Loading..." Focusable="True"  >
-            <dx:WaitIndicator.ContentTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Please Wait" FontSize="20"/>
-                        <TextBlock Text="{Binding}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </dx:WaitIndicator.ContentTemplate>
-        </dx:WaitIndicator>
+            <dx:WaitIndicator DeferedVisibility="{Binding IsWaitIndicatorVisible}" Name="TempbusyIndicator" Content="Loading..." Focusable="True"  >
+                <dx:WaitIndicator.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Please Wait" FontSize="20"/>
+                            <TextBlock Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </dx:WaitIndicator.ContentTemplate>
+            </dx:WaitIndicator>
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal">
-        <ToggleButton     Name="ToggleButtonP" IsChecked="True"   >
-            <ToggleButton.Style>
-                <Style TargetType="{x:Type ToggleButton}">
-                    <Setter Property="Content" Value="Compliance"/>
-                    <Setter Property="Background" Value="LightGray"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Content" Value="Account/Securty Detail"/>
-                            <Setter Property="Background" Value="LightGoldenrodYellow"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ToggleButton.Style>
-        </ToggleButton>
+            <ToggleButton     Name="ToggleButtonP" IsChecked="True"   >
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Content" Value="Compliance"/>
+                        <Setter Property="Background" Value="LightGray"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Content" Value="Account/Securty Detail"/>
+                                <Setter Property="Background" Value="LightGoldenrodYellow"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
             <dx:SimpleButton Grid.Row="1" Grid.Column="1" Height="25" Width="10" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Click="Button_Click_1" 
                 Visibility="{Binding ElementName=ToggleButtonP,Path=IsChecked,Converter={StaticResource ButtonLabelConverter}}"></dx:SimpleButton>
         </StackPanel>
@@ -517,10 +517,10 @@
                     </DataTemplate>
                 </dx:WaitIndicator.ContentTemplate>
             </dx:WaitIndicator>
-           
+
         </Grid>
-        
- 
+
+
     </Grid>
 
 </UserControl>

@@ -159,6 +159,10 @@
     <Reference Include="Linedata.Client.Workstation.SharedReferences">
       <HintPath>..\..\..\DLL\Linedata.Client.Workstation.SharedReferences.dll</HintPath>
     </Reference>
+    <Reference Include="Linedata.Client.Workstation.Widgets, Version=2.3.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Temp\devexpress17\Linedata.Client.Workstation.Widgets.dll</HintPath>
+    </Reference>
     <Reference Include="Linedata.Framework.Foundation, Version=5.2.0.0, Culture=neutral, PublicKeyToken=379f934f80b268e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\DLL\Linedata.Framework.Foundation.dll</HintPath>
@@ -287,6 +291,13 @@
     <Resource Include="Images\cash.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\Sendorder\add_blocked_order_faster.sql" />
+    <Content Include="SQL\Sendorder\create_orders_from_position_faster.sql" />
+    <Content Include="SQL\Sendorder\orders_insert.sql" />
+    <Content Include="SQL\Sendorder\proposed_orders_delete.sql" />
+    <Content Include="SQL\Sendorder\sendorder_init.sql" />
+    <Content Include="SQL\Sendorder\sendorder_through_new_sql.sql" />
+    <Content Include="SQL\Sendorder\SetGetContext.sql" />
     <Content Include="SQL\se_add_first_override.sql" />
     <Content Include="SQL\se_get_adv_rebal_op.sql" />
     <Content Include="SQL\se_get_list_account.sql" />

@@ -17,16 +17,16 @@
             
              >
     <UserControl.Resources>
-        <Style TargetType="dxg:GridColumnHeader">
+        <!--<Style TargetType="dxg:GridColumnHeader">
             <Setter Property="Background" Value="LightGreen"/>
-        </Style>
+        </Style>-->
         <sys:Double x:Key="maxHeaderHeight">
             40
         </sys:Double>
     </UserControl.Resources>
 
 
-    <Grid VerticalAlignment="Stretch" Width="auto"  Height="Auto" HorizontalAlignment="Stretch" Background="#165c56">
+    <Grid VerticalAlignment="Stretch" Width="auto"  Height="Auto" HorizontalAlignment="Stretch" >
         <Grid.Resources>
             
             <DataTemplate x:Key="renameColumnHeaderTemplate">
@@ -73,13 +73,13 @@
         <dxe:DateEdit EditValue="{Binding Parameters.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 			HorizontalAlignment="Left" Margin="335,43,0,0" VerticalAlignment="Top" Width="150" x:Name="txtstartdate" FontFamily="Calibri" FontSize="14" Height="20" EditValueChanged="end_EditValueChanged"/>
 
-        <ComboBox Text="{Binding Parameters.ControlType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        	x:Name="cmboControlType" HorizontalAlignment="Left" Margin="91,42,0,0" VerticalAlignment="top" SelectionChanged="cmboDesk_SelectedIndexChanged" 
+        <dxe:ComboBoxEdit Text="{Binding Parameters.ControlType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        	x:Name="cmboControlType" HorizontalAlignment="Left" Margin="91,42,0,0" VerticalAlignment="top" SelectedIndexChanged="cmboDesk_SelectedIndexChanged" 
         	Width="176" FontFamily="Calibri Black" FontSize="14" Height="20" />
         <Label Content="Control Type:" HorizontalAlignment="Left" Foreground="White" Margin="5,43,0,0" VerticalAlignment="Top" Width="86" Height="23" FontWeight="Bold" RenderTransformOrigin="0.479,0.077" />
         <Label Content="Intraday Code:" HorizontalAlignment="Left" Foreground="White" Margin="490,42,0,0" VerticalAlignment="Top" Width="86" Height="23" FontWeight="Bold" />
-        <ComboBox Text="{Binding Parameters.LoadHist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        	x:Name="cmboIntradayCode" HorizontalAlignment="left" Margin="581,43,0,0" VerticalAlignment="top" SelectionChanged="cmboIntradayCode_SelectedIndexChanged" 
+        <dxe:ComboBoxEdit Text="{Binding Parameters.LoadHist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        	x:Name="cmboIntradayCode" HorizontalAlignment="left" Margin="581,43,0,0" VerticalAlignment="top" SelectedIndexChanged="cmboIntradayCode_SelectedIndexChanged" 
         	Width="140" FontFamily="Calibri Black" FontSize="14" Height="20" />
         <Label Content="Account:" HorizontalAlignment="Left" Foreground="White" Margin="10,10,0,0" VerticalAlignment="Top" Width="65" Height="23" FontWeight="Bold" />
         <Label Content="Date:
@@ -164,7 +164,7 @@
         </dxg:GridControl>
 
         <!--buttom Grid-->
-        <Grid VerticalAlignment="Stretch" Width="auto" Height="auto" HorizontalAlignment="Stretch" Grid.Row="2" Margin="0,7" Background="#165c56" >
+        <Grid VerticalAlignment="Stretch" Width="auto" Height="auto" HorizontalAlignment="Stretch" Grid.Row="2" Margin="0,7"  >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="600" />
@@ -174,9 +174,9 @@
             <GridSplitter  HorizontalAlignment="Left" Grid.Column="1" Width="7" Background="Black"  
 			x:Name="lblborder3" FontWeight="Bold" VerticalContentAlignment="Center" VerticalAlignment="Stretch" />
 
-            <TabControl Grid.Column="0" Margin="10,10,4,4" Background="#165c56" Foreground="White">
+            <TabControl Grid.Column="0" Margin="10,10,4,4" >
 
-                <TabItem Header="Summary" Margin="0,0,0,0" Background="#165c56" Foreground="White" >
+                <TabItem Header="Summary" Margin="0,0,0,0"  >
                     <Grid Height="Auto">
                         <dxg:GridControl x:Name="SummaryGrid"  dx:DXSerializer.StoreLayoutMode="All" Grid.Column="0"
                          AutoPopulateColumns="True" EnableSmartColumnsGeneration="True" 
@@ -208,7 +208,7 @@
 
                     </Grid>
                 </TabItem>
-                <TabItem Header="Data Quality" Margin="0,0,0,0" Background="#165c56" Foreground="White">
+                <TabItem Header="Data Quality" Margin="0,0,0,0" >
                     <Grid Height="Auto">
                         <dxg:GridControl x:Name="DataQualityGrid"  dx:DXSerializer.StoreLayoutMode="All" Grid.Column="0"
                          AutoPopulateColumns="True" EnableSmartColumnsGeneration="True" 
@@ -240,7 +240,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Detail" Margin="0,0,0,0" Background="#165c56" Foreground="White">
+                <TabItem Header="Detail" Margin="0,0,0,0" >
                     <Grid Height="Auto">
                         <dxg:GridControl x:Name="DetailGrid"  dx:DXSerializer.StoreLayoutMode="All" Grid.Column="0"
                          AutoPopulateColumns="True" EnableSmartColumnsGeneration="True" 
@@ -272,7 +272,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Effect" Margin="0,0,0,0" Background="#165c56" Foreground="White">
+                <TabItem Header="Effect" Margin="0,0,0,0" >
                     <Grid Height="Auto">
                         <dxg:GridControl x:Name="effectGrid"  dx:DXSerializer.StoreLayoutMode="All" Grid.Column="0"
                          AutoPopulateColumns="True" EnableSmartColumnsGeneration="True" 
@@ -304,7 +304,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Class" Margin="0,0,0,0" Background="#165c56" Foreground="White">
+                <TabItem Header="Class" Margin="0,0,0,0" >
                     <Grid Height="Auto">
                         <dxg:GridControl x:Name="ClassGrid"  dx:DXSerializer.StoreLayoutMode="All" Grid.Column="0"
                          AutoPopulateColumns="True" EnableSmartColumnsGeneration="True" 
@@ -338,16 +338,16 @@
 
             </TabControl>
 
-            <TabControl Grid.Column="1" Margin="10,10,4,4" Background="#165c56" Foreground="White">
+            <TabControl Grid.Column="1" Margin="10,10,4,4" >
 
-                <TabItem Header="Rule Review" Margin="0,0,0,0" Background="#165c56" Foreground="White">
-                    <Grid Height="Auto" Background="#165c56">
+                <TabItem Header="Rule Review" Margin="0,0,0,0" >
+                    <Grid Height="Auto" >
                         <TextBox Margin="0,10,0,25" Height="50" HorizontalAlignment="Left" Width="294" VerticalAlignment="Top" Name="txtRuleComment" Foreground="Black" />
-                        <Button Height="20" Width="111" Content="Save Comment" VerticalAlignment="top" HorizontalAlignment="left" Margin="0,65,0,0" Click="Button_Click" Background="#66afaf"/>
+                        <Button Height="20" Width="111" Content="Save Comment" VerticalAlignment="top" HorizontalAlignment="left" Margin="0,65,0,0" Click="Button_Click" />
                     </Grid>
                 </TabItem>
-                <TabItem Header="Ruleset Review" Margin="0,0,0,0" Background="#165c56" Foreground="White">
-                    <Grid Height="Auto" Background="#165c56" >
+                <TabItem Header="Ruleset Review" Margin="0,0,0,0" >
+                    <Grid Height="Auto"  >
 
                         <TextBox Margin="0,10,0,25" Height="50" HorizontalAlignment="Left" Width="294" VerticalAlignment="Top" Name="txtRulesetComment" Foreground="Black" />
                         <Button Height="20" Width="88" Content="1st Validate" VerticalAlignment="top" Background ="#66afaf" HorizontalAlignment="left" Margin="0,65,0,0" Click="Btn_Ruleset_Click"/>

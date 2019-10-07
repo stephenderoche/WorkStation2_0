@@ -3,10 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              mc:Ignorable="d"
-        d:DesignHeight="300" d:DesignWidth="300" Unloaded="Window_Unloaded" Height="100" Width="300"
+        d:DesignHeight="300" d:DesignWidth="300" Unloaded="Window_Unloaded" Height="100" Width="400"
               >
 
-    <TextBox x:Name="txtXml" HorizontalAlignment="Left" Height="27" Margin="10,10,0,0" TextWrapping="Wrap" Text="ValidationView.xaml" VerticalAlignment="Top" Width="272"/>
+    <StackPanel Orientation="Horizontal" Grid.Column="4" Margin="5,0,0,0">
+        <TextBlock Text="Application theme:" VerticalAlignment="Center" Margin="10,0" />
+
+        <dxe:ComboBoxEdit VerticalAlignment="Center" Width="200" ItemsSource="{Binding Source={x:Static dx:Theme.Themes}}" x:Name="cbTheme"
+                              DisplayMember="Name" ValueMember="Name"  EditValueChanged="cbTheme_EditValueChanged" EditValue="{Binding _view._view.Parameters.DefaultTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+    </StackPanel>
 
 </Window>
