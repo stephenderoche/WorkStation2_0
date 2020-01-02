@@ -614,6 +614,10 @@ namespace SalesSharedContracts
         [OperationContract]
         void se_add_first_override(int account_id, int security_id,string reason,int order_id, out ApplicationMessageList messages);
 
+        [OperationContract]
+        void se_add_internal_mf_cash(string short_name, decimal cash_amount, out ApplicationMessageList messages);
 
+        [OperationContract]
+        DataSet se_get_funds_cash_by_fof(int account_id,int @include_orders , out ApplicationMessageList messages);
     }
 }

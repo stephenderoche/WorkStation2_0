@@ -498,6 +498,12 @@ namespace SalesSharedContracts.Types
         [OperationContract]
         void se_add_first_override(int account_id, int security_id, string reason, int order_id, out ApplicationMessageList messages);
 
+        [OperationContract]
+        void se_add_internal_mf_cash(string short_name, decimal cash_amount, out ApplicationMessageList messages);
+
+        [OperationContract]
+        DataSet se_get_funds_cash_by_fof(int account_id, int @include_orders, out ApplicationMessageList messages);
+
     }
     [ServiceBehavior(
         InstanceContextMode = InstanceContextMode.PerCall,
@@ -11033,6 +11039,119 @@ namespace SalesSharedContracts.Types
                 messages.Add(message);
             }
 
+        }
+
+        public void se_add_internal_mf_cash(string short_name, decimal cash_amount, out ApplicationMessageList messages)
+        {
+            messages = new ApplicationMessageList();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                using (ILinedataDbConnection connection = DbFactory.CreateConnection(ServerSettings.ApplicationDataSource, messages))
+                {
+                    connection.Open();
+
+                    using (ILinedataDbCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        IDbDataParameter[] storedProcParams = new IDbDataParameter[2];
+                        IDbDataParameter param;
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@short_name";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.String;
+                        param.Value = short_name;
+                        storedProcParams[0] = param;
+
+
+                        //Param 2
+                        param = command.CreateParameter();
+                        param.ParameterName = "@cash_amount";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Decimal;
+                        param.Value = cash_amount;
+                        storedProcParams[1] = param;
+
+                     
+
+                        storedProcParams = connection.AdjustParamsForServer(storedProcParams, 0);
+
+                        command.CommandText = connection.BuildCommandText("se_add_internal_mf_cash", storedProcParams);
+
+                        foreach (IDbDataParameter paramToAdd in storedProcParams)
+                        { command.Parameters.Add(paramToAdd); }
+
+                        IDataReader reader = command.ExecuteReader();
+
+                        ds = ServiceTypeUtil.ConvertDataReaderToDataSet(reader);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ApplicationMessage message = new ApplicationMessage(ex, ApplicationMessageType.Error);
+                messages.Add(message);
+            }
+
+        }
+
+        public DataSet se_get_funds_cash_by_fof(int account_id, int @include_orders, out ApplicationMessageList messages)
+        {
+            messages = new ApplicationMessageList();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                using (ILinedataDbConnection connection = DbFactory.CreateConnection(ServerSettings.ApplicationDataSource, messages))
+                {
+                    connection.Open();
+
+                    using (ILinedataDbCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        IDbDataParameter[] storedProcParams = new IDbDataParameter[2];
+                        IDbDataParameter param;
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@account_id";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int32;
+                        param.Value = account_id;
+                        storedProcParams[0] = param;
+
+                        //Param 2
+                        param = command.CreateParameter();
+                        param.ParameterName = "@include_orders";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int32;
+                        param.Value = @include_orders;
+                        storedProcParams[1] = param;
+
+                        storedProcParams = connection.AdjustParamsForServer(storedProcParams, 0);
+
+                        command.CommandText = connection.BuildCommandText("se_get_funds_cash_by_fof", storedProcParams);
+
+                        foreach (IDbDataParameter paramToAdd in storedProcParams)
+                        { command.Parameters.Add(paramToAdd); }
+
+                        IDataReader reader = command.ExecuteReader();
+
+                        ds = ServiceTypeUtil.ConvertDataReaderToDataSet(reader);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ApplicationMessage message = new ApplicationMessage(ex, ApplicationMessageType.Error);
+                messages.Add(message);
+            }
+            return ds;
         }
     }
     }

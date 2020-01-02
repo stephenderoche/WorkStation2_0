@@ -81,7 +81,7 @@ namespace CurrentOrders.Client.View
             ws.Url = "https://logic.itginc.com/services/CalculationService_v3_0?wsdl";
             ws.PreAuthenticate = true;
             ws.Timeout = 60000;
-            ws.Credentials = new NetworkCredential("Linedatatest", "Linedata3");
+            ws.Credentials = new NetworkCredential("Linedatatest", "Spring2020");
             
 
 
@@ -238,7 +238,7 @@ namespace CurrentOrders.Client.View
 				ws.Url = "https://logic.itginc.com/services/CalculationService_v3_0?wsdl";
 				ws.PreAuthenticate = true;
 				ws.Timeout = 60000;
-				ws.Credentials = new NetworkCredential( "Linedatatest", "Linedata3" );
+				ws.Credentials = new NetworkCredential( "Linedatatest", "Spring2020");
                 
 
 				//set up the input arguments for the web service "calculate" method
@@ -362,7 +362,7 @@ namespace CurrentOrders.Client.View
             ws.Url = "https://logic.itginc.com/services/CalculationService_v3_0?wsdl";
             ws.PreAuthenticate = true;
             ws.Timeout = 60000;
-            ws.Credentials = new NetworkCredential("Linedatatest", "Linedata3");
+            ws.Credentials = new NetworkCredential("Linedatatest", "Spring2020");
 
             ws.deleteTradelist(comboBox1.Text);
 

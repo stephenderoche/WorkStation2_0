@@ -34,7 +34,7 @@
 
 
     <Grid Column="0" Background="LightGray">
-        <Grid.Resources>
+        <!--<Grid.Resources>
 
             <local:ButtonLabelConverter x:Key="ButtonLabelConverter"></local:ButtonLabelConverter>
             <local:ButtonLabelConverterReverse x:Key="ButtonLabelConverterReverse"></local:ButtonLabelConverterReverse>
@@ -67,7 +67,7 @@
             <DataTemplate x:Key="wrapHeader">
                 <TextBlock Text="{Binding}" MaxHeight="{StaticResource maxHeaderHeight}" TextWrapping="Wrap" TextAlignment="Center" />
             </DataTemplate>
-        </Grid.Resources>
+        </Grid.Resources>-->
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -367,8 +367,13 @@
                 Visibility="{Binding ElementName=ToggleButtonP,Path=IsChecked,Converter={StaticResource ButtonLabelConverter}}"></dx:SimpleButton>
         </StackPanel>
         <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="237*"/>
+            </Grid.ColumnDefinitions>
             <dxg:GridControl   AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"   x:Name="_dataOPDetail"   
-                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="7,10,10,15"  Grid.Row="2" Grid.Column="1"
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="7,10,10,32"
                           HorizontalAlignment="Stretch" 
                           HorizontalContentAlignment="Stretch" 
                           FontSize="12" FontFamily="Calibri" 
@@ -377,7 +382,7 @@
                           dx:DXSerializer.StoreLayoutMode="All"
                           dxg:GridSerializationOptions.AddNewColumns="true" 
                           dxg:GridSerializationOptions.RemoveOldColumns="False"
-                          Visibility="{Binding ElementName=ToggleButtonP,Path=IsChecked,Converter={StaticResource ButtonLabelConverterReverse}}"
+                          Visibility="{Binding ElementName=ToggleButtonP,Path=IsChecked,Converter={StaticResource ButtonLabelConverterReverse}}" Grid.ColumnSpan="3"
                            >
                 <dxg:GridControl.View  >
 
@@ -439,7 +444,7 @@
 
             </dxg:GridControl>
             <dxg:GridControl   AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="False"   x:Name="_dataCompDetail"   
-                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="7,10,10,15"  Grid.Row="2" Grid.Column="1"
+                          FontWeight="SemiBold"     AllowLiveDataShaping="True"  Margin="7,10,10,32"
                           HorizontalAlignment="Stretch" 
                           HorizontalContentAlignment="Stretch" 
                           FontSize="12" FontFamily="Calibri" 
@@ -448,7 +453,7 @@
                           dx:DXSerializer.StoreLayoutMode="All"
                           dxg:GridSerializationOptions.AddNewColumns="true" 
                           dxg:GridSerializationOptions.RemoveOldColumns="False"
-                          Visibility="{Binding ElementName=ToggleButtonP,Path=IsChecked,Converter={StaticResource ButtonLabelConverter}}"
+                          Visibility="{Binding ElementName=ToggleButtonP,Path=IsChecked,Converter={StaticResource ButtonLabelConverter}}" Grid.ColumnSpan="3"
                            >
                 <dxg:GridControl.View  >
 
@@ -507,7 +512,7 @@
 
 
             </dxg:GridControl>
-            <dx:WaitIndicator DeferedVisibility="{Binding IsWaitIndicatorVisible2}" Name="TempbusyIndicator2" Content="Loading..." Focusable="True"  >
+            <dx:WaitIndicator DeferedVisibility="{Binding IsWaitIndicatorVisible2}" Name="TempbusyIndicator2" Content="Loading..." Focusable="True" Grid.ColumnSpan="3" Margin="0,0,0,17"  >
                 <dx:WaitIndicator.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
