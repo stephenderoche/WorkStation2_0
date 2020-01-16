@@ -27,7 +27,7 @@ as
 	security.security_id = rebal_audit_security.security_id
 	join account on
 	account.account_id = rebal_audit_security.account_id
-	
+	 where rebal_session_id = @session_id
 
 go
 if @@error = 0 print 'PROCEDURE: se_rebal_sessions_security created'
