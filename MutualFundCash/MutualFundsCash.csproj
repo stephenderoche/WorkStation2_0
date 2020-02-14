@@ -107,91 +107,107 @@
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v18.1.Core, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Charts.v18.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Data.v18.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Mvvm.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Mvvm.v18.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Office.v18.1.Core, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Office.v18.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.RichEdit.v18.1.Core, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.RichEdit.v18.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.RichEdit.v18.1.Export, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.RichEdit.v18.1.Export.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Printing.v18.1.Core, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Printing.v18.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Charts.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Xpf.Charts.v18.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.CodeView.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Xpf.CodeView.v18.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Core.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Xpf.Core.v18.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Xpf.Grid.v18.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.1.Core, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Xpf.Grid.v18.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Printing.v18.1, Version=18.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL_753\DevExpress.Xpf.Printing.v18.1.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Client.Widget.AccountSummaryDataProvider">
-      <HintPath>..\..\..\DLL\Linedata.Client.Widget.AccountSummaryDataProvider.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Client.Widget.AccountSummaryDataProvider.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Client.Widget.BaseWidget">
-      <HintPath>..\..\..\DLL\Linedata.Client.Widget.BaseWidget.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Client.Widget.BaseWidget.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Client.Workstation.LongviewAdapter.DataContracts">
-      <HintPath>..\..\..\DLL\Linedata.Client.Workstation.LongviewAdapter.DataContracts.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Client.Workstation.LongviewAdapter.DataContracts.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Client.Workstation.LongviewAdapterClient">
-      <HintPath>..\..\..\DLL\Linedata.Client.Workstation.LongviewAdapterClient.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Client.Workstation.LongviewAdapterClient.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Client.Workstation.SharedReferences">
-      <HintPath>..\..\..\DLL\Linedata.Client.Workstation.SharedReferences.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Client.Workstation.SharedReferences.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Client.Workstation.Widgets, Version=2.3.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Temp\devexpress17\Linedata.Client.Workstation.Widgets.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Client.Workstation.Widgets.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Framework.Foundation, Version=5.2.0.0, Culture=neutral, PublicKeyToken=379f934f80b268e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Framework.Foundation.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Framework.Foundation.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Framework.WidgetFrame.PluginBase, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Framework.WidgetFrame.PluginBase.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Framework.WidgetFrame.PluginBase.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Framework.WidgetFrame.ThemesAndStyles, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Framework.WidgetFrame.ThemesAndStyles.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Framework.WidgetFrame.ThemesAndStyles.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Framework.WidgetFrame.UISupport, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Framework.WidgetFrame.UISupport.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Framework.WidgetFrame.UISupport.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Shared.Api, Version=75.3.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Shared.Api.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Shared.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Linedata.Shared.ServiceModel">
+      <HintPath>..\..\DLL_753\Linedata.Shared.ServiceModel.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Shared.Widget.Common">
-      <HintPath>..\..\..\DLL\Linedata.Shared.Widget.Common.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Shared.Widget.Common.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Shared.Workstation.Api, Version=2.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Shared.Workstation.Api.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Shared.Workstation.Api.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Shared.Workstation.Api.PortfolioManagement">
-      <HintPath>..\..\..\DLL\Linedata.Shared.Workstation.Api.PortfolioManagement.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Shared.Workstation.Api.PortfolioManagement.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
       <SpecificVersion>False</SpecificVersion>
@@ -201,32 +217,34 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="ReactiveDomain.Core, Version=0.8.15.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\ReactiveDomain.Core.dll</HintPath>
+      <HintPath>..\..\DLL_753\ReactiveDomain.Core.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveDomain.Messaging, Version=0.8.15.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\ReactiveDomain.Messaging.dll</HintPath>
+      <HintPath>..\..\DLL_753\ReactiveDomain.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI, Version=7.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\ReactiveUI.dll</HintPath>
+      <HintPath>..\..\DLL_753\ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="SalesSharedContracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\SalesSharedContracts.dll</HintPath>
+      <HintPath>..\..\DLL_753\SalesSharedContracts.dll</HintPath>
     </Reference>
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Splat.dll</HintPath>
+      <HintPath>..\..\DLL_753\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL_753\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\DLL_753\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -284,6 +302,7 @@
     <Resource Include="Images\cash.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\cash_scripts.sql" />
     <Content Include="SQL\Sendorder\add_blocked_order_faster.sql" />
     <Content Include="SQL\Sendorder\create_orders_from_position_faster.sql" />
     <Content Include="SQL\Sendorder\orders_insert.sql" />
