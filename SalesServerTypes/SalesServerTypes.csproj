@@ -79,7 +79,7 @@
     </Reference>
     <Reference Include="Linedata.Framework.Foundation.Engine, Version=5.1.0.0, Culture=neutral, PublicKeyToken=379f934f80b268e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Framework.Foundation.Engine.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Framework.Foundation.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Framework.WidgetFrame.PluginBase, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -95,38 +95,38 @@
     </Reference>
     <Reference Include="Linedata.Server, Version=75.2.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Server.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.Api, Version=75.2.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Server.Api.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.Api.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.DataProvider">
-      <HintPath>..\..\..\DLL\Linedata.Server.DataProvider.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.DataProvider.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.DbClasses, Version=5.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Server.DbClasses.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.DbClasses.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.DbInterfaces, Version=5.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Server.DbInterfaces.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.DbInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.DBL">
-      <HintPath>..\..\..\DLL\Linedata.Server.DBL.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.DBL.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.DbProcsEngine, Version=5.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Server.DbProcsEngine.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.DbProcsEngine.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.Interfaces">
-      <HintPath>..\..\..\DLL\Linedata.Server.Interfaces.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.Rebalance">
-      <HintPath>..\..\..\DLL\Linedata.Server.Rebalance.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.Rebalance.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Server.ReferenceData">
-      <HintPath>..\..\..\DLL\Linedata.Server.ReferenceData.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.ReferenceData.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Shared.Api, Version=75.3.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>

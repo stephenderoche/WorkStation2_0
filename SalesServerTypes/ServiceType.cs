@@ -504,6 +504,8 @@ namespace SalesSharedContracts.Types
         [OperationContract]
         DataSet se_get_funds_cash_by_fof(int account_id, int @include_orders, out ApplicationMessageList messages);
 
+        DataSet se_get_Blotter_accounts(string Deskname, out ApplicationMessageList messages);
+
     }
     [ServiceBehavior(
         InstanceContextMode = InstanceContextMode.PerCall,
@@ -11153,6 +11155,58 @@ namespace SalesSharedContracts.Types
             }
             return ds;
         }
+
+        public DataSet se_get_Blotter_accounts(string Deskname, out ApplicationMessageList messages)
+        {
+            messages = new ApplicationMessageList();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                using (ILinedataDbConnection connection = DbFactory.CreateConnection(ServerSettings.ApplicationDataSource, messages))
+                {
+                    connection.Open();
+
+                    using (ILinedataDbCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        IDbDataParameter[] storedProcParams = new IDbDataParameter[1];
+                        IDbDataParameter param;
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@desk_name";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.String;
+                        param.Value = Deskname;
+                        storedProcParams[0] = param;
+
+                        storedProcParams = connection.AdjustParamsForServer(storedProcParams, 0);
+
+                        command.CommandText = connection.BuildCommandText("se_get_Blotter_accounts", storedProcParams);
+
+                        foreach (IDbDataParameter paramToAdd in storedProcParams)
+                        { command.Parameters.Add(paramToAdd); }
+
+                        IDataReader reader = command.ExecuteReader();
+
+
+                        ds = ServiceTypeUtil.ConvertDataReaderToDataSet(reader);
+
+                        // ds = ServiceTypeUtil.ConvertDataReaderToDataSet(reader);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ApplicationMessage message = new ApplicationMessage(ex, ApplicationMessageType.Error);
+                messages.Add(message);
+            }
+            return ds;
+        }
+
+
     }
     }
     

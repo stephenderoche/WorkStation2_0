@@ -99,7 +99,7 @@
     </Reference>
     <Reference Include="Linedata.Server.Api, Version=75.2.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL\Linedata.Server.Api.dll</HintPath>
+      <HintPath>..\..\DLL_753\Linedata.Server.Api.dll</HintPath>
     </Reference>
     <Reference Include="Linedata.Shared.Api, Version=5.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>

@@ -619,5 +619,9 @@ namespace SalesSharedContracts
 
         [OperationContract]
         DataSet se_get_funds_cash_by_fof(int account_id,int @include_orders , out ApplicationMessageList messages);
+
+        [OperationContract]
+        DataSet se_get_Blotter_accounts(string Deskname, out ApplicationMessageList messages);
+
     }
 }
