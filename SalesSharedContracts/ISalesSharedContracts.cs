@@ -623,5 +623,56 @@ namespace SalesSharedContracts
         [OperationContract]
         DataSet se_get_Blotter_accounts(string Deskname, out ApplicationMessageList messages);
 
+
+        //tba
+        ///<summary>
+        ///Gets the Strategy Data for given currency
+        /// <param name="currencyId">currency id of the selectect block on the blotter</param>
+        /// <param name="messages">Any issues in the server side will be logged in this parameter</param>
+        ///</summary>
+        //[OperationContract]
+        //DataSet getStrategyDataData(int lookUpDataType, string code, out IApplicationMessageList messages);
+
+        [OperationContract]
+        DataSet getLookUpData(int lookUpDataType, out ApplicationMessageList messages);
+
+        ///<summary>
+        ///Gets TBA Data
+        ///</summary>
+        //[OperationContract]
+        //DataSet getStrategyDataData(out IApplicationMessageList messages);
+
+        [OperationContract]
+        DataSet getTBAData(decimal tba_umb_mortgage_type_code, string settlement_date_start, string settlement_date_end, decimal? account_id, out ApplicationMessageList messages);
+
+        ///<summary>
+        ///Gets TBA Data
+        ///</summary>
+        //[OperationContract]
+        //DataSet getStrategyDataData(out IApplicationMessageList messages);
+
+        [OperationContract]
+        DataSet getTBADataDetais(decimal security_id, decimal broker_id, decimal? account_id, int isPosition, out ApplicationMessageList messages);
+
+        ///<summary>
+        ///Deletes existing orders/blocks and creates new orders/blocks with newly allocated quantity
+        /// <param name="HAxXingOrdersData">XML string containg order data</param>
+        /// <param name="messages">Any issues in the server side will be logged in this parameter</param>
+        ///</summary>
+        //[OperationContract]
+        //void CreateNewDistributions(decimal baseBlockId, int resSideCode, int securityId, int ticketTypeCode, string HAcXingOrdersData, int isNew, out IApplicationMessageList messages);
+
+        [OperationContract]
+        DataSet getSettlemtDates(int tba_umb_settlement_month_code, int tba_umb_mortgage_type_code, out ApplicationMessageList messages);
+
+        ///<summary>
+        ///Deletes existing orders/blocks and creates new orders/blocks with newly allocated quantity
+        /// <param name="HAxXingOrdersData">XML string containg order data</param>
+        /// <param name="messages">Any issues in the server side will be logged in this parameter</param>
+        ///</summary>
+        [OperationContract]
+        void CreateTBAOrders(string xml, int isPosition, string delivery_date_string, string settlement_date_string, int roll
+            , int tba_umb_mortgage_type_code, int tba_umb_settlement_month_code, decimal coupon, out ApplicationMessageList messages);
+
     }
 }

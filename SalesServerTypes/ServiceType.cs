@@ -506,11 +506,22 @@ namespace SalesSharedContracts.Types
 
         DataSet se_get_Blotter_accounts(string Deskname, out ApplicationMessageList messages);
 
+        void CreateTBAOrders(string xml, int isPosition, string delivery_date_string, string settlement_date_string, int roll
+           , int tba_umb_mortgage_type_code, int tba_umb_settlement_month_code, decimal coupon, out ApplicationMessageList messages);
+        DataSet getSettlemtDates(int tba_umb_settlement_month_code, int tba_umb_mortgage_type_code, out ApplicationMessageList messages);
+
+        DataSet getLookUpData(int lookUpDataType, out ApplicationMessageList messages);
+
+        DataSet getTBAData(decimal tba_umb_mortgage_type_code, string settlement_date_start, string settlement_date_end, decimal? account_id, out ApplicationMessageList messages);
+
+
+
     }
     [ServiceBehavior(
         InstanceContextMode = InstanceContextMode.PerCall,
         UseSynchronizationContext = false,
         Name = "SalesSharedContracts")]
+
     public class ServiceTypes : ServiceTypeBase, ISalesSharedContracts, IServiceTypes
     {
         static private string dsn = "";
@@ -11206,7 +11217,380 @@ namespace SalesSharedContracts.Types
             return ds;
         }
 
+        public void CreateTBAOrders(string xml, int isPosition, string delivery_date_string, string settlement_date_string, int roll
+           , int tba_umb_mortgage_type_code, int tba_umb_settlement_month_code, decimal coupon, out ApplicationMessageList messages)
+        {
+
+            messages = new ApplicationMessageList();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                using (ILinedataDbConnection connection = DbFactory.CreateConnection(ServerSettings.ApplicationDataSource, messages))
+                {
+                    connection.Open();
+
+                    using (ILinedataDbCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        IDbDataParameter[] storedProcParams = new IDbDataParameter[9];
+                        IDbDataParameter param;
+
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@xml";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Xml;
+                        param.Value = xml;
+                        storedProcParams[0] = param;
+
+                        //Param 2
+                        param = command.CreateParameter();
+                        param.ParameterName = "@delivery_date_string";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.String;
+                        param.Value = delivery_date_string;
+                        storedProcParams[1] = param;
+
+                        //Param 3
+                        param = command.CreateParameter();
+                        param.ParameterName = "@settlement_date_string";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.String;
+                        param.Value = settlement_date_string;
+                        storedProcParams[2] = param;
+
+                        //param 4
+                        param = command.CreateParameter();
+                        param.ParameterName = "@roll";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int16;
+                        param.Value = roll;
+                        storedProcParams[3] = param;
+
+                        //Param 5
+                        param = command.CreateParameter();
+                        param.ParameterName = "@tba_umb_mortgage_type_code";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int16;
+                        param.Value = tba_umb_mortgage_type_code;
+                        storedProcParams[4] = param;
+
+                        //Param 6
+                        param = command.CreateParameter();
+                        param.ParameterName = "@tba_umb_settlement_month_code";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int16;
+                        param.Value = tba_umb_settlement_month_code;
+                        storedProcParams[5] = param;
+
+                        //Param 7
+                        param = command.CreateParameter();
+                        param.ParameterName = "@coupon";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Decimal;
+                        param.Value = coupon;
+                        storedProcParams[6] = param;
+
+                        //Param 8
+                        param = command.CreateParameter();
+                        param.ParameterName = "@current_user";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int32;
+                        param.Value = getUserId(); ;
+                        storedProcParams[7] = param;
+
+                        //Param 9
+                        param = command.CreateParameter();
+                        param.ParameterName = "@isPosition";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int16;
+                        param.Value = isPosition;
+                        storedProcParams[8] = param;
+
+
+                        storedProcParams = connection.AdjustParamsForServer(storedProcParams, 0);
+
+                        command.CommandText = connection.BuildCommandText("psg_create_tba_orders", storedProcParams);
+
+                        foreach (IDbDataParameter paramToAdd in storedProcParams)
+                        { command.Parameters.Add(paramToAdd); }
+
+                        command.ExecuteReader();
+
+                    }
+                }
+            }
+            //catch (ApplicationMessageListException exception)
+            //{
+            //    messages.AppendMessages(exception.ApplicationMessageCollection);
+            //}
+            catch (Exception ex)
+            {
+                ApplicationMessage message = new ApplicationMessage(ex, ApplicationMessageType.Error);
+                messages.Add(message);
+            }
+
+        }
+
+        public DataSet getTBADataDetais(decimal security_id, decimal broker_id, decimal? account_id, int isPosition, out ApplicationMessageList messages)
+        {
+            messages = new ApplicationMessageList();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                using (ILinedataDbConnection connection = DbFactory.CreateConnection(ServerSettings.ApplicationDataSource, messages))
+                {
+                    connection.Open();
+
+                    using (ILinedataDbCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        IDbDataParameter[] storedProcParams = new IDbDataParameter[4];
+                        IDbDataParameter param;
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@security_id";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Decimal;
+                        param.Value = security_id;
+                        storedProcParams[0] = param;
+
+                        //Param 2
+                        param = command.CreateParameter();
+                        param.ParameterName = "@broker_id";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Decimal;
+                        param.Value = broker_id;
+                        storedProcParams[1] = param;
+
+                        //Param 3
+                        param = command.CreateParameter();
+                        param.ParameterName = "@account_id";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Decimal;
+                        param.Value = account_id;
+                        storedProcParams[2] = param;
+
+                        //Param 4
+                        param = command.CreateParameter();
+                        param.ParameterName = "@isPosition";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int16;
+                        param.Value = isPosition;
+                        storedProcParams[3] = param;
+
+                        storedProcParams = connection.AdjustParamsForServer(storedProcParams, 0);
+
+                        command.CommandText = connection.BuildCommandText("psg_get_tba_data_details", storedProcParams);
+
+                        foreach (IDbDataParameter paramToAdd in storedProcParams)
+                        { command.Parameters.Add(paramToAdd); }
+
+                        IDataReader reader = command.ExecuteReader();
+
+                        ds = ServiceTypeUtil.ConvertDataReaderToDataSet(reader);
+                    }
+                }
+            }
+            //catch (ApplicationMessageListException exception)
+            //{
+            //    messages.AppendMessages(exception.ApplicationMessageCollection);
+            //}
+            catch (Exception ex)
+            {
+                ApplicationMessage message = new ApplicationMessage(ex, ApplicationMessageType.Error);
+                messages.Add(message);
+            }
+            return ds;
+        }
+
+        public DataSet getSettlemtDates(int tba_umb_settlement_month_code, int tba_umb_mortgage_type_code, out ApplicationMessageList messages)
+        {
+            messages = new ApplicationMessageList();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                using (ILinedataDbConnection connection = DbFactory.CreateConnection(ServerSettings.ApplicationDataSource, messages))
+                {
+                    connection.Open();
+
+                    using (ILinedataDbCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        IDbDataParameter[] storedProcParams = new IDbDataParameter[2];
+                        IDbDataParameter param;
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@tba_umb_settlement_month_code";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int16;
+                        param.Value = tba_umb_settlement_month_code;
+                        storedProcParams[0] = param;
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@tba_umb_mortgage_type_code";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int16;
+                        param.Value = tba_umb_mortgage_type_code;
+                        storedProcParams[1] = param;
+
+                        storedProcParams = connection.AdjustParamsForServer(storedProcParams, 0);
+
+                        command.CommandText = connection.BuildCommandText("psg_get_settlement_dates", storedProcParams);
+
+                        foreach (IDbDataParameter paramToAdd in storedProcParams)
+                        { command.Parameters.Add(paramToAdd); }
+
+                        IDataReader reader = command.ExecuteReader();
+
+                        ds = ServiceTypeUtil.ConvertDataReaderToDataSet(reader);
+                    }
+                }
+            }
+            //catch (ApplicationMessageListException exception)
+            //{
+            //    messages.AppendMessages(exception.ApplicationMessageCollection);
+            //}
+            catch (Exception ex)
+            {
+                ApplicationMessage message = new ApplicationMessage(ex, ApplicationMessageType.Error);
+                messages.Add(message);
+            }
+            return ds;
+        }
+
+        public DataSet getLookUpData(int lookUpDataType, out ApplicationMessageList messages)
+        {
+            messages = new ApplicationMessageList();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                using (ILinedataDbConnection connection = DbFactory.CreateConnection(ServerSettings.ApplicationDataSource, messages))
+                {
+                    connection.Open();
+
+                    using (ILinedataDbCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        IDbDataParameter[] storedProcParams = new IDbDataParameter[1];
+                        IDbDataParameter param;
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@lookUpDataType";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Int16;
+                        param.Value = lookUpDataType;
+                        storedProcParams[0] = param;
+
+                        storedProcParams = connection.AdjustParamsForServer(storedProcParams, 0);
+
+                        command.CommandText = connection.BuildCommandText("psg_get_lookup_data", storedProcParams);
+
+                        foreach (IDbDataParameter paramToAdd in storedProcParams)
+                        { command.Parameters.Add(paramToAdd); }
+
+                        IDataReader reader = command.ExecuteReader();
+
+                        ds = ServiceTypeUtil.ConvertDataReaderToDataSet(reader);
+                    }
+                }
+            }
+            //catch (ApplicationMessageListException exception)
+            //{
+            //    messages.AppendMessages(exception.ApplicationMessageCollection);
+            //}
+            catch (Exception ex)
+            {
+                ApplicationMessage message = new ApplicationMessage(ex, ApplicationMessageType.Error);
+                messages.Add(message);
+            }
+            return ds;
+        }
+
+        public DataSet getTBAData(decimal tba_umb_mortgage_type_code, string settlement_date_start, string settlement_date_end, decimal? account_id, out ApplicationMessageList messages)
+        {
+            messages = new ApplicationMessageList();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                using (ILinedataDbConnection connection = DbFactory.CreateConnection(ServerSettings.ApplicationDataSource, messages))
+                {
+                    connection.Open();
+
+                    using (ILinedataDbCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        IDbDataParameter[] storedProcParams = new IDbDataParameter[4];
+                        IDbDataParameter param;
+
+                        //Param 1
+                        param = command.CreateParameter();
+                        param.ParameterName = "@tba_umb_mortgage_type_code";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Decimal;
+                        param.Value = tba_umb_mortgage_type_code;
+                        storedProcParams[0] = param;
+
+                        //Param 2
+                        param = command.CreateParameter();
+                        param.ParameterName = "@settlement_date_start";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.String;
+                        param.Value = settlement_date_start;
+                        storedProcParams[1] = param;
+
+                        //Param 3
+                        param = command.CreateParameter();
+                        param.ParameterName = "@settlement_date_end";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.String;
+                        param.Value = settlement_date_end;
+                        storedProcParams[2] = param;
+
+                        //Param 4
+                        param = command.CreateParameter();
+                        param.ParameterName = "@account_id";
+                        param.Direction = ParameterDirection.Input;
+                        param.DbType = DbType.Decimal;
+                        param.Value = account_id;
+                        storedProcParams[3] = param;
+
+                        storedProcParams = connection.AdjustParamsForServer(storedProcParams, 0);
+
+                        command.CommandText = connection.BuildCommandText("psg_get_tba_data", storedProcParams);
+
+                        foreach (IDbDataParameter paramToAdd in storedProcParams)
+                        { command.Parameters.Add(paramToAdd); }
+
+                        IDataReader reader = command.ExecuteReader();
+
+                        ds = ServiceTypeUtil.ConvertDataReaderToDataSet(reader);
+                    }
+                }
+            }
+            //catch (ApplicationMessageListException exception)
+            //{
+            //    messages.AppendMessages(exception.ApplicationMessageCollection);
+            //}
+            catch (Exception ex)
+            {
+                ApplicationMessage message = new ApplicationMessage(ex, ApplicationMessageType.Error);
+                messages.Add(message);
+            }
+            return ds;
+        }
+
 
     }
-    }
+}
     

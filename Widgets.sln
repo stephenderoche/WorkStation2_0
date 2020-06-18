@@ -95,7 +95,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Addins", "Addins", "{190F1C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFCash", "..\Addins\MFCash\MFCash.csproj", "{5D2AF1EB-CFD9-42B1-8CE3-9D0574E57BFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunCompliance.Client", "..\Addins\ComplianceViewerTB-20200220T174507Z-001\ComplianceViewerTB\RunCompliance.Client\RunCompliance.Client.csproj", "{AA514F46-EF71-4449-B106-FC58F3F7780A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunCompliance.Client", "..\Addins\ComplianceViewerTB\RunCompliance.Client\RunCompliance.Client.csproj", "{AA514F46-EF71-4449-B106-FC58F3F7780A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
